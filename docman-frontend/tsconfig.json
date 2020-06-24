@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "dom"
+    ],
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./app/*"
+      ],
+      "@/*": [
+        "./app/*"
+      ]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./app/types"
+    ],
+    "types": [
+      "@types/node",
+      "@nuxt/types",
+      "@nuxtjs/axios",
+      "vuetify"
+    ]
+  },
+  "files": [
+    "app/types/vue-shim.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "app/services/**/*.ts",
+    "app/models/**/*.ts",
+    "app/store/**/*.ts",
+    "app/hooks/**/*.ts",
+    "app/plugins/**/*.ts",
+    "app/utils/**/*.ts"
+  ]
+}

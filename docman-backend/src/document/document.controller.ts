@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { DocumentService } from '~/document/document.service';
 
-@Controller('document')
+@Controller('api/documents')
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}
 

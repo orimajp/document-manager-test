@@ -1,0 +1,36 @@
+{
+  "name": "docman-frontend",
+  "version": "1.0.0",
+  "description": "My stunning Nuxt.js project",
+  "author": "Hideo Oshima",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NUXT_PORT=3030 nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "generate": "nuxt-ts generate",
+    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@nuxt/typescript-runtime": "^0.4.10",
+    "@nuxtjs/axios": "^5.11.0",
+    "nuxt": "^2.13.1",
+    "nuxt-composition-api": "^0.9.3",
+    "vue-unstated": "0.0.7"
+  },
+  "devDependencies": {
+    "@mdi/font": "^5.3.45",
+    "@nuxt/typescript-build": "^1.0.3",
+    "@nuxtjs/eslint-config": "^3.0.0",
+    "@nuxtjs/eslint-config-typescript": "^2.0.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/vuetify": "^1.11.2",
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.3.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-nuxt": ">=1.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
+  }
+}
