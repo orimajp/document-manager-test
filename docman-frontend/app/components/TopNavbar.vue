@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app clipped-left dark dense class="primary">
-    <v-btn>
-      <v-icon icon dark @click="goTop">
+    <v-btn icon dark @click="goTop">
+      <v-icon>
         mdi-home
       </v-icon>
     </v-btn>
@@ -17,6 +17,10 @@
 import { defineComponent } from 'nuxt-composition-api'
 import useRouter from '~/hooks/useRouter'
 
+type Props = {
+  pageTitle: String
+}
+
 export default defineComponent({
   props: {
     pageTitle: {
@@ -24,6 +28,7 @@ export default defineComponent({
       default: 'ドキュメント管理アプリモック'
     }
   },
+  // setup(props: Props) {
   setup() {
     const { router } = useRouter()
 
@@ -37,6 +42,7 @@ export default defineComponent({
 
     return {
       goTop,
+      // pageTitle: props.pageTitle,
       goCreateDocument
     }
   }

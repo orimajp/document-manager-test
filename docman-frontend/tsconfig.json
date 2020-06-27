@@ -45,6 +45,7 @@
     "app/store/**/*.ts",
     "app/hooks/**/*.ts",
     "app/plugins/**/*.ts",
+    "app/containers/**/*.ts",
     "app/utils/**/*.ts"
   ]
 }
