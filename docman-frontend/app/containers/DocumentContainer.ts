@@ -43,6 +43,4 @@ const useDisplayDocument = () => {
   }
 }
 
-export function DocumentContainer() {
-  return createContainer(useDisplayDocument)
-}
+export default createContainer(useDisplayDocument)

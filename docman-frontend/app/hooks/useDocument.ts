@@ -6,8 +6,9 @@ import { createDocumentData } from '~/models/document/DocumentDataFactory'
 export const userDocument = () => {
   const { axios } = useAxios()
 
-  const search = async () => {
-    return await axios.$get<Array<IDocumentList>>('/api/documents')
+  const search = (): Promise<Array<IDocumentList>> => {
+    // return await axios.$get<Array<IDocumentList>>('/api/documents')
+    return axios.$get<Array<IDocumentList>>('/api/documents')
   }
 
   const getDocument = async (documentId: string): Promise<DocumentData> => {
