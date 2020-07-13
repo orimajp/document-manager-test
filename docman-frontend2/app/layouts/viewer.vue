@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <document-view-tree-drawer />
+    <document-view-navbar />
     <nuxt />
     <document-viewe-toc-drawer />
   </v-app>
@@ -12,11 +13,13 @@ import DocumentContainer from '~/containers/DocumentContainer'
 import PageContainer from '~/containers/PageContainer'
 import DrawerContainer from '~/containers/DrawerContainer'
 import HeadlineCotanier from '~/containers/HeadlineCotanier'
+import DocumentViewNavbar from '~/components/view/DocumentViewNavbar'
 import DocumentViewTreeDrawer from '~/components/view/drawer/DocumentViewTreeDrawer'
 import DocumentVieweTocDrawer from '~/components/view/drawer/DocumentVieweTocDrawer'
 
 export default defineComponent({
   components: {
+    DocumentViewNavbar,
     DocumentViewTreeDrawer,
     DocumentVieweTocDrawer
   },
