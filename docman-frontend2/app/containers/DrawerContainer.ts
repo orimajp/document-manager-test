@@ -2,7 +2,7 @@ import { computed } from '@vue/composition-api'
 import { createContainer } from 'vue-unstated'
 import { useStorage } from '@vueuse/core'
 
-export const useDrawer = () => {
+const useDrawer = () => {
   const state = useStorage('docman-drawer-settings', {
     permanent: true,
     drawer: false

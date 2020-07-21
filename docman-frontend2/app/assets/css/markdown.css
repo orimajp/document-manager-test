@@ -1,0 +1,145 @@
+/* エディタプレビュー時 */
+.edit-preview-style {
+  top: 48px;
+  bottom: 30px;
+  position: fixed;
+  overflow-y: auto;
+}
+
+.editor-container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.document-title {
+  padding-bottom: 20px;
+  font-size: 2.5em;
+  font-weight: 200;
+  color: darkgray;
+}
+
+/* ここはmarkdown-itの都合上scopedは使えない(Vuetifyの既存スタイルを打ち消すため) */
+.v-application code {
+  box-shadow: none;
+  border-radius: 0;
+  font-weight: normal;
+  font-size: 100%;
+  color: black;
+  /*text-indent: 0;*/
+  padding: 0;
+}
+
+.v-application code::after {
+  content: none;
+}
+/*.v-application pre > code {
+  margin-bottom: -20px;
+}*/
+.v-application pre {
+  text-indent: -0.5em;
+}
+
+.markdown-edit-mode {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.markdown-body {
+}
+
+.markdown-body pre > code {
+  font-weight: 500;
+}
+
+/* 重複が多くてスタイル定義がイケてないが、markdown-it-containerプラグインの設定を凝らなければ解消しないのでとりあえず放置 */
+/* こちらのようなことをすればいいのだが、コードが不完全(TypeScript的にはエラーになる)でそのまま使えない https://blog.nakamu.life/posts/markdown-it-container-markdown-message-box */
+.markdown-body .alert-primary {
+  margin: 10px 0;
+  padding: 10px 10px;
+  border-radius: 5px;
+  color: #004085;
+  background-color: #cce5ff;
+  border-color: #b8daff;
+}
+.markdown-body .alert-primary p {
+  margin: 0;
+}
+
+.markdown-body .alert-secondary {
+  margin: 10px 0;
+  padding: 10px 10px;
+  border-radius: 5px;
+  color: #383d41;
+  background-color: #e2e3e5;
+  border-color: #d6d8db;
+}
+.markdown-body .alert-secondary p {
+  margin: 0;
+}
+
+.markdown-body .alert-success {
+  margin: 10px 0;
+  padding: 10px 10px;
+  border-radius: 5px;
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+.markdown-body .alert-success p {
+  margin: 0;
+}
+
+.markdown-body .alert-info {
+  margin: 10px 0;
+  padding: 10px 10px;
+  border-radius: 5px;
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+.markdown-body .alert-info p {
+  margin: 0;
+}
+
+.markdown-body .alert-warning {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+.markdown-body .alert-warning p {
+  margin: 0;
+}
+
+.markdown-body .alert-danger {
+  margin: 10px 0;
+  padding: 10px 10px;
+  border-radius: 5px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+.markdown-body .alert-danger p {
+  margin: 0;
+}
+
+.markdown-body .footnotes-list {
+  font-size: 85%;
+}
+
+/* markdown-it-video用レスポンシブスタイル */
+.markdown-body .embed-responsive {
+  position: relative;
+  height: 0;
+  padding-top: 56.25%;
+  overflow: hidden;
+}
+.markdown-body .embed-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

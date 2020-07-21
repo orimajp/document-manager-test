@@ -1,5 +1,5 @@
 <template>
-  <div />
+  <document-view-content :page-content="page" />
 </template>
 
 <script lang="ts">
@@ -7,9 +7,13 @@ import { computed, defineComponent } from '@vue/composition-api'
 import useRouter from '~/hooks/useRouter'
 import DocumentContainer from '~/containers/DocumentContainer'
 import PageContainer from '~/containers/PageContainer'
+import DocumentViewContent from '~/components/view/DocumentViewContent'
 
 export default defineComponent({
   layout: 'viewer',
+  components: {
+    DocumentViewContent
+  },
   setup() {
     const { route } = useRouter()
     const pageId = route.value.params.key
@@ -28,7 +32,7 @@ export default defineComponent({
     }
 
     return {
-      document,
+      // document,
       page
     }
   }
