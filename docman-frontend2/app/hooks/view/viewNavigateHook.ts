@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, Ref } from '@vue/composition-api'
+import { Ref } from '@vue/composition-api'
 import { useInnerPath } from '~/hooks/view/viewInnerPathHook'
 import { useRouter } from '~/hooks/useRouter'
 
@@ -13,30 +13,11 @@ const goFootNode = (id: string) => {
   window.location.href = `#${id}`
 }
 
-export const useNavigate = (viewer: Ref<HTMLElement | null>) => {
-  let links = {} as HTMLCollectionOf<HTMLAnchorElement> | undefined
-
-  onMounted(() => {
-    links = viewer.value?.getElementsByTagName('a')
-    if (!links) {
-      return
-    }
-    Array.from(links).forEach((element) => {
-      element.addEventListener('click', navigate)
-    })
-  })
-
-  onUnmounted(() => {
-    if (!links) {
-      return
-    }
-    Array.from(links).forEach((element) => {
-      element.removeEventListener('click', navigate)
-    })
-  })
-
+export const useNavigate = () => {
   const { router } = useRouter()
   const { getInnerPath } = useInnerPath()
+
+  let links = {} as HTMLCollectionOf<HTMLAnchorElement> | undefined
 
   const navigate = (event: Event) => {
     const hrefs = (event.target as Element).getAttribute('href')
@@ -64,5 +45,29 @@ export const useNavigate = (viewer: Ref<HTMLElement | null>) => {
     }
 
     return router.push(innerPath)
+  }
+
+  const addNavigateListener = (viewer: Ref<HTMLElement | null>) => {
+    links = viewer.value?.getElementsByTagName('a')
+    if (!links) {
+      return
+    }
+    Array.from(links).forEach((element) => {
+      element.addEventListener('click', navigate)
+    })
+  }
+
+  const removeNavigateListener = () => {
+    if (!links) {
+      return
+    }
+    Array.from(links).forEach((element) => {
+      element.removeEventListener('click', navigate)
+    })
+  }
+
+  return {
+    addNavigateListener,
+    removeNavigateListener
   }
 }

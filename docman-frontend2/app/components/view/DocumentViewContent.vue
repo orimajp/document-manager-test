@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <v-container fluid>
+    <v-container>
       <div ref="viewer">
         <h1 class="document-title">{{ pageTitle }}</h1>
         <div class="markdown-body">
@@ -12,7 +12,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, Ref, ref } from '@vue/composition-api'
+import {
+  defineComponent,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  PropType,
+  Ref,
+  ref
+} from '@vue/composition-api'
 import { PageData } from '~/models/page/PageData'
 import { PageContentProp, useViewContent } from '~/hooks/view/viewContentHook'
 import { useCollectHeadline } from '~/hooks/view/viewCollectHeadlineHook'
@@ -27,7 +35,21 @@ export default defineComponent({
 
     const viewer = ref(null) as Ref<HTMLElement | null> // ref=viewer相当
     useCollectHeadline(props, viewer)
-    useNavigate(viewer)
+
+    const { addNavigateListener, removeNavigateListener } = useNavigate()
+
+    // FIXME addNavigateListener()の実行が空振ってしまうので無理矢理タイマで待ち合わせる
+    onMounted(() => {
+      window.setTimeout(() => {
+        nextTick(() => {
+          addNavigateListener(viewer)
+        })
+      }, 200)
+    })
+
+    onUnmounted(() => {
+      removeNavigateListener()
+    })
 
     return {
       viewer,

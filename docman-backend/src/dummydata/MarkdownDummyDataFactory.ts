@@ -30,7 +30,8 @@ const pageData: string = `
 
 * https://github.com/nuxt-community/modules/issues/185
 * https://github.com/nuxt/nuxtjs.org/blob/master/components/commons/HtmlParser.global.vue
-* https://bitto.jp/posts/blog/nuxt%E5%8C%96/nuxt-md-anchor-convert/https://bitto.jp/posts/blog/nuxt%E5%8C%96/nuxt-md-anchor-convert/
+* https://bitto.jp/posts/blog/nuxt%E5%8C%96/nuxt-md-anchor-convert/
+* https://bitto.jp/posts/blog/nuxt%E5%8C%96/nuxt-md-anchor-convert/
 
 # コード
 ## TypeScript

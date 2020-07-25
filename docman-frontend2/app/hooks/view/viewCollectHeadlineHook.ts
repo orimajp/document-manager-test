@@ -10,11 +10,7 @@ export const useCollectHeadline = (
   props: PageContentProp,
   viewer: Ref<HTMLElement | null>
 ) => {
-  const {
-    headlines,
-    clearHeadlines,
-    addHeadline
-  } = HeadlineContanier.useContainer()
+  const { clearHeadlines, addHeadline } = HeadlineContanier.useContainer()
 
   onMounted(() => {
     collectHeadLine()
@@ -39,7 +35,5 @@ export const useCollectHeadline = (
     for (const header of headers) {
       addHeadline(createDocumentHeadline(header))
     }
-
-    console.log(JSON.stringify(headlines.value, null, 2))
   }
 }
