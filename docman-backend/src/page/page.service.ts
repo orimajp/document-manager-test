@@ -13,7 +13,6 @@ export class PageService {
 
   getPage(pageId: string): IPage | null {
     for (const page of this.pages) {
-      console.log(page)
       if (page.pageId === pageId) {
         return page
       }
@@ -26,5 +25,4 @@ export class PageService {
       this.pages.push(page)
     }
   }
-
 }

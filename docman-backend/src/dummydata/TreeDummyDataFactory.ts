@@ -4,8 +4,6 @@ import { IPage } from '~/page/page.interface';
 // import dayjs from 'dayjs';
 import * as dayjs from 'dayjs'
 import 'dayjs/locale/ja';
-import { IDocumentList } from '~/document/document-list.interface';
-import { DocumentList } from '~/document/document-list';
 
 const node: INode = {
   pageTitle: 'ページ0のタイトル(ツリーテスト)',
@@ -197,12 +195,6 @@ export function getTreeDummyDocument(): IDocument {
   return document
 }
 
-export function getTreeDummyDocumentList(): IDocumentList {
-  // console.log(document)
-  return new DocumentList(document.documentId, document.documentTile, document.createdAt, document.updatedAt)
-}
-
 export function getTreeDummyPages(): Array<IPage> {
-  // console.log(pages)
   return pages
 }

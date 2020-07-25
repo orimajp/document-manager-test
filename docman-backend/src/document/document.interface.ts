@@ -1,5 +1,5 @@
-import dayjs from 'dayjs'
-import 'dayjs/locale/ja'
+// import dayjs from 'dayjs'
+// import 'dayjs/locale/ja'
 import { INode } from '~/node/node.interface';
 
 export interface IDocument {

@@ -1,32 +1,26 @@
 import { Injectable } from '@nestjs/common'
 import { IDocumentList } from '~/document/document-list.interface'
-// import { DocumentList } from '~/document/document-list'
-// import * as dayjs from 'dayjs'
-// import 'dayjs/locale/ja'
 import { IDocument } from '~/document/document.interface';
-// import { IPage } from '~/page/page.interface';
-// import { getTreeDummyDocument, getTreeDummyDocumentList, getTreeDummyPages } from '~/dummydata/TreeDummyDataFactory';
-import { getTreeDummyDocument, getTreeDummyDocumentList } from '~/dummydata/TreeDummyDataFactory';
+import { getTreeDummyDocument } from '~/dummydata/TreeDummyDataFactory';
+import { DocumentList } from '~/document/document-list';
 
 @Injectable()
 export class DocumentService {
   private readonly documents: Array<IDocument>
-  private readonly documentLists: Array<IDocumentList>
 
   constructor() {
-    this.documentLists = []
     this.documents = []
     this.createDummyData()
   }
 
   getDocumentList(): Array<IDocumentList> {
-    /*
-    const document1 = new DocumentList("a", "ドキュメント1", dayjs().format(), dayjs().format())
     const documentList = [] as Array<IDocumentList>
-    documentList.push(document1)
+    for (const document of this.documents) {
+      documentList.push(
+        new DocumentList(document.documentId, document.documentTile, document.createdAt, document.updatedAt)
+      )
+    }
     return documentList
-     */
-    return this.documentLists
   }
 
   getDocument(documentId: string): IDocument | null {
@@ -40,7 +34,5 @@ export class DocumentService {
 
   private createDummyData() {
     this.documents.push(getTreeDummyDocument())
-    this.documentLists.push(getTreeDummyDocumentList())
   }
-
 }
