@@ -3,6 +3,7 @@ import { IDocumentList } from '~/document/document-list.interface'
 import { IDocument } from '~/document/document.interface';
 import { getTreeDummyDocument } from '~/dummydata/TreeDummyDataFactory';
 import { DocumentList } from '~/document/document-list';
+import { getMarkdownDummyDocument } from '~/dummydata/MarkdownDummyDataFactory';
 
 @Injectable()
 export class DocumentService {
@@ -34,5 +35,6 @@ export class DocumentService {
 
   private createDummyData() {
     this.documents.push(getTreeDummyDocument())
+    this.documents.push(getMarkdownDummyDocument())
   }
 }

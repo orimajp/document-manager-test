@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { IPage } from '~/page/page.interface';
 import { getTreeDummyPages } from '~/dummydata/TreeDummyDataFactory';
+import { getMarkdownDummyPages } from '~/dummydata/MarkdownDummyDataFactory';
 
 @Injectable()
 export class PageService {
@@ -22,6 +23,9 @@ export class PageService {
 
   private createDummyData() {
     for (const page of getTreeDummyPages()) {
+      this.pages.push(page)
+    }
+    for (const page of getMarkdownDummyPages()) {
       this.pages.push(page)
     }
   }

@@ -19,7 +19,6 @@
 import { defineComponent } from '@vue/composition-api'
 import HeadlineContanier from '~/containers/HeadlineContanier'
 import { DocumentHeadline } from '~/models/document/DocumentHeadline'
-import { useRouter } from '~/hooks/useRouter'
 
 export default defineComponent({
   setup() {
@@ -28,9 +27,8 @@ export default defineComponent({
       return `headline-${headline.label}`
     }
 
-    const { route } = useRouter()
     const changeHash = (hash: string): void => {
-      route.value.hash = hash
+      window.location.hash = hash
     }
 
     return {

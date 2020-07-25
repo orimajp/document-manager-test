@@ -5,76 +5,8 @@ import { IPage } from '~/page/page.interface';
 import * as dayjs from 'dayjs'
 import 'dayjs/locale/ja';
 
-const node: INode = {
-  pageTitle: 'ページ0のタイトル(ツリーテスト)',
-  pageId: 'page0',
-  nodes: [
-    {
-      pageTitle: 'ページ1',
-      pageId: 'page1',
-      nodes: []
-    },
-    {
-      pageTitle: 'ページ2',
-      pageId: 'page2',
-      nodes: [
-        {
-          pageTitle: 'ページ3',
-          pageId: 'page3',
-          nodes: []
-        },
-        {
-          pageTitle: 'ページ4',
-          pageId: 'page4',
-          nodes: [
-            {
-              pageTitle: 'ページ5',
-              pageId: 'page5',
-              nodes: []
-            },
-            {
-              pageTitle: 'ページ6',
-              pageId: 'page6',
-              nodes: [
-                {
-                  pageTitle: 'ページ7',
-                  pageId: 'page7',
-                  nodes: []
-                },
-                {
-                  pageTitle: 'ページ8',
-                  pageId: 'page8',
-                  nodes: []
-                }
-              ]
-            },
-            {
-              pageTitle: 'ページ9',
-              pageId: 'page9',
-              nodes: []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      pageTitle: 'ページ10',
-      pageId: 'page10',
-      nodes: []
-    }
-  ]
-}
-
 const createDate = dayjs('2020-07-07').format()
 const updateDate = dayjs('2020/08/08').format()
-
-const document: IDocument = {
-  documentId: 'page0',
-  documentTile: 'ページ0のタイトル(ツリーテスト)',
-  node: node,
-  createdAt: createDate,
-  updatedAt: updateDate
-}
 
 const pages:Array<IPage> = [
   {
@@ -164,32 +96,76 @@ const pages:Array<IPage> = [
     pageData: 'ページ10のデータ',
     createdAt: createDate,
     updatedAt: updateDate
-  },
-  {
-    documentId: 'page100',
-    pageId: 'page100',
-    pageTitle: 'ページ100のタイトル',
-    pageData: 'ページ100のデータ',
-    createdAt: createDate,
-    updatedAt: updateDate
-  },
-  {
-    documentId: 'page100',
-    pageId: 'page101',
-    pageTitle: 'ページ101のタイトル',
-    pageData: 'ページ101のデータ',
-    createdAt: createDate,
-    updatedAt: updateDate
-  },
-  {
-    documentId: 'page100',
-    pageId: 'page102',
-    pageTitle: 'ページ102のタイトル',
-    pageData: 'ページ102のデータ',
-    createdAt: createDate,
-    updatedAt: updateDate
   }
 ]
+
+const node: INode = {
+  pageTitle: pages[0].pageTitle,
+  pageId: pages[0].pageId,
+  nodes: [
+    {
+      pageTitle: pages[1].pageTitle,
+      pageId: pages[1].pageId,
+      nodes: []
+    },
+    {
+      pageTitle: pages[2].pageTitle,
+      pageId: pages[2].pageId,
+      nodes: [
+        {
+          pageTitle: pages[3].pageTitle,
+          pageId: pages[3].pageId,
+          nodes: []
+        },
+        {
+          pageTitle: pages[4].pageTitle,
+          pageId: pages[4].pageId,
+          nodes: [
+            {
+              pageTitle: pages[5].pageTitle,
+              pageId: pages[5].pageId,
+              nodes: []
+            },
+            {
+              pageTitle: pages[6].pageTitle,
+              pageId: pages[6].pageId,
+              nodes: [
+                {
+                  pageTitle: pages[7].pageTitle,
+                  pageId: pages[7].pageId,
+                  nodes: []
+                },
+                {
+                  pageTitle: pages[8].pageTitle,
+                  pageId: pages[8].pageId,
+                  nodes: []
+                }
+              ]
+            },
+            {
+              pageTitle: pages[9].pageTitle,
+              pageId: pages[9].pageId,
+              nodes: []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      pageTitle: pages[10].pageTitle,
+      pageId: pages[10].pageId,
+      nodes: []
+    }
+  ]
+}
+
+const document: IDocument = {
+  documentId: pages[0].documentId,
+  documentTile: pages[0].pageTitle,
+  node: node,
+  createdAt: pages[0].createdAt,
+  updatedAt: pages[0].updatedAt
+}
 
 export function getTreeDummyDocument(): IDocument {
   return document

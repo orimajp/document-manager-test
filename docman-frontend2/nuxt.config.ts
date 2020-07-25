@@ -47,7 +47,11 @@ const nuxtConfig: NuxtConfig = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    'github-markdown-css',
+    '../node_modules/highlight.js/styles/github-gist.css'
+    // 'github-markdown-css' // github-gist.cssaが無いとハイライトされない
+  ],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -74,8 +78,51 @@ const nuxtConfig: NuxtConfig = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/markdownit'
   ],
+
+  // [optional] markdownit options
+  // See https://github.com/markdown-it/markdown-it
+  // https://github.com/highlightjs/highlightjs-vue
+  markdownit: {
+    injected: true, // $mdを利用してmarkdownをhtmlにレンダリングする
+    breaks: true, // 改行コードを<br>に変換する
+    html: true, // HTML タグを有効にする
+    linkify: true, // URLに似たテキストをリンクに自動変換する
+    typography: true, // 言語に依存しないきれいな 置換 + 引用符 を有効にします。
+    highlight: (str: string, lang: string) => {
+      const hljs = require('highlight.js')
+      const hljsDefineVue = require('highlightjs-vue')
+      hljsDefineVue(hljs)
+      hljs.initHighlightingOnLoad()
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(lang, str).value
+        } catch (__) {}
+        return '' // use external default escaping
+      }
+    },
+    use: [
+      ['markdown-it-container', 'alert-primary'],
+      ['markdown-it-container', 'alert-secondary'],
+      ['markdown-it-container', 'alert-info'],
+      ['markdown-it-container', 'alert-success'],
+      ['markdown-it-container', 'alert-warning'],
+      ['markdown-it-container', 'alert-danger'],
+      'markdown-it-sanitizer',
+      'markdown-it-plantuml',
+      'markdown-it-anchor',
+      'markdown-it-mark',
+      'markdown-it-footnote',
+      'markdown-it-ins',
+      'markdown-it-sub',
+      'markdown-it-abbr',
+      'markdown-it-deflist',
+      'markdown-it-video'
+    ]
+  },
+
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

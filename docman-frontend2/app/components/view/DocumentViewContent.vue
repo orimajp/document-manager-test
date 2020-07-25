@@ -4,7 +4,7 @@
       <div ref="viewer">
         <h1 class="document-title">{{ pageTitle }}</h1>
         <div class="markdown-body">
-          <div>{{ pageData }}</div>
+          <div v-html="$md.render(pageData)" />
         </div>
       </div>
     </v-container>
