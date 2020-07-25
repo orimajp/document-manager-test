@@ -1,8 +1,8 @@
 import { computed } from '@vue/composition-api'
 import DrawerContainer from '~/containers/DrawerContainer'
 import PageContainer from '~/containers/PageContainer'
-import useRouter from '~/hooks/useRouter'
 import DocumentContainer from '~/containers/DocumentContainer'
+import { useRouter } from '~/hooks/useRouter'
 
 export const useViewNavbar = () => {
   const { drawer } = DrawerContainer.useContainer()
@@ -29,16 +29,16 @@ export const useViewNavbar = () => {
 
   const { router } = useRouter()
   const goTop = () => {
-    router.push('/')
+    return router.push('/')
   }
   const goPageCreate = () => {
-    router.push(`/document/create/page/${pageId}`)
+    return router.push(`/document/create/page/${pageId}`)
   }
   const goPageEdit = () => {
-    router.push(`/document/edit/${pageId}`)
+    return router.push(`/document/edit/${pageId}`)
   }
   const goTreeEdit = () => {
-    router.push(`/document/tree/${pageId}`)
+    return router.push(`/document/tree/${pageId}`)
   }
 
   return {

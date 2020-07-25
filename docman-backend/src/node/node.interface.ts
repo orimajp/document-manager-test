@@ -1,5 +1,5 @@
 export interface INode {
   pageId: string
-  pateTitle: string
+  pageTitle: string
   nodes: Array<INode>
 }

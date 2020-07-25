@@ -7,7 +7,7 @@ type State = {
   route: Route
 }
 
-const useRouter = () => {
+export const useRouter = () => {
   const vm = getRuntimeVM()
   const state = reactive<State>({
     route: vm.$route
@@ -23,5 +23,3 @@ const useRouter = () => {
 
   return { ...toRefs(state), router: vm.$router }
 }
-
-export default useRouter

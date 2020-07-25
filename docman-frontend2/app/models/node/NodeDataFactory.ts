@@ -10,5 +10,5 @@ export function createNodeData(iNode: INode): NodeData {
 }
 
 function createSinglNodeData(iNode: INode): NodeData {
-  return new NodeData(iNode.pageId, iNode.pateTitle)
+  return new NodeData(iNode.pageId, iNode.pageTitle)
 }

@@ -1,7 +1,8 @@
 <template>
   <v-main>
     <v-container fluid :class="{ 'editor-container-fluid': dualMode }">
-      <div id="markdown-viewer" class="edit-preview-style">
+      <!--<div id="markdown-viewer" ref="viewer" class="edit-preview-style">-->
+      <div ref="viewer" class="edit-preview-style">
         <h1 class="document-title markdown-edit-mode">
           {{ pageTitle }}
         </h1>
@@ -18,7 +19,7 @@
 
 <script lang="ts">
 // import { defineComponent, PropType, SetupContext } from '@vue/composition-api'
-import { defineComponent, PropType } from '@vue/composition-api'
+import { defineComponent, PropType, Ref, ref } from '@vue/composition-api'
 import { useViewerScrollHandle } from '~/hooks/viewer/viewerHandleScrollHook'
 import { PageData } from '~/models/page/PageData'
 import { PageContentProp, useViewContent } from '~/hooks/view/viewContentHook'
@@ -35,9 +36,12 @@ export default defineComponent({
     const { displayMode, dualMode } = DisplayModeContainer.useContainer()
     const { viewerWidthStlye } = useViewerWindowSize(displayMode)
 
-    useViewerScrollHandle('markdown-viewer')
+    const viewer = ref(null) as Ref<HTMLElement | null> // ref=viewer相当
+    // useViewerScrollHandle('markdown-viewer')
+    useViewerScrollHandle(viewer)
 
     return {
+      viewer,
       pageTitle,
       pageData,
       dualMode,

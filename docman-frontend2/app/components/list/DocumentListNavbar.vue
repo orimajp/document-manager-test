@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import useRouter from '~/hooks/useRouter'
+import { useRouter } from '~/hooks/useRouter'
 
 export default defineComponent({
   setup() {

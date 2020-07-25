@@ -17,13 +17,13 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import useRouter from '~/hooks/useRouter'
-import HeadlineCotanier from '~/containers/HeadlineCotanier'
+import HeadlineContanier from '~/containers/HeadlineContanier'
 import { DocumentHeadline } from '~/models/document/DocumentHeadline'
+import { useRouter } from '~/hooks/useRouter'
 
 export default defineComponent({
   setup() {
-    const { headlines } = HeadlineCotanier.useContainer()
+    const { headlines } = HeadlineContanier.useContainer()
     const headlineClass = (headline: DocumentHeadline): string => {
       return `headline-${headline.label}`
     }

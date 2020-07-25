@@ -1,15 +1,19 @@
 import {
   nextTick,
-  onMounted,
-  onUnmounted,
+  // onMounted,
+  // onUnmounted,
+  Ref,
   watchEffect
 } from '@vue/composition-api'
+import { useEventListener } from '@vueuse/core'
 import EditScrollHandleContainer from '~/containers/EditScrollHandleContainer'
 
 export const useViewerScrollHandle = (
   // context: SetupContext,
-  targetId: string
+  // targetId: string
+  viewer: Ref<HTMLElement | null>
 ) => {
+  /*
   let markdownViewr: HTMLElement
 
   onMounted(() => {
@@ -20,6 +24,7 @@ export const useViewerScrollHandle = (
   onUnmounted(() => {
     markdownViewr.removeEventListener('scroll', handleScroll)
   })
+   */
 
   const {
     viewerScrollValue,
@@ -45,6 +50,8 @@ export const useViewerScrollHandle = (
     }
   }
 
+  useEventListener('scroll', handleScroll, false, viewer.value as HTMLElement)
+
   watchEffect(() => {
     setScrollTop(viewerScrollValue.value)
   })
@@ -52,9 +59,13 @@ export const useViewerScrollHandle = (
   const setScrollTop = (v: number) => {
     isScrollRecieved = true
     setTimeout(false)
-    const topEnd = markdownViewr.scrollHeight - markdownViewr.clientHeight
+    // const topEnd = markdownViewr.scrollHeight - markdownViewr.clientHeight
+    const topEnd =
+      (viewer.value as HTMLElement).scrollHeight -
+      (viewer.value as HTMLElement).clientHeight
     nextTick(() => {
-      markdownViewr.scrollTop = topEnd * v
+      // markdownViewr.scrollTop = topEnd * v
+      ;(viewer.value as HTMLElement).scrollTop = topEnd * v
     })
   }
 

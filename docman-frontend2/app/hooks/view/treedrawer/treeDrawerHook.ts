@@ -1,7 +1,7 @@
 import { computed } from '@vue/composition-api'
 import PageContainer from '~/containers/PageContainer'
 import DocumentContainer from '~/containers/DocumentContainer'
-import useRouter from '~/hooks/useRouter'
+import { useRouter } from '~/hooks/useRouter'
 
 export const useTreeDrawer = () => {
   const { document } = DocumentContainer.useContainer()
@@ -13,18 +13,17 @@ export const useTreeDrawer = () => {
 
   const currentNode = computed(() => document.value.node)
 
-  const pageIdArray = [] as Array<string>
+  const pageIdArray = [] as Array<string> // リアクティブにしない
 
   const documentSelected = computed(
     () => currentNode.value.pageId === page.value.pageId
   )
 
-  const pageTitle = computed(() => currentNode.value.pateTitle)
+  const pageTitle = computed(() => currentNode.value.pageTitle)
 
   const { router } = useRouter()
-
   const goDocumentTop = () => {
-    router.push(`/document/view/${documentId}`)
+    return router.push(`/document/view/${documentId.value}`)
   }
 
   return {

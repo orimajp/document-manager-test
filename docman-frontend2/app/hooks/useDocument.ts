@@ -12,6 +12,7 @@ export const useDocument = () => {
   }
 
   const getDocument = async (documentId: string): Promise<DocumentData> => {
+    console.log(`ドキュメント取得： documentId=${documentId}`)
     const document = await axios.$get(`/api/documents/${documentId}`)
     return createDocumentData(document)
   }

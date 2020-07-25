@@ -1,13 +1,13 @@
 export class NodeData {
   pageId: string
-  pateTitle: string
+  pageTitle: string
   expand: boolean
   select: boolean
   nodes: Array<NodeData>
 
-  constructor(pageId: string, pateTitle: string) {
+  constructor(pageId: string, pageTitle: string) {
     this.pageId = pageId
-    this.pateTitle = pateTitle
+    this.pageTitle = pageTitle
     this.expand = false
     this.select = false
     this.nodes = []

@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from '@vue/composition-api'
+import { computed, defineComponent, PropType } from '@vue/composition-api'
 import { TreeContextMenuParam } from '~/hooks/view/contextmenu/treeContextMenuControllHook'
 import { useTreeContextRouting } from '~/hooks/view/contextmenu/treeContextMenuRoutingHook'
 
@@ -51,15 +51,20 @@ export default defineComponent({
       window.open(url, '_blank')
     }
 
+    const openPageId = computed(() => props.treeContextMenuParam.openPageId)
     const { createChildPage, createNextPage } = useTreeContextRouting(
-      ref(props.treeContextMenuParam.openPageId)
+      openPageId
     )
+
+    const contextMenuX = computed(() => props.treeContextMenuParam.contextMenuX)
+    const contextMenuY = computed(() => props.treeContextMenuParam.contextMenuY)
+    const top = computed(() => props.treeContextMenuParam.top)
 
     return {
       showContextMenu,
-      contextMenuX: props.treeContextMenuParam.contextMenuX,
-      contextMenuY: props.treeContextMenuParam.contextMenuY,
-      top: props.treeContextMenuParam.top,
+      contextMenuX,
+      contextMenuY,
+      top,
       openPage,
       createChildPage,
       createNextPage

@@ -6,13 +6,13 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-// import HeadlineCotanier from '~/containers/HeadlineCotanier'
+// import HeadlineContanier from '~/containers/HeadlineContanier'
 import DisplayModeContainer from '~/containers/DisplayModeContainer'
 import EditScrollHandleContainer from '~/containers/EditScrollHandleContainer'
 
 export default defineComponent({
   setup() {
-    // HeadlineCotanier.provide()
+    // HeadlineContanier.provide()
     DisplayModeContainer.provide()
     EditScrollHandleContainer.provide()
   }

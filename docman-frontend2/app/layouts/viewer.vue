@@ -12,7 +12,7 @@ import { defineComponent } from '@vue/composition-api'
 import DocumentContainer from '~/containers/DocumentContainer'
 import PageContainer from '~/containers/PageContainer'
 import DrawerContainer from '~/containers/DrawerContainer'
-import HeadlineCotanier from '~/containers/HeadlineCotanier'
+import HeadlineContanier from '~/containers/HeadlineContanier'
 import DocumentViewNavbar from '~/components/view/DocumentViewNavbar'
 import DocumentViewTreeDrawer from '~/components/view/drawer/DocumentViewTreeDrawer'
 import DocumentVieweTocDrawer from '~/components/view/drawer/DocumentVieweTocDrawer'
@@ -27,7 +27,7 @@ export default defineComponent({
     DocumentContainer.provide()
     PageContainer.provide()
     DrawerContainer.provide()
-    HeadlineCotanier.provide()
+    HeadlineContanier.provide()
   }
 })
 </script>

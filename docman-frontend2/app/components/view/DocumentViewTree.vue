@@ -4,7 +4,7 @@
       v-if="!firstNode"
       class="doc-list"
       :class="{ selected: currentNode.select }"
-      @click="openPage(currentPageId.value)"
+      @click="openPage"
       @contextmenu="openTreeContextMenu"
     >
       <v-icon class="collapse-icon" v-text="iconText" />

@@ -1,6 +1,6 @@
 import { Ref } from '@vue/composition-api'
 import { usePage } from '~/hooks/usePage'
-import useRouter from '~/hooks/useRouter'
+import { useRouter } from '~/hooks/useRouter'
 
 export const useTreeContextRouting = (openPageId: Ref<string | null>) => {
   const { getPage } = usePage()
@@ -10,7 +10,7 @@ export const useTreeContextRouting = (openPageId: Ref<string | null>) => {
     const page = await getPage(openPageId.value as string)
     const documentId = page.documentId
     await router.push(
-      `/document/create/page/${documentId}?prevendChildTargetKey=${openPageId}`
+      `/document/create/page/${documentId}?prevendChildTargetKey=${openPageId.value}`
     )
   }
 
@@ -18,7 +18,7 @@ export const useTreeContextRouting = (openPageId: Ref<string | null>) => {
     const page = await getPage(openPageId.value as string)
     const documentId = page.documentId
     await router.push(
-      `/document/create/page/${documentId}?appendNextTargetKey=${openPageId}`
+      `/document/create/page/${documentId}?appendNextTargetKey=${openPageId.value}`
     )
   }
 

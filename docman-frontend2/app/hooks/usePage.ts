@@ -6,6 +6,7 @@ export const usePage = () => {
   const { axios } = useAxios()
 
   const getPage = async (pageId: string): Promise<PageData> => {
+    console.log(`ページ取得： pageId=${pageId}`)
     const page = await axios.$get(`/api/pages/${pageId}`)
     return createPageData(page)
   }

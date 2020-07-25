@@ -1,6 +1,6 @@
 import { computed, SetupContext } from '@vue/composition-api'
 import { NodeData } from '~/models/node/NodeData'
-import useRouter from '~/hooks/useRouter'
+import { useRouter } from '~/hooks/useRouter'
 
 export interface TreeProps {
   currentNode: NodeData
@@ -23,7 +23,11 @@ export const useTree = (treeProps: TreeProps, context: SetupContext) => {
 
   const firstNode = computed(() => treeProps.pageIdArray.length === 0)
 
-  const currentPageId = computed(() => treeProps.currentNode.pageId)
+  // const currentPageId = computed(() => treeProps.currentNode.pageId)
+  const currentPageId = computed(() => {
+    console.log(`currentPageId=${treeProps.currentNode.pageId}`)
+    return treeProps.currentNode.pageId
+  })
 
   const addPageIdArray = computed(() =>
     treeProps.pageIdArray.concat(currentPageId.value)
@@ -31,11 +35,12 @@ export const useTree = (treeProps: TreeProps, context: SetupContext) => {
 
   const { router } = useRouter()
 
-  const openPage = (pageId: string) => {
-    router.push(`/document/view/${pageId}`)
+  const openPage = () => {
+    return router.push(`/document/view/${currentPageId.value}`)
   }
 
   const openContextMenu = (pageId: string, e: MouseEvent) => {
+    console.log(e)
     context.emit('openContextMenu', pageId, e)
   }
 

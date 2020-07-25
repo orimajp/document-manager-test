@@ -20,7 +20,7 @@ export const useTreeContextControll = () => {
   })
 
   const openContextMenu = (pageId: string, e: MouseEvent, top: boolean) => {
-    // e.preventDefault()
+    e.preventDefault()
     state.contextMenuParam.showContextMenu = true
     state.contextMenuParam.openPageId = pageId
     state.contextMenuParam.contextMenuX = e.clientX

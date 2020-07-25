@@ -40,7 +40,7 @@
 // import { defineComponent, watchEffect } from 'nuxt-composition-api'
 import { defineComponent, PropType } from '@vue/composition-api'
 import { IDocumentList } from '~/models/document/IDocumentList'
-import useRouter from '~/hooks/useRouter'
+import { useRouter } from '~/hooks/useRouter'
 
 type Props = {
   list: Array<IDocumentList>

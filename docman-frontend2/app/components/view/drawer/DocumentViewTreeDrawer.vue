@@ -51,7 +51,7 @@ export default defineComponent({
 
     const {
       documentId,
-      pageId,
+      // pageId,
       currentNode,
       pageIdArray,
       documentSelected,
@@ -70,8 +70,8 @@ export default defineComponent({
       openTopContextMenu(documentId.value, e)
     }
 
-    const treeContextMenu = (e) => {
-      openTreeContextMenu(pageId.value, e)
+    const treeContextMenu = (pageId, e) => {
+      openTreeContextMenu(pageId, e)
     }
 
     return {
