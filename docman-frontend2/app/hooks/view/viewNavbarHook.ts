@@ -32,13 +32,13 @@ export const useViewNavbar = () => {
     return router.push('/')
   }
   const goPageCreate = () => {
-    return router.push(`/document/create/page/${pageId}`)
+    return router.push(`/document/create/page/${pageId.value}`)
   }
   const goPageEdit = () => {
-    return router.push(`/document/edit/${pageId}`)
+    return router.push(`/document/edit/${pageId.value}`)
   }
   const goTreeEdit = () => {
-    return router.push(`/document/tree/${pageId}`)
+    return router.push(`/document/tree/${pageId.value}`)
   }
 
   return {

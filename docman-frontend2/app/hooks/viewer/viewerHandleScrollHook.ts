@@ -7,8 +7,9 @@ import {
 } from '@vue/composition-api'
 import { useEventListener } from '@vueuse/core'
 import EditScrollHandleContainer from '~/containers/EditScrollHandleContainer'
+import SyncModeContainer from '~/containers/SyncModeContainer'
 
-export const useViewerScrollHandle = (
+export const useViewerHandleScroll = (
   // context: SetupContext,
   // targetId: string
   viewer: Ref<HTMLElement | null>
@@ -30,12 +31,16 @@ export const useViewerScrollHandle = (
     viewerScrollValue,
     updateEditorScrollValue
   } = EditScrollHandleContainer.useContainer()
+  const { syncMode } = SyncModeContainer.useContainer()
 
   let timeoutId: null | number = null
   let isScrollRecieved = false
 
   const handleScroll = (e: Event) => {
     if (isScrollRecieved) {
+      return
+    }
+    if (!syncMode.value) {
       return
     }
     const el = e.target as Element

@@ -11,7 +11,13 @@ export const usePage = () => {
     return createPageData(page)
   }
 
+  const updatePage = async (page: PageData): Promise<void> => {
+    console.log(`ページ更新： pageId=${page.pageId}`)
+    await axios.$put('/api/pages', page)
+  }
+
   return {
-    getPage
+    getPage,
+    updatePage
   }
 }

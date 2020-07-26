@@ -1,6 +1,9 @@
 import * as path from 'path'
 import colors from 'vuetify/es5/util/colors'
 import { NuxtConfig } from '@nuxt/types'
+import { NuxtOptionsLoaders, NuxtWebpackEnv } from '@nuxt/types/config/build'
+import { Configuration as WebpackConfiguration } from 'webpack'
+const MonacoEditorPlugin = require('monaco-editor-webpack-plugin')
 
 const nuxtConfig: NuxtConfig = {
   /*
@@ -157,7 +160,15 @@ const nuxtConfig: NuxtConfig = {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {}
+  build: {
+    extend(
+      config: WebpackConfiguration,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      ctx: { loaders: NuxtOptionsLoaders } & NuxtWebpackEnv
+    ) {
+      config.plugins?.push(new MonacoEditorPlugin())
+    }
+  }
 }
 
 module.exports = nuxtConfig

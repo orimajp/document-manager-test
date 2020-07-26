@@ -20,7 +20,7 @@
 <script lang="ts">
 // import { defineComponent, PropType, SetupContext } from '@vue/composition-api'
 import { defineComponent, PropType, Ref, ref } from '@vue/composition-api'
-import { useViewerScrollHandle } from '~/hooks/viewer/viewerHandleScrollHook'
+import { useViewerHandleScroll } from '~/hooks/viewer/viewerHandleScrollHook'
 import { PageData } from '~/models/page/PageData'
 import { PageContentProp, useViewContent } from '~/hooks/view/viewContentHook'
 import { useViewerWindowSize } from '~/hooks/viewer/viewerWindowSizeHook'
@@ -37,8 +37,8 @@ export default defineComponent({
     const { viewerWidthStlye } = useViewerWindowSize(displayMode)
 
     const viewer = ref(null) as Ref<HTMLElement | null> // ref=viewer相当
-    // useViewerScrollHandle('markdown-viewer')
-    useViewerScrollHandle(viewer)
+    // useViewerHandleScroll('markdown-viewer')
+    useViewerHandleScroll(viewer)
 
     return {
       viewer,
