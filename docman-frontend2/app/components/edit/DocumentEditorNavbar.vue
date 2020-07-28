@@ -68,20 +68,11 @@ interface EditorNavbarProps {
 
 export default defineComponent({
   props: {
-    pageTitle: Object as PropType<string>,
-    documentEdit: Object as PropType<boolean>,
-    createMode: Object as PropType<boolean>
+    pageTitle: String as PropType<string>,
+    documentEdit: Boolean as PropType<boolean>,
+    createMode: Boolean as PropType<boolean>
   },
   setup(props: EditorNavbarProps, context: SetupContext) {
-    /*
-    const title = computed({
-      get: () => props.pageTitle,
-      set: (val) => {
-        context.emit('updateTitle', val)
-      }
-    })
-     */
-
     const editTarget = computed(() => (props.documentEdit ? 'D' : 'P'))
 
     const { darkMode } = DarkModeContainer.useContainer()
@@ -122,7 +113,6 @@ export default defineComponent({
 
     return {
       titleField,
-      // title,
       editTarget,
       option,
       mode,

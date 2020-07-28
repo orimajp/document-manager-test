@@ -1,13 +1,6 @@
 import { useWindowSize } from '@vueuse/core'
 import { computed, Ref } from '@vue/composition-api'
-// import { PageContentProp } from '~/hooks/view/viewContentHook'
 import { DisplayMode, DUAL, EDIT } from '~/models/EditorDisplayMode'
-
-/*
-interface PreviewProp extends PageContentProp {
-  displayMode: DisplayMode
-}
-*/
 
 const calculateViewerWidth = (
   windowWidth: number,
@@ -31,7 +24,7 @@ export const useViewerWindowSize = (displayMode: Ref<DisplayMode>) => {
   })
 
   const viewerWidthStlye = computed(() => {
-    return `${viewerWidth}px`
+    return `${viewerWidth.value}px`
   })
 
   return {

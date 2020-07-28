@@ -1,7 +1,6 @@
 <template>
   <v-main>
     <v-container fluid :class="{ 'editor-container-fluid': dualMode }">
-      <!--<div id="markdown-viewer" ref="viewer" class="edit-preview-style">-->
       <div ref="viewer" class="edit-preview-style">
         <h1 class="document-title markdown-edit-mode">
           {{ pageTitle }}
@@ -10,7 +9,7 @@
           class="markdown-body markdown-edit-mode"
           :style="{ width: viewerWidthStlye }"
         >
-          <div>{{ pageData }}</div>
+          <div v-html="$md.render(pageData)" />
         </div>
       </div>
     </v-container>
@@ -18,7 +17,6 @@
 </template>
 
 <script lang="ts">
-// import { defineComponent, PropType, SetupContext } from '@vue/composition-api'
 import { defineComponent, PropType, Ref, ref } from '@vue/composition-api'
 import { useViewerHandleScroll } from '~/hooks/viewer/viewerHandleScrollHook'
 import { PageData } from '~/models/page/PageData'
@@ -30,14 +28,12 @@ export default defineComponent({
   props: {
     pageContent: Object as PropType<PageData>
   },
-  // setup(props: PageContentProp, context: SetupContext) {
   setup(props: PageContentProp) {
     const { pageTitle, pageData } = useViewContent(props)
     const { displayMode, dualMode } = DisplayModeContainer.useContainer()
     const { viewerWidthStlye } = useViewerWindowSize(displayMode)
 
     const viewer = ref(null) as Ref<HTMLElement | null> // ref=viewer相当
-    // useViewerHandleScroll('markdown-viewer')
     useViewerHandleScroll(viewer)
 
     return {
@@ -45,7 +41,6 @@ export default defineComponent({
       pageTitle,
       pageData,
       dualMode,
-      // viewerWidth,
       viewerWidthStlye
     }
   }

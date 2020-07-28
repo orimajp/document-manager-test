@@ -3,6 +3,7 @@
     <document-editor-navbar
       :page-title="pageTitle"
       :document-edit="documentEdit"
+      :create-mode="false"
       @goTop="goTop"
       @updateTitle="updateTitle"
     />
@@ -24,14 +25,20 @@
       </v-col>
     </v-row>
     <document-editor-footer
-      @updateDocument="cancelDocumentPage"
-      @cancelDocument="updateDocumentPage"
+      @updateDocument="updateDocumentPage"
+      @cancelDocument="cancelDocumentPage"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from '@vue/composition-api'
+import {
+  computed,
+  defineComponent,
+  Ref,
+  ref,
+  watchEffect
+} from '@vue/composition-api'
 import { useEventListener } from '@vueuse/core'
 import MarkdownEditor from '~/components/editor/MarkdownEditor.vue'
 import DocumentPreviewer from '~/components/viewer/DocumentPreviewer'
@@ -63,26 +70,37 @@ export default defineComponent({
     const { getPage } = usePage()
     const page = ref(null) as Ref<PageData>
     const pageTitle = computed(() => {
-      return page.value === null ? ref('') : page.value.pageTitle
+      return page.value === null ? '' : page.value.pageTitle
     })
     const pageData = computed(() => {
-      return page.value === null ? ref('') : page.value.pageData
+      return page.value === null ? '' : page.value.pageData
     })
     const documentEdit = computed(() => {
       return page.value === null
-        ? ref(true)
+        ? true
         : page.value.pageId === page.value.documentId
     })
-    getPage(pageId).then((editPageData) => (page.value = editPageData))
+    // getPage(pageId).then((editPageData) => (page.value = editPageData))
+    getPage(pageId).then((editPageData) => {
+      console.log(editPageData)
+      return (page.value = editPageData)
+    })
 
     const { editMode, dualMode, prevMode } = DisplayModeContainer.useContainer()
-    const displayEditForm = computed(() => !prevMode)
-    const displayPreviewArea = computed(() => !editMode)
+    const displayEditForm = computed(() => !prevMode.value)
+    const displayPreviewArea = computed(() => !editMode.value)
 
     const {
       displayEditFormCols,
       displayPreviewAreaCols
     } = useEditorPaneColumn()
+
+    watchEffect(() =>
+      console.log(`displayEditFormCols=${displayEditFormCols.value}`)
+    )
+    watchEffect(() =>
+      console.log(`displayPreviewAreaCols=${displayPreviewAreaCols.value}`)
+    )
 
     const { change, savePage } = EditStateContainer.useContainer()
     const { updatePage } = usePage()

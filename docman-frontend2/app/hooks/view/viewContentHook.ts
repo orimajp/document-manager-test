@@ -6,8 +6,12 @@ export interface PageContentProp {
 }
 
 export const useViewContent = (props: PageContentProp) => {
-  const pageTitle = computed(() => props.pageContent.pageTitle)
-  const pageData = computed(() => props.pageContent.pageData)
+  const pageTitle = computed(() =>
+    props.pageContent === null ? '' : props.pageContent.pageTitle
+  )
+  const pageData = computed(() =>
+    props.pageContent === null ? '' : props.pageContent.pageData
+  )
 
   return {
     pageTitle,

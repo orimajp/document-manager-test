@@ -1,32 +1,14 @@
 import {
   nextTick,
-  // onMounted,
-  // onUnmounted,
+  onMounted,
+  onUnmounted,
   Ref,
   watchEffect
 } from '@vue/composition-api'
-import { useEventListener } from '@vueuse/core'
 import EditScrollHandleContainer from '~/containers/EditScrollHandleContainer'
 import SyncModeContainer from '~/containers/SyncModeContainer'
 
-export const useViewerHandleScroll = (
-  // context: SetupContext,
-  // targetId: string
-  viewer: Ref<HTMLElement | null>
-) => {
-  /*
-  let markdownViewr: HTMLElement
-
-  onMounted(() => {
-    markdownViewr = document.getElementById(targetId) as HTMLElement
-    markdownViewr.addEventListener('scroll', handleScroll)
-  })
-
-  onUnmounted(() => {
-    markdownViewr.removeEventListener('scroll', handleScroll)
-  })
-   */
-
+export const useViewerHandleScroll = (viewer: Ref<HTMLElement | null>) => {
   const {
     viewerScrollValue,
     updateEditorScrollValue
@@ -48,28 +30,31 @@ export const useViewerHandleScroll = (
       const topEnd = el.scrollHeight - el.clientHeight
       if (topEnd > 0) {
         nextTick(() => {
-          // context.emit('onScrollUpdatedEditor', el.scrollTop / topEnd)
           updateEditorScrollValue(el.scrollTop / topEnd)
         })
       }
     }
   }
 
-  useEventListener('scroll', handleScroll, false, viewer.value as HTMLElement)
+  onMounted(() => {
+    viewer.value?.addEventListener('scroll', handleScroll)
+  })
 
-  watchEffect(() => {
-    setScrollTop(viewerScrollValue.value)
+  onUnmounted(() => {
+    viewer.value?.removeEventListener('scroll', handleScroll)
   })
 
   const setScrollTop = (v: number) => {
+    if (viewer.value === null) {
+      console.log('setScrollTop(): viewer.value is null.')
+      return
+    }
     isScrollRecieved = true
     setTimeout(false)
-    // const topEnd = markdownViewr.scrollHeight - markdownViewr.clientHeight
     const topEnd =
       (viewer.value as HTMLElement).scrollHeight -
       (viewer.value as HTMLElement).clientHeight
     nextTick(() => {
-      // markdownViewr.scrollTop = topEnd * v
       ;(viewer.value as HTMLElement).scrollTop = topEnd * v
     })
   }
@@ -87,4 +72,8 @@ export const useViewerHandleScroll = (
       }, 200)
     }
   }
+
+  watchEffect(() => {
+    setScrollTop(viewerScrollValue.value)
+  })
 }

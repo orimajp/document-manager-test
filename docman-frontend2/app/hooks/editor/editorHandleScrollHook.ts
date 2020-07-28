@@ -3,10 +3,10 @@ import {
   computed,
   ComputedRef,
   nextTick,
+  onMounted,
   Ref,
   watchEffect
 } from '@vue/composition-api'
-import { useEventListener } from '@vueuse/core'
 import EditScrollHandleContainer from '~/containers/EditScrollHandleContainer'
 import SyncModeContainer from '~/containers/SyncModeContainer'
 import IStandaloneCodeEditor = monacoEditor.editor.IStandaloneCodeEditor
@@ -25,11 +25,12 @@ export const useEditorHandleScroll = (
   let isScrollRecieved = false
 
   const editorRef = computed(() => editor.value as IStandaloneCodeEditor)
-  const editorElementRef = computed(
-    () => ((editor.value as IStandaloneCodeEditor) as unknown) as HTMLElement
-  )
 
   const handleScroll = () => {
+    if (editorRef.value === null) {
+      console.log('handleScroll(): editorRef.value is null.')
+      return
+    }
     if (isScrollRecieved) {
       return
     }
@@ -45,7 +46,9 @@ export const useEditorHandleScroll = (
     }
   }
 
-  useEventListener('scroll', handleScroll, false, editorElementRef.value)
+  onMounted(() => {
+    editorRef.value.onDidScrollChange(handleScroll)
+  })
 
   const setTimeout = (clearOnly: boolean) => {
     // clearOnly不要では？
@@ -62,6 +65,10 @@ export const useEditorHandleScroll = (
   }
 
   const setScrollTop = (v: number) => {
+    if (editorRef.value === null) {
+      console.log('setScrollTop(): handleScroll(): editorRef.value is null.')
+      return
+    }
     isScrollRecieved = true
     setTimeout(false)
     const topEnd = editorRef.value.getScrollHeight() - windowHeight.value

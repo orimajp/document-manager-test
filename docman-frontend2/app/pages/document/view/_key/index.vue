@@ -32,28 +32,6 @@ export default defineComponent({
     const { page, fetchPage } = PageContainer.useContainer()
     const { document, fetchDocument } = DocumentContainer.useContainer()
 
-    /*
-    fetchPage(pageId)
-
-    watchEffect(() => {
-      documentId.value = page.value.documentId
-      console.log(`documentID=${documentId.value}`)
-    })
-
-    watchEffect(() => {
-      if (documentId.value !== document.value.documentId) {
-        fetchDocument(documentId.value)
-      }
-    })
-
-    watchEffect(() => {
-      if (document.value.documentId !== '') {
-        const keyArray = document.value.getNestedIdArray(pageId)
-        document.value.openChildren(keyArray)
-      }
-    })
-    */
-
     // FIXME async/awaitが使えないので無理矢理な処理になっている
     fetchPage(pageId).then(() => {
       documentId.value = page.value.documentId

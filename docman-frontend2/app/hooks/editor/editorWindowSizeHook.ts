@@ -1,4 +1,4 @@
-import { computed, Ref } from '@vue/composition-api'
+import { computed, Ref, watchEffect } from '@vue/composition-api'
 import { useWindowSize } from '@vueuse/core'
 import { DisplayMode, DUAL, PREV } from '~/models/EditorDisplayMode'
 
@@ -27,8 +27,11 @@ export const useEditorWindowSize = (displayMode: Ref<DisplayMode>) => {
     calculateEditorWidth(width.value, displayMode.value)
   )
 
-  const editorHeightStyle = computed(() => `editorHeight=${windowHeight}px`)
-  const editorWidthStyle = computed(() => `editorWidth=${windowWidth}px`)
+  const editorHeightStyle = computed(() => `${windowHeight.value}px`)
+  const editorWidthStyle = computed(() => `${windowWidth.value}px`)
+
+  watchEffect(() => console.log(`width=${width.value}`))
+  watchEffect(() => console.log(`height=${height.value}`))
 
   return {
     windowHeight,

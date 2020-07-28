@@ -9,20 +9,20 @@ export const useEditorPaneColumn = () => {
   const { editMode, prevMode } = DisplayModeContainer.useContainer()
 
   const displayEditFormCols = computed(() => {
-    if (prevMode) {
+    if (prevMode.value) {
       return NONE
     }
-    if (editMode) {
+    if (editMode.value) {
       return FULL_WIDTH
     }
     return HALF_WIDTH
   })
 
   const displayPreviewAreaCols = computed(() => {
-    if (prevMode) {
+    if (prevMode.value) {
       return FULL_WIDTH
     }
-    if (editMode) {
+    if (editMode.value) {
       return NONE
     }
     return HALF_WIDTH
