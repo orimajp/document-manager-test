@@ -44,27 +44,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, PropType, SetupContext } from '@vue/composition-api'
 import {
-  computed,
-  defineComponent,
-  nextTick,
-  onMounted,
-  PropType,
-  Ref,
-  ref,
-  SetupContext,
-  watch
-} from '@vue/composition-api'
-import DarkModeContainer from '~/containers/DarkModeContainer'
-import SyncModeContainer from '~/containers/SyncModeContainer'
-import { DUAL, EDIT, PREV } from '~/models/EditorDisplayMode'
-import { useDisplayMode } from '~/hooks/editor/editorDisplayModeHook'
-
-interface EditorNavbarProps {
-  pageTitle: string
-  documentEdit: boolean
-  createMode: boolean
-}
+  EditorNavbarProps,
+  useEditorNavbar
+} from '~/hooks/edit/editorNavbarHook'
 
 export default defineComponent({
   props: {
@@ -73,43 +57,17 @@ export default defineComponent({
     createMode: Boolean as PropType<boolean>
   },
   setup(props: EditorNavbarProps, context: SetupContext) {
-    const editTarget = computed(() => (props.documentEdit ? 'D' : 'P'))
-
-    const { darkMode } = DarkModeContainer.useContainer()
-    const { syncMode } = SyncModeContainer.useContainer()
-    const option = ref(['SYNC']) as Ref<Array<string>>
-    watch(
-      () => option.value,
-      (value) => {
-        darkMode.value = value.includes('DARK')
-        syncMode.value = value.includes('SYNC')
-      }
-    )
-
-    const editValue = EDIT
-    const dualValue = DUAL
-    const prevValue = PREV
-
-    const mode = ref(DUAL)
-    useDisplayMode(mode)
-
-    const goTop = () => {
-      context.emit('goTop')
-    }
-
-    const updateTitle = (newTitle) => {
-      context.emit('updateTitle', newTitle)
-    }
-
-    const titleField = ref(null) as Ref<HTMLElement>
-
-    onMounted(() => {
-      if (props.createMode) {
-        nextTick(() => {
-          titleField.value.focus()
-        })
-      }
-    })
+    const {
+      titleField,
+      editTarget,
+      option,
+      mode,
+      editValue,
+      dualValue,
+      prevValue,
+      goTop,
+      updateTitle
+    } = useEditorNavbar(props, context)
 
     return {
       titleField,
