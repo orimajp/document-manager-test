@@ -37,13 +37,14 @@ export class DummyStore {
   }
 
   putPage(newPage: IPage): void {
-    const oldPage = this.getPage(newPage.pageId)
-    if (oldPage === null) {
-      new Error('ページ未発見')
+    for (const page of this.pages) {
+      if (page.pageId === newPage.pageId) {
+        page.pageTitle = newPage.pageTitle
+        page.pageData = newPage.pageData
+        return
+      }
     }
-    this.pages = this.pages.map((page) =>
-      page.pageId === newPage.pageId ? newPage : page
-    )
+    throw new Error('ページ未発見')
   }
 
   private createDummyDocumentData() {
