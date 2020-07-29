@@ -1,5 +1,6 @@
-import { Controller, Get, HttpException, HttpStatus, Param } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Put } from '@nestjs/common';
 import { PageService } from '~/page/page.service';
+import { IPage } from '~/page/page.interface';
 
 @Controller('api/pages')
 export class PageController {
@@ -18,4 +19,23 @@ export class PageController {
     return page
   }
 
+  @Put()
+  putPage(@Body() newPage: IPage) {
+    const page = this.pageService.getPage(newPage.pageId)
+    if (!page) {
+      throw new HttpException({
+        status: HttpStatus.NOT_FOUND,
+        error: `ページが見つかりません。(pageId=${newPage.pageId})`
+      },404)
+    }
+
+    try {
+      this.pageService.putPage(newPage)
+    } catch (e) {
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: `更新対象ページが見つかりません。(pageId=${newPage.pageId})`
+      },500)
+    }
+  }
 }

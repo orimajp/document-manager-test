@@ -1,32 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { IPage } from '~/page/page.interface';
-import { getTreeDummyPages } from '~/dummydata/TreeDummyDataFactory';
-import { getMarkdownDummyPages } from '~/dummydata/MarkdownDummyDataFactory';
+import { DummyStore, dummyStore } from '~/dummystore/DummyStore';
 
 @Injectable()
 export class PageService {
-  private readonly pages: Array<IPage>
+  private readonly dummyStore: DummyStore
 
   constructor() {
-    this.pages = []
-    this.createDummyData()
+    this.dummyStore = dummyStore
   }
 
   getPage(pageId: string): IPage | null {
-    for (const page of this.pages) {
-      if (page.pageId === pageId) {
-        return page
-      }
-    }
-    return null
+    return this.dummyStore.getPage(pageId)
   }
 
-  private createDummyData() {
-    for (const page of getTreeDummyPages()) {
-      this.pages.push(page)
-    }
-    for (const page of getMarkdownDummyPages()) {
-      this.pages.push(page)
-    }
+  putPage(newPage: IPage): void {
+    dummyStore.putPage(newPage)
   }
+
 }

@@ -1,22 +1,20 @@
 import { Injectable } from '@nestjs/common'
 import { IDocumentList } from '~/document/document-list.interface'
 import { IDocument } from '~/document/document.interface';
-import { getTreeDummyDocument } from '~/dummydata/TreeDummyDataFactory';
 import { DocumentList } from '~/document/document-list';
-import { getMarkdownDummyDocument } from '~/dummydata/MarkdownDummyDataFactory';
+import { DummyStore, dummyStore } from '~/dummystore/DummyStore';
 
 @Injectable()
 export class DocumentService {
-  private readonly documents: Array<IDocument>
+  private readonly dummyStore: DummyStore
 
   constructor() {
-    this.documents = []
-    this.createDummyData()
+    this.dummyStore = dummyStore
   }
 
   getDocumentList(): Array<IDocumentList> {
     const documentList = [] as Array<IDocumentList>
-    for (const document of this.documents) {
+    for (const document of this.dummyStore.getAllDocuments()) {
       documentList.push(
         new DocumentList(document.documentId, document.documentTile, document.createdAt, document.updatedAt)
       )
@@ -25,16 +23,6 @@ export class DocumentService {
   }
 
   getDocument(documentId: string): IDocument | null {
-    for (const document of this.documents) {
-      if (document.documentId === documentId) {
-        return  document
-      }
-    }
-    return null
-  }
-
-  private createDummyData() {
-    this.documents.push(getTreeDummyDocument())
-    this.documents.push(getMarkdownDummyDocument())
+    return dummyStore.getDocument(documentId)
   }
 }
