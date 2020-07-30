@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { IPage } from '~/page/page.interface';
 import { DummyStore, dummyStore } from '~/dummystore/DummyStore';
+import { Page } from '~/page/page';
 
 @Injectable()
 export class PageService {
@@ -18,4 +19,8 @@ export class PageService {
     dummyStore.putPage(newPage)
   }
 
+  registerPage(documentId: string, pageId: string, date: string, pageTitle: string, pageData: string) {
+    const page = new Page(documentId, pageId, pageData, pageTitle, date, date)
+    dummyStore.registerPage(page)
+  }
 }

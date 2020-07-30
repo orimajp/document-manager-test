@@ -2,6 +2,7 @@ import { useAxios } from '~/hooks/useAxios'
 import { IDocumentList } from '~/models/document/IDocumentList'
 import { DocumentData } from '~/models/document/DocumentData'
 import { createDocumentData } from '~/models/document/factory/DocumentDataFactory'
+import { NewDocument } from '~/models/document/NewDocument'
 
 export const useDocument = () => {
   const { axios } = useAxios()
@@ -17,8 +18,18 @@ export const useDocument = () => {
     return createDocumentData(document)
   }
 
+  const registerDocument = async (
+    documentTitle: string,
+    documentData: string
+  ): Promise<DocumentData> => {
+    const newDocument = new NewDocument(documentTitle, documentData)
+    const document = await axios.$post('api/documents', newDocument)
+    return createDocumentData(document)
+  }
+
   return {
     search,
-    getDocument
+    getDocument,
+    registerDocument
   }
 }

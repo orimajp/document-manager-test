@@ -4,8 +4,8 @@ import { getMarkdownDummyDocument, getMarkdownDummyPages } from '~/dummydata/Mar
 import { getTreeDummyDocument, getTreeDummyPages } from '~/dummydata/TreeDummyDataFactory';
 
 export class DummyStore {
-  private documents: Array<IDocument>
-  private pages: Array<IPage>
+  private readonly documents: Array<IDocument>
+  private readonly pages: Array<IPage>
   constructor() {
     console.log('DummyStore initialize.')
     this.documents = []
@@ -27,6 +27,10 @@ export class DummyStore {
     return null
   }
 
+  registerDocument(document: IDocument): void {
+    this.documents.push(document)
+  }
+
   getPage(pageId: string): IPage | null {
     for (const page of this.pages) {
       if (page.pageId === pageId) {
@@ -45,6 +49,10 @@ export class DummyStore {
       }
     }
     throw new Error('ページ未発見')
+  }
+
+  registerPage(page: IPage): void {
+    this.pages.push(page)
   }
 
   private createDummyDocumentData() {

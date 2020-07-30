@@ -3,6 +3,9 @@ import { IDocumentList } from '~/document/document-list.interface'
 import { IDocument } from '~/document/document.interface';
 import { DocumentList } from '~/document/document-list';
 import { DummyStore, dummyStore } from '~/dummystore/DummyStore';
+import { INode } from '~/node/node.interface';
+import { Node } from '~/node/node'
+import { Document } from '~/document/document';
 
 @Injectable()
 export class DocumentService {
@@ -24,5 +27,11 @@ export class DocumentService {
 
   getDocument(documentId: string): IDocument | null {
     return dummyStore.getDocument(documentId)
+  }
+
+  registerDocument(documentId: string, date: string, documentTile: string) {
+    const node = new Node(documentId, documentTile, [] as Array<INode>)
+    const document = new Document(documentId, documentTile, date, date, node)
+    dummyStore.registerDocument(document)
   }
 }
