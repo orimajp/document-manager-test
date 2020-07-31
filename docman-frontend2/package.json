@@ -19,7 +19,7 @@
     "@types/highlightjs": "^9.12.0",
     "@types/markdown-it": "^10.0.1",
     "@vue/composition-api": "^1.0.0-beta.6",
-    "@vueuse/core": "^4.0.0-beta.2",
+    "@vueuse/core": "^4.0.0-beta.4",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.1.2",
     "highlightjs-vue": "^1.0.0",
