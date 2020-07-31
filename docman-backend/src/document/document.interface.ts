@@ -4,7 +4,7 @@ import { INode } from '~/node/node.interface';
 
 export interface IDocument {
   documentId: string
-  documentTile: string
+  documentTitle: string
   node: INode
   createdAt: string // FIXME Date型は型定義されていない
   updatedAt: string // FIXME Date型は型定義されていない

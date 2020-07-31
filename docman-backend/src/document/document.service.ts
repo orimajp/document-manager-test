@@ -19,7 +19,7 @@ export class DocumentService {
     const documentList = [] as Array<IDocumentList>
     for (const document of this.dummyStore.getAllDocuments()) {
       documentList.push(
-        new DocumentList(document.documentId, document.documentTile, document.createdAt, document.updatedAt)
+        new DocumentList(document.documentId, document.documentTitle, document.createdAt, document.updatedAt)
       )
     }
     return documentList

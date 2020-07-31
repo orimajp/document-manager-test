@@ -6,7 +6,7 @@ export function createDocumentData(iDocument: IDocument): DocumentData {
   const nodeData = createNodeData(iDocument.node)
   return new DocumentData(
     iDocument.documentId,
-    iDocument.documentTile,
+    iDocument.documentTitle,
     iDocument.createdAt,
     iDocument.updatedAt,
     nodeData

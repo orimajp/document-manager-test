@@ -161,7 +161,7 @@ const node: INode = {
 
 const document: IDocument = {
   documentId: pages[0].documentId,
-  documentTile: pages[0].pageTitle,
+  documentTitle: pages[0].pageTitle,
   node: node,
   createdAt: pages[0].createdAt,
   updatedAt: pages[0].updatedAt
