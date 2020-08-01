@@ -3,6 +3,7 @@ import { DocumentService } from '~/document/document.service';
 import { IdentityService } from '~/identity/identity.service';
 import { PageService } from '~/page/page.service';
 import { NewDocument } from '~/document/new-document.interface';
+import { UpdateDocumentNodes } from '~/document/update-document-nodes.interface';
 import * as dayjs from 'dayjs'
 import 'dayjs/locale/ja';
 
@@ -43,5 +44,17 @@ export class DocumentController {
       },500)
     }
     return document
+  }
+
+  @Post(':documentId/nodes')
+  postDocumentNodes(@Param('documentId') documentId: string,
+                    @Body() updateDocumentNodes: UpdateDocumentNodes) {
+    const document = this.documentService.updateDocumentNodes(documentId, updateDocumentNodes)
+    if (!document) {
+      throw new HttpException({
+        status: HttpStatus.NOT_FOUND,
+        error: `更新対象のドキュメントが見つかりません。(documentId=${documentId})`
+      },404)
+    }
   }
 }

@@ -6,6 +6,7 @@ import { DummyStore, dummyStore } from '~/dummystore/DummyStore';
 import { INode } from '~/node/node.interface';
 import { Node } from '~/node/node'
 import { Document } from '~/document/document';
+import { UpdateDocumentNodes } from '~/document/update-document-nodes.interface';
 
 @Injectable()
 export class DocumentService {
@@ -34,4 +35,14 @@ export class DocumentService {
     const document = new Document(documentId, documentTile, date, date, node)
     dummyStore.registerDocument(document)
   }
+
+  updateDocumentNodes(documentId: string, updateDocumentNodes: UpdateDocumentNodes): IDocument | null {
+    const document = this.getDocument(documentId)
+    if (!document) {
+      return null
+    }
+    document.node.nodes = updateDocumentNodes.nodes
+    return document
+  }
+
 }

@@ -37,7 +37,8 @@
     "monaco-editor-webpack-plugin": "^1.9.0",
     "nuxt": "^2.14.0",
     "vue-monaco": "^1.2.1",
-    "vue-unstated": "0.0.7"
+    "vue-unstated": "0.0.7",
+    "vuedraggable": "^2.24.0"
   },
   "devDependencies": {
     "@mdi/font": "^5.4.55",

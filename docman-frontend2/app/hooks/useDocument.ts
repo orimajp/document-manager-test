@@ -3,6 +3,8 @@ import { IDocumentList } from '~/models/document/IDocumentList'
 import { DocumentData } from '~/models/document/DocumentData'
 import { createDocumentData } from '~/models/document/factory/DocumentDataFactory'
 import { NewDocument } from '~/models/document/NewDocument'
+import { Node } from '~/models/node/Node'
+import { UpdateDocumentNodes } from '~/models/node/UpdateDocumentNodes'
 
 export const useDocument = () => {
   const { axios } = useAxios()
@@ -27,9 +29,18 @@ export const useDocument = () => {
     return createDocumentData(document)
   }
 
+  const updateDocumentNode = async (
+    documentId: string,
+    nodes: Array<Node>
+  ): Promise<void> => {
+    const updateDocumentNode = new UpdateDocumentNodes(nodes)
+    await axios.$post(`/api/documents/${documentId}/nodes`, updateDocumentNode)
+  }
+
   return {
     search,
     getDocument,
-    registerDocument
+    registerDocument,
+    updateDocumentNode
   }
 }
