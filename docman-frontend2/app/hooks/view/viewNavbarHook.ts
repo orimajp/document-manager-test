@@ -17,7 +17,10 @@ export const useViewNavbar = () => {
 
   const { document } = DocumentContainer.useContainer()
   const documentNodes = computed(() => document.value.node.nodes)
-  const canTreeEdit = () => {
+  const canTreeEdit = computed(() => {
+    if (!documentNodes.value) {
+      return false
+    }
     if (documentNodes.value.length > 1) {
       return true
     }
@@ -25,7 +28,7 @@ export const useViewNavbar = () => {
       documentNodes.value.length === 1 &&
       documentNodes.value[0].nodes.length > 0
     )
-  }
+  })
 
   const { router } = useRouter()
   const goTop = () => {
