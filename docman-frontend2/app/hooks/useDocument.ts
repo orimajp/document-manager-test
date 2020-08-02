@@ -34,7 +34,7 @@ export const useDocument = () => {
     nodes: Array<Node>
   ): Promise<void> => {
     const updateDocumentNode = new UpdateDocumentNodes(nodes)
-    await axios.$post(`/api/documents/${documentId}/nodes`, updateDocumentNode)
+    await axios.$put(`/api/documents/${documentId}/nodes`, updateDocumentNode)
   }
 
   return {

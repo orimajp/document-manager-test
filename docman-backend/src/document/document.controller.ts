@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { DocumentService } from '~/document/document.service';
 import { IdentityService } from '~/identity/identity.service';
 import { PageService } from '~/page/page.service';
@@ -46,7 +46,7 @@ export class DocumentController {
     return document
   }
 
-  @Post(':documentId/nodes')
+  @Put(':documentId/nodes')
   postDocumentNodes(@Param('documentId') documentId: string,
                     @Body() updateDocumentNodes: UpdateDocumentNodes) {
     const document = this.documentService.updateDocumentNodes(documentId, updateDocumentNodes)
