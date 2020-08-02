@@ -47,8 +47,8 @@ export class DocumentController {
   }
 
   @Put(':documentId/nodes')
-  postDocumentNodes(@Param('documentId') documentId: string,
-                    @Body() updateDocumentNodes: UpdateDocumentNodes) {
+  putDocumentNodes(@Param('documentId') documentId: string,
+                   @Body() updateDocumentNodes: UpdateDocumentNodes) {
     const document = this.documentService.updateDocumentNodes(documentId, updateDocumentNodes)
     if (!document) {
       throw new HttpException({
