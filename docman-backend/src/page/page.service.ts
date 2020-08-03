@@ -23,4 +23,8 @@ export class PageService {
     const page = new Page(documentId, pageId, pageData, pageTitle, date, date)
     dummyStore.registerPage(page)
   }
+
+  postPageFirstNode(page: IPage) {
+    dummyStore.postPageFirstNode(page)
+  }
 }

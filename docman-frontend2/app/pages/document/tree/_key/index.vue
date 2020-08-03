@@ -5,17 +5,14 @@
       <v-container>
         <div class="tree-edit-content">
           <v-card :height="editAreaHeight" class="tree-edit-area" outlined>
-            <draggable-tree
-              v-model="treeNodes"
-              :current-page-id="currentPageId"
-            />
+            <draggable-tree v-model="treeNodes" :current-page-id="pageId" />
           </v-card>
         </div>
       </v-container>
     </v-main>
     <document-tree-editor-footer
-      @registerTree="registerTree"
-      @cancelTree="cancelTree"
+      @registerTree="registerTreeData"
+      @cancelTree="cancelTreeData"
     />
   </div>
 </template>
@@ -26,6 +23,7 @@ import DocumentTreeEditorNavbar from '~/components/tree/DocumentTreeEditorNavbar
 import DraggableTree from '~/components/tree/DraggableTree.vue'
 import DocumentTreeEditorFooter from '~/components/tree/DocumentTreeEditorFooter.vue'
 import { useTreeEditor } from '~/hooks/tree/treeEditorHook'
+import { useRouter } from '~/hooks/useRouter'
 
 export default defineComponent({
   components: {
@@ -34,21 +32,34 @@ export default defineComponent({
     DocumentTreeEditorFooter
   },
   setup() {
+    const { route } = useRouter()
+    const pageId = route.value.params.key
+
     const {
       treeNodes,
       pageTitle,
-      currentPageId,
+      fetchTreeData,
       registerTree,
       cancelTree,
       editAreaHeight
     } = useTreeEditor()
 
+    fetchTreeData(pageId)
+
+    const registerTreeData = () => {
+      registerTree(pageId)
+    }
+
+    const cancelTreeData = () => {
+      cancelTree(pageId)
+    }
+
     return {
       treeNodes,
       pageTitle,
-      currentPageId,
-      registerTree,
-      cancelTree,
+      pageId,
+      registerTreeData,
+      cancelTreeData,
       editAreaHeight
     }
   }

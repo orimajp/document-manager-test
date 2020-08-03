@@ -1,5 +1,6 @@
 import { IDocument } from '~/document/document.interface';
 import { IPage } from '~/page/page.interface';
+import { Node } from '~/node/node';
 import { getMarkdownDummyDocument, getMarkdownDummyPages } from '~/dummydata/MarkdownDummyDataFactory';
 import { getTreeDummyDocument, getTreeDummyPages } from '~/dummydata/TreeDummyDataFactory';
 
@@ -53,6 +54,15 @@ export class DummyStore {
 
   registerPage(page: IPage): void {
     this.pages.push(page)
+  }
+
+  postPageFirstNode(page: IPage): void {
+    const document = this.getDocument(page.documentId)
+    if (!document){
+      throw new Error('ドキュメント未発見')
+    }
+    const node = new Node(page.pageId, page.pageTitle, [])
+    document.node.nodes.unshift(node)
   }
 
   private createDummyDocumentData() {

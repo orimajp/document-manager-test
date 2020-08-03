@@ -2,7 +2,7 @@
   <div>
     <document-editor-navbar
       :page-title="documentTitle"
-      :document-edit="true"
+      :document-edit="false"
       :create-mode="true"
       @goTop="goTop"
       @updateTitle="updateTitle"
@@ -26,8 +26,11 @@
     </v-row>
     <document-editor-create-footer
       :document-edit="true"
-      @registerDocument="registerDocument"
-      @cancelDocument="cancelDocument"
+      @registerDocument="registerPage"
+      @cancelDocument="cancelPage"
+    />
+    <tree-edit-dialog
+      :tree-edit-dialog-controll-menu="treeEditDialogControllMenu"
     />
   </div>
 </template>
@@ -39,11 +42,13 @@ import DocumentEditorCreateFooter from '~/components/create/DocumentEditorCreate
 import DocumentPreviewer from '~/components/viewer/DocumentPreviewer.vue'
 import MarkdownEditor from '~/components/editor/MarkdownEditor.vue'
 import DocumentEditorNavbar from '~/components/edit/DocumentEditorNavbar.vue'
+import TreeEditDialog from '~/components/create/TreeEditDialog.vue'
 import { useRouter } from '~/hooks/useRouter'
 import EditStateContainer from '~/containers/EditStateContainer'
-import { useDocument } from '~/hooks/useDocument'
 import { useEditorPaneColumn } from '~/hooks/edit/editorPaneColumnHook'
 import DisplayModeContainer from '~/containers/DisplayModeContainer'
+import { usePage } from '~/hooks/usePage'
+import { useTreeEditDialogControll } from '~/hooks/create/treeEditDialogControllHook'
 import { useCreateDataHook } from '~/hooks/create/createDataHook'
 
 const LEAVE_CONFIRM_MESSAGE =
@@ -55,11 +60,39 @@ export default defineComponent({
     DocumentEditorNavbar,
     MarkdownEditor,
     DocumentPreviewer,
-    DocumentEditorCreateFooter
+    DocumentEditorCreateFooter,
+    TreeEditDialog
   },
   setup() {
-    const { change, savePage } = EditStateContainer.useContainer()
+    const { route, router } = useRouter()
+    const pageId = route.value.params.key
 
+    const pageFunc = usePage()
+    let documentId
+    pageFunc.getPage(pageId).then((document) => {
+      documentId = document.documentId
+    })
+
+    /*
+    const prevendChildTargetId = route.value.query.prevendChildTargetId
+      ? route.value.query.prevendChildTargetId
+      : null
+    const appendNextTargetId = route.value.query.appendNextTargetId
+      ? route.value.query.appendNextTargetId
+      : null
+     */
+
+    const {
+      treeEditDialogControllMenu,
+      openDialog,
+      closeDialog
+    } = useTreeEditDialogControll()
+
+    const closeEditDialog = () => {
+      closeDialog()
+    }
+
+    const { change, savePage } = EditStateContainer.useContainer()
     const {
       title,
       data,
@@ -76,16 +109,15 @@ export default defineComponent({
       displayEditFormCols,
       displayPreviewAreaCols
     } = useEditorPaneColumn()
-
-    const { router } = useRouter()
-    const documentFunc = useDocument()
-    const registerDocument = () => {
-      documentFunc.registerDocument(title.value, data.value).then((data) => {
-        router.push(`/document/view/${data.documentId}`)
-      })
+    const registerPage = () => {
+      pageFunc
+        .registerPage(documentId, title.value, data.value)
+        .then((data) => {
+          openDialog(data.pageId)
+        })
     }
 
-    const cancelDocument = () => {
+    const cancelPage = () => {
       router.push('/')
     }
 
@@ -112,11 +144,13 @@ export default defineComponent({
       dualMode,
       displayEditFormCols,
       displayPreviewAreaCols,
+      treeEditDialogControllMenu,
       updateTitle,
       updatePageData,
-      registerDocument,
-      cancelDocument,
-      goTop
+      registerPage,
+      cancelPage,
+      goTop,
+      closeEditDialog
     }
   }
 })

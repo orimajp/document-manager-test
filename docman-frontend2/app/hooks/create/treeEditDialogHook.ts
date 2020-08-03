@@ -6,13 +6,19 @@ import { useTreeEditRouter } from '~/hooks/tree/treeEditRouterHook'
 /* 高さ補正値 */
 const ADJUST_HEIGHT = 136
 
-export const useTreeEditor = () => {
+/* ヘッダ・フッタ補正 */
+const HEADER_FOOTER_HEIGHT = 117
+
+export const useTreeEditDialog = () => {
   const { treeNodes, pageTitle, updateNode, fetchTreeData } = useTreeEditData()
   const { registerTree, cancelTree } = useTreeEditRouter(updateNode)
 
   const windowHeight = ref(0)
   onMounted(() => (windowHeight.value = window.innerHeight))
-  const editAreaHeight = computed(() => windowHeight.value - ADJUST_HEIGHT)
+  const editAreaHeightStyle = computed(
+    () => windowHeight.value - ADJUST_HEIGHT - HEADER_FOOTER_HEIGHT + 'px'
+  )
+  const dialogAreaHeight = computed(() => windowHeight.value - ADJUST_HEIGHT)
 
   const calculateWindowWidth = () => (windowHeight.value = window.innerHeight)
   useEventListener('resize', calculateWindowWidth)
@@ -23,6 +29,7 @@ export const useTreeEditor = () => {
     fetchTreeData,
     registerTree,
     cancelTree,
-    editAreaHeight
+    editAreaHeightStyle,
+    dialogAreaHeight
   }
 }

@@ -1,10 +1,15 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { PageService } from '~/page/page.service';
 import { IPage } from '~/page/page.interface';
+import { NewPage } from '~/page/new-page.interface';
+import { IdentityService } from '~/identity/identity.service';
+import * as dayjs from 'dayjs'
+import 'dayjs/locale/ja';
 
 @Controller('api/pages')
 export class PageController {
-  constructor(private readonly pageService: PageService) {
+  constructor(private readonly pageService: PageService,
+              private readonly  identityService: IdentityService) {
   }
 
   @Get(':pageId')
@@ -16,6 +21,22 @@ export class PageController {
         error: `ページが見つかりません。(pageId=${pageId})`
       },404)
     }
+    return page
+  }
+
+  @Post()
+  postPage(@Body() newPage: NewPage) {
+    const id = this.identityService.generateId()
+    const date = dayjs().format()
+    this.pageService.registerPage(newPage.documentId, id, date, newPage.pageTitle, newPage.pageData)
+    const page = this.pageService.getPage(id)
+    if (!page) {
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: `登録したページが見つかりません。(pageId=${id})`
+      },500)
+    }
+    this.pageService.postPageFirstNode(page)
     return page
   }
 
