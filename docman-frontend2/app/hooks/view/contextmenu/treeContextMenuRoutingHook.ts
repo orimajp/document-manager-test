@@ -10,7 +10,7 @@ export const useTreeContextRouting = (openPageId: Ref<string | null>) => {
     const page = await getPage(openPageId.value as string)
     const documentId = page.documentId
     await router.push(
-      `/document/create/page/${documentId}?prevendChildTargetKey=${openPageId.value}`
+      `/document/create/page/${documentId}?prevendChildTargetId=${openPageId.value}`
     )
   }
 
@@ -18,7 +18,7 @@ export const useTreeContextRouting = (openPageId: Ref<string | null>) => {
     const page = await getPage(openPageId.value as string)
     const documentId = page.documentId
     await router.push(
-      `/document/create/page/${documentId}?appendNextTargetKey=${openPageId.value}`
+      `/document/create/page/${documentId}?appendNextTargetId=${openPageId.value}`
     )
   }
 

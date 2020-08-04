@@ -47,9 +47,9 @@ import { useRouter } from '~/hooks/useRouter'
 import EditStateContainer from '~/containers/EditStateContainer'
 import { useEditorPaneColumn } from '~/hooks/edit/editorPaneColumnHook'
 import DisplayModeContainer from '~/containers/DisplayModeContainer'
-import { usePage } from '~/hooks/usePage'
 import { useTreeEditDialogControll } from '~/hooks/create/treeEditDialogControllHook'
 import { useCreateDataHook } from '~/hooks/create/createDataHook'
+import { useRegisterPage } from '~/hooks/create/registerPageHook'
 
 const LEAVE_CONFIRM_MESSAGE =
   '編集中のデータを破棄してページを離れます。よろしいですか？'
@@ -65,22 +65,14 @@ export default defineComponent({
   },
   setup() {
     const { route, router } = useRouter()
+
     const pageId = route.value.params.key
-
-    const pageFunc = usePage()
-    let documentId
-    pageFunc.getPage(pageId).then((document) => {
-      documentId = document.documentId
-    })
-
-    /*
     const prevendChildTargetId = route.value.query.prevendChildTargetId
-      ? route.value.query.prevendChildTargetId
+      ? (route.value.query.prevendChildTargetId as string)
       : null
     const appendNextTargetId = route.value.query.appendNextTargetId
-      ? route.value.query.appendNextTargetId
+      ? (route.value.query.appendNextTargetId as string)
       : null
-     */
 
     const {
       treeEditDialogControllMenu,
@@ -109,12 +101,16 @@ export default defineComponent({
       displayEditFormCols,
       displayPreviewAreaCols
     } = useEditorPaneColumn()
+
+    const { registerNewPage } = useRegisterPage(openDialog)
     const registerPage = () => {
-      pageFunc
-        .registerPage(documentId, title.value, data.value)
-        .then((data) => {
-          openDialog(data.pageId)
-        })
+      registerNewPage(
+        pageId,
+        title.value,
+        data.value,
+        prevendChildTargetId,
+        appendNextTargetId
+      )
     }
 
     const cancelPage = () => {

@@ -2,6 +2,7 @@ import { useAxios } from '~/hooks/useAxios'
 import { PageData } from '~/models/page/PageData'
 import { createPageData } from '~/models/page/PageDataFactory'
 import { NewPage } from '~/models/page/NewPage'
+import { NewPositonPage } from '~/models/page/NewPositonPage'
 
 export const usePage = () => {
   const { axios } = useAxios()
@@ -21,6 +22,36 @@ export const usePage = () => {
     return await axios.$post('/api/pages', newPage)
   }
 
+  const registerPagePrevendChild = async (
+    documentId: string,
+    pageTitle: string,
+    pageData: string,
+    targePagetId: string
+  ): Promise<PageData> => {
+    const newPositonPage = new NewPositonPage(
+      documentId,
+      pageTitle,
+      pageData,
+      targePagetId
+    )
+    return await axios.$post('/api/pages/prevend', newPositonPage)
+  }
+
+  const registerPageAppendNext = async (
+    documentId: string,
+    pageTitle: string,
+    pageData: string,
+    targePagetId: string
+  ): Promise<PageData> => {
+    const newPositonPage = new NewPositonPage(
+      documentId,
+      pageTitle,
+      pageData,
+      targePagetId
+    )
+    return await axios.$post('/api/pages/append', newPositonPage)
+  }
+
   const updatePage = async (page: PageData): Promise<void> => {
     console.log(`ページ更新： pageId=${page.pageId}`)
     await axios.$put('/api/pages', page)
@@ -29,6 +60,8 @@ export const usePage = () => {
   return {
     getPage,
     registerPage,
+    registerPagePrevendChild,
+    registerPageAppendNext,
     updatePage
   }
 }
