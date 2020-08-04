@@ -84,6 +84,18 @@ export default defineComponent({
       closeDialog()
     }
 
+    const { registerNewPage } = useRegisterPage(openDialog)
+
+    const registerPage = () => {
+      registerNewPage(
+        pageId,
+        title.value,
+        data.value,
+        prevendChildTargetId,
+        appendNextTargetId
+      )
+    }
+
     const { change, savePage } = EditStateContainer.useContainer()
     const {
       title,
@@ -101,17 +113,6 @@ export default defineComponent({
       displayEditFormCols,
       displayPreviewAreaCols
     } = useEditorPaneColumn()
-
-    const { registerNewPage } = useRegisterPage(openDialog)
-    const registerPage = () => {
-      registerNewPage(
-        pageId,
-        title.value,
-        data.value,
-        prevendChildTargetId,
-        appendNextTargetId
-      )
-    }
 
     const cancelPage = () => {
       router.push('/')
