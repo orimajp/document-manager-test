@@ -1,7 +1,8 @@
 import { computed, ref, Ref } from '@vue/composition-api'
 import { PageData } from '~/models/page/PageData'
+import { usePage } from '~/hooks/usePage'
 
-export const useCreateData = (change: Ref<boolean>) => {
+export const useUpdateData = (pageId: string, change: Ref<boolean>) => {
   const page = ref({
     documentId: '',
     pageId: '',
@@ -10,22 +11,33 @@ export const useCreateData = (change: Ref<boolean>) => {
     createdAt: '',
     updatedAt: ''
   }) as Ref<PageData>
-  const title = computed(() => page.value.pageTitle)
-  const data = computed(() => page.value.pageData)
+
+  const { getPage } = usePage()
+  getPage(pageId).then((editPageData) => (page.value = editPageData))
+
+  const pageTitle = computed(() => page.value.pageTitle)
+
+  const pageData = computed(() => page.value.pageData)
+
+  const documentEdit = computed(
+    () => page.value.pageId === page.value.documentId
+  )
 
   const updateTitle = (updateTitle: string) => {
     change.value = true
     page.value.pageTitle = updateTitle
   }
+
   const updatePageData = (updatePageData: string) => {
     change.value = true
     page.value.pageData = updatePageData
   }
 
   return {
-    title,
-    data,
     page,
+    pageTitle,
+    pageData,
+    documentEdit,
     updateTitle,
     updatePageData
   }

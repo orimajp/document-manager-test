@@ -32,24 +32,18 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  Ref,
-  ref,
-  watchEffect
-} from '@vue/composition-api'
+import { computed, defineComponent } from '@vue/composition-api'
 import { useEventListener } from '@vueuse/core'
 import MarkdownEditor from '~/components/editor/MarkdownEditor.vue'
 import DocumentPreviewer from '~/components/viewer/DocumentPreviewer'
 import { useRouter } from '~/hooks/useRouter'
 import { usePage } from '~/hooks/usePage'
 import { useEditorPaneColumn } from '~/hooks/edit/editorPaneColumnHook'
-import { PageData } from '~/models/page/PageData'
 import DocumentEditorNavbar from '~/components/edit/DocumentEditorNavbar.vue'
 import DisplayModeContainer from '~/containers/DisplayModeContainer'
 import EditStateContainer from '~/containers/EditStateContainer'
 import DocumentEditorFooter from '~/components/edit/DocumentEditorFooter.vue'
+import { useUpdateData } from '~/hooks/edit/updateDataHook'
 
 const LEAVE_CONFIRM_MESSAGE =
   '編集中のデータを破棄してページを離れます。よろしいですか？'
@@ -63,28 +57,18 @@ export default defineComponent({
     DocumentEditorFooter
   },
   setup() {
-    const { route } = useRouter()
-    const pageId = route.value.params.key
-    console.log(`pageId=${pageId}`)
+    const { route, router } = useRouter()
 
-    const { getPage } = usePage()
-    const page = ref(null) as Ref<PageData>
-    const pageTitle = computed(() => {
-      return page.value === null ? '' : page.value.pageTitle
-    })
-    const pageData = computed(() => {
-      return page.value === null ? '' : page.value.pageData
-    })
-    const documentEdit = computed(() => {
-      return page.value === null
-        ? true
-        : page.value.pageId === page.value.documentId
-    })
-    // getPage(pageId).then((editPageData) => (page.value = editPageData))
-    getPage(pageId).then((editPageData) => {
-      console.log(editPageData)
-      return (page.value = editPageData)
-    })
+    const pageId = route.value.params.key
+    const { change, savePage } = EditStateContainer.useContainer()
+    const {
+      page,
+      pageTitle,
+      pageData,
+      documentEdit,
+      updateTitle,
+      updatePageData
+    } = useUpdateData(pageId, change)
 
     const { editMode, dualMode, prevMode } = DisplayModeContainer.useContainer()
     const displayEditForm = computed(() => !prevMode.value)
@@ -95,35 +79,18 @@ export default defineComponent({
       displayPreviewAreaCols
     } = useEditorPaneColumn()
 
-    watchEffect(() =>
-      console.log(`displayEditFormCols=${displayEditFormCols.value}`)
-    )
-    watchEffect(() =>
-      console.log(`displayPreviewAreaCols=${displayPreviewAreaCols.value}`)
-    )
-
-    const { change, savePage } = EditStateContainer.useContainer()
     const { updatePage } = usePage()
-    const { router } = useRouter()
-
-    const updateTitle = (updateTitle) => {
-      change.value = true
-      page.value.pageTitle = updateTitle
-    }
-    const updatePageData = (updatePageData) => {
-      change.value = true
-      page.value.pageData = updatePageData
-    }
-
     const updateDocumentPage = () => {
       savePage.value = true
       updatePage(page.value).then(() => {
         router.push(`/document/view/${page.value.pageId}`)
       })
     }
+
     const cancelDocumentPage = () => {
       router.push(`/document/view/${page.value.pageId}`)
     }
+
     const goTop = () => {
       router.push('/')
     }

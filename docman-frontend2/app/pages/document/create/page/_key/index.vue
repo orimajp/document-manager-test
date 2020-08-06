@@ -48,7 +48,7 @@ import EditStateContainer from '~/containers/EditStateContainer'
 import { useEditorPaneColumn } from '~/hooks/edit/editorPaneColumnHook'
 import DisplayModeContainer from '~/containers/DisplayModeContainer'
 import { useTreeEditDialogControll } from '~/hooks/create/treeEditDialogControllHook'
-import { useCreateDataHook } from '~/hooks/create/createDataHook'
+import { useCreateData } from '~/hooks/create/createDataHook'
 import { useRegisterPage } from '~/hooks/create/registerPageHook'
 
 const LEAVE_CONFIRM_MESSAGE =
@@ -97,13 +97,9 @@ export default defineComponent({
     }
 
     const { change, savePage } = EditStateContainer.useContainer()
-    const {
-      title,
-      data,
-      page,
-      updateTitle,
-      updatePageData
-    } = useCreateDataHook(change)
+    const { title, data, page, updateTitle, updatePageData } = useCreateData(
+      change
+    )
 
     const { editMode, dualMode, prevMode } = DisplayModeContainer.useContainer()
     const displayEditForm = computed(() => !prevMode.value)

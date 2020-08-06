@@ -44,7 +44,7 @@ import EditStateContainer from '~/containers/EditStateContainer'
 import { useDocument } from '~/hooks/useDocument'
 import { useEditorPaneColumn } from '~/hooks/edit/editorPaneColumnHook'
 import DisplayModeContainer from '~/containers/DisplayModeContainer'
-import { useCreateDataHook } from '~/hooks/create/createDataHook'
+import { useCreateData } from '~/hooks/create/createDataHook'
 
 const LEAVE_CONFIRM_MESSAGE =
   '編集中のデータを破棄してページを離れます。よろしいですか？'
@@ -60,13 +60,9 @@ export default defineComponent({
   setup() {
     const { change, savePage } = EditStateContainer.useContainer()
 
-    const {
-      title,
-      data,
-      page,
-      updateTitle,
-      updatePageData
-    } = useCreateDataHook(change)
+    const { title, data, page, updateTitle, updatePageData } = useCreateData(
+      change
+    )
 
     const { editMode, dualMode, prevMode } = DisplayModeContainer.useContainer()
     const displayEditForm = computed(() => !prevMode.value)
