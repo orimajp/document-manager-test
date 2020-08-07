@@ -33,7 +33,6 @@
 
 <script lang="ts">
 import { computed, defineComponent } from '@vue/composition-api'
-import { useEventListener } from '@vueuse/core'
 import MarkdownEditor from '~/components/editor/MarkdownEditor.vue'
 import DocumentPreviewer from '~/components/viewer/DocumentPreviewer'
 import { useRouter } from '~/hooks/useRouter'
@@ -44,9 +43,7 @@ import DisplayModeContainer from '~/containers/DisplayModeContainer'
 import EditStateContainer from '~/containers/EditStateContainer'
 import DocumentEditorFooter from '~/components/edit/DocumentEditorFooter.vue'
 import { useUpdateData } from '~/hooks/edit/updateDataHook'
-
-const LEAVE_CONFIRM_MESSAGE =
-  '編集中のデータを破棄してページを離れます。よろしいですか？'
+import { useBeforeUnloadConfirm } from '~/hooks/edit/beforeUnloadConfirmHook'
 
 export default defineComponent({
   layout: 'editor',
@@ -95,15 +92,7 @@ export default defineComponent({
       router.push('/')
     }
 
-    useEventListener('beforeunload', (event: BeforeUnloadEvent) => {
-      if (change.value && !savePage.value) {
-        event.preventDefault()
-        // ここのメッセージはブラウザ依存
-        event.returnValue = LEAVE_CONFIRM_MESSAGE
-      }
-    })
-
-    // FIXME 現状、Vue Composition APIにおいて、Vue-Routerによる画面遷移をガードする手段は無いっぽい
+    useBeforeUnloadConfirm(change, savePage)
 
     return {
       page,
