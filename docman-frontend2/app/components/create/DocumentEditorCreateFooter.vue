@@ -20,26 +20,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, SetupContext } from '@vue/composition-api'
+import { defineComponent, SetupContext } from '@vue/composition-api'
 import EditStateContainer from '~/containers/EditStateContainer'
 
-interface EditorCreateProp {
-  documentEdit: boolean
-}
-
 export default defineComponent({
-  props: {
-    documentEdit: Boolean as PropType<boolean>
-  },
-  setup(props: EditorCreateProp, context: SetupContext) {
+  setup(_, context: SetupContext) {
     const { change } = EditStateContainer.useContainer()
 
     const registerDocumentPage = () => {
-      if (props.documentEdit) {
-        context.emit('registerDocument')
-        return
-      }
-      context.emit('registerPage')
+      context.emit('registerDocumentPage')
     }
 
     const cancelDocument = () => {

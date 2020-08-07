@@ -25,8 +25,7 @@
       </v-col>
     </v-row>
     <document-editor-create-footer
-      :document-edit="true"
-      @registerDocument="registerPage"
+      @registerDocumentPage="registerPage"
       @cancelDocument="cancelPage"
     />
     <tree-edit-dialog
