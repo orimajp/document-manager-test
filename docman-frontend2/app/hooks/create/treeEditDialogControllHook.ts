@@ -5,6 +5,10 @@ export interface TreeEditDialogControllMenu {
   pageId: string
 }
 
+export interface TreeEditDialogControllProps {
+  treeEditDialogControllMenu: TreeEditDialogControllMenu
+}
+
 export const useTreeEditDialogControll = () => {
   const state = reactive({
     treeEditDialogControllMenu: {

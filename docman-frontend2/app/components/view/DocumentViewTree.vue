@@ -1,5 +1,5 @@
 <template>
-  <div class="tree-block">
+  <div>
     <li
       v-if="!firstNode"
       class="doc-list"

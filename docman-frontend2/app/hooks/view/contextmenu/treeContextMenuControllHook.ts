@@ -8,6 +8,10 @@ export interface TreeContextMenuParam {
   top: boolean
 }
 
+export interface TreeContextMenuProps {
+  treeContextMenuParam: TreeContextMenuParam
+}
+
 export const useTreeContextControll = () => {
   const state = reactive({
     contextMenuParam: {

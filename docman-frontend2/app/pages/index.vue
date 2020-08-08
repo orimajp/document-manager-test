@@ -1,12 +1,12 @@
 <template>
   <div>
     <d-ocument-list-navbar />
-    <document-list-viewer :list="list" />
+    <document-list-viewer :list="list" :complete="complete" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from '@vue/composition-api'
+import { defineComponent, ref } from '@vue/composition-api'
 import { IDocumentList } from '../models/document/IDocumentList'
 import { useDocument } from '~/hooks/useDocument'
 import DOcumentListNavbar from '~/components/list/DocumentListNavbar'
@@ -19,14 +19,18 @@ export default defineComponent({
   },
   setup() {
     const { search } = useDocument()
+
     const list = ref<Array<IDocumentList>>([])
-    watchEffect(async () => {
-      list.value = await search()
+    const complete = ref(false)
+
+    search().then((data) => {
+      list.value = data
+      complete.value = true
     })
-    console.log('index')
-    console.log(list)
+
     return {
-      list
+      list,
+      complete
     }
   }
 })

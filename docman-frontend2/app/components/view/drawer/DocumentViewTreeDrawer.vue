@@ -51,7 +51,6 @@ export default defineComponent({
 
     const {
       documentId,
-      // pageId,
       currentNode,
       pageIdArray,
       documentSelected,

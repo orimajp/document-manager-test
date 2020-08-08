@@ -25,20 +25,13 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, PropType, SetupContext } from '@vue/composition-api'
 import {
-  computed,
-  defineComponent,
-  PropType,
-  SetupContext,
-  watchEffect
-} from '@vue/composition-api'
-import { TreeEditDialogControllMenu } from '~/hooks/create/treeEditDialogControllHook'
+  TreeEditDialogControllMenu,
+  TreeEditDialogControllProps
+} from '~/hooks/create/treeEditDialogControllHook'
 import { useTreeEditDialog } from '~/hooks/create/treeEditDialogHook'
 import DraggableTree from '~/components/tree/DraggableTree.vue'
-
-type Props = {
-  treeEditDialogControllMenu: TreeEditDialogControllMenu
-}
 
 export default defineComponent({
   components: {
@@ -47,36 +40,17 @@ export default defineComponent({
   props: {
     treeEditDialogControllMenu: Object as PropType<TreeEditDialogControllMenu>
   },
-  setup(props: Props, contest: SetupContext) {
-    const showModal = computed<boolean>({
-      get: () => props.treeEditDialogControllMenu.showModal,
-      set: () => contest.emit('closeDialog')
-    })
-    const pageId = computed(() => props.treeEditDialogControllMenu.pageId)
-
+  setup(props: TreeEditDialogControllProps, contest: SetupContext) {
     const {
+      showModal,
+      pageId,
       treeNodes,
       pageTitle,
-      fetchTreeData,
-      registerTree,
-      cancelTree,
+      registerTreeData,
+      cancelTreeData,
       editAreaHeightStyle,
       dialogAreaHeight
-    } = useTreeEditDialog()
-
-    watchEffect(() => {
-      if (showModal.value) {
-        fetchTreeData(pageId.value)
-      }
-    })
-
-    const registerTreeData = () => {
-      registerTree(pageId.value)
-    }
-
-    const cancelTreeData = () => {
-      cancelTree(pageId.value)
-    }
+    } = useTreeEditDialog(props, contest)
 
     return {
       showModal,

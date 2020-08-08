@@ -24,8 +24,7 @@ import {
   PropType,
   Ref,
   ref,
-  SetupContext,
-  watchEffect
+  SetupContext
 } from '@vue/composition-api'
 import MonacoEditor from 'vue-monaco'
 import * as monacoEditor from 'monaco-editor'
@@ -92,13 +91,6 @@ export default defineComponent({
 
     useEditorHandleScroll(markdownEditor, windowHeight)
     useEditorHandleWindowResize(markdownEditor, windowHeight, windowWidth)
-
-    watchEffect(() => console.log(`windowHeight=${windowHeight.value}`))
-    watchEffect(() => console.log(`windowWidth=${windowWidth.value}`))
-    watchEffect(() =>
-      console.log(`editorHeightStyle=${editorHeightStyle.value}`)
-    )
-    watchEffect(() => console.log(`editorWidthStyle=${editorWidthStyle.value}`))
 
     return {
       windowHeight,
