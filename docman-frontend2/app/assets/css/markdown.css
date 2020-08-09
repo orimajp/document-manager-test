@@ -149,3 +149,11 @@
   padding-top: 48px;
   margin-top: -48px;
 }
+
+.markdown-content {
+  margin-bottom: 20px;
+}
+.markdown-content .date-data {
+  text-align: right;
+  color: lightgray;
+}

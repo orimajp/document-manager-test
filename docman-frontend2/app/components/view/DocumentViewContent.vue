@@ -1,8 +1,13 @@
 <template>
   <v-main>
-    <v-container>
+    <v-container fluid>
       <div ref="viewer">
         <h1 class="document-title">{{ pageTitle }}</h1>
+        <div class="markdown-content">
+          <div class="date-data">
+            {{ contentDate }}
+          </div>
+        </div>
         <div class="markdown-body">
           <div v-html="$md.render(pageData)" />
         </div>
@@ -13,6 +18,7 @@
 
 <script lang="ts">
 import {
+  computed,
   defineComponent,
   nextTick,
   onMounted,
@@ -31,7 +37,13 @@ export default defineComponent({
     pageContent: Object as PropType<PageData>
   },
   setup(props: PageContentProp) {
-    const { pageTitle, pageData } = useViewContent(props)
+    const {
+      pageTitle,
+      pageData,
+      createdAt,
+      updatedAt,
+      formatDate
+    } = useViewContent(props)
 
     const viewer = ref(null) as Ref<HTMLElement | null> // ref=viewer相当
     useCollectHeadline(props, viewer)
@@ -51,10 +63,19 @@ export default defineComponent({
       removeNavigateListener()
     })
 
+    const contentDate = computed(
+      // () => `作成: ${createdAt.value} 更新: ${updatedAt.value}`
+      () =>
+        `作成: ${formatDate(createdAt.value)} 更新: ${formatDate(
+          updatedAt.value
+        )}`
+    )
+
     return {
       viewer,
       pageTitle,
-      pageData
+      pageData,
+      contentDate
     }
   }
 })
