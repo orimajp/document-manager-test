@@ -17,10 +17,10 @@
     "@nuxtjs/axios": "^5.12.1",
     "@nuxtjs/markdownit": "^1.2.10",
     "@types/highlightjs": "^9.12.0",
-    "@types/markdown-it": "^10.0.1",
-    "@vue/composition-api": "^1.0.0-beta.8",
+    "@types/markdown-it": "^10.0.2",
+    "@vue/composition-api": "^1.0.0-beta.9",
     "@vueuse/core": "^4.0.0-beta.4",
-    "dayjs": "^1.8.32",
+    "dayjs": "^1.8.33",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.1.2",
     "highlightjs-vue": "^1.0.0",
@@ -42,7 +42,7 @@
     "vuedraggable": "^2.24.0"
   },
   "devDependencies": {
-    "@mdi/font": "^5.4.55",
+    "@mdi/font": "^5.5.55",
     "@nuxt/typescript-build": "^2.0.2",
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-config-typescript": "^3.0.0",
