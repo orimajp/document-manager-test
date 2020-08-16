@@ -5,7 +5,7 @@ import {
   nextTick,
   onMounted,
   Ref,
-  watchEffect
+  watch
 } from '@vue/composition-api'
 import EditScrollHandleContainer from '~/containers/EditScrollHandleContainer'
 import SyncModeContainer from '~/containers/SyncModeContainer'
@@ -77,7 +77,12 @@ export const useEditorHandleScroll = (
     })
   }
 
-  watchEffect(() => {
-    setScrollTop(editorScrollValue.value)
-  })
+  watch(
+    () => editorScrollValue.value,
+    (newVal, oldVal) => {
+      if (newVal !== oldVal) {
+        setScrollTop(newVal)
+      }
+    }
+  )
 }
