@@ -33,6 +33,7 @@ import { useEditorWindowSize } from '~/hooks/editor/editorWindowSizeHook'
 import { useEditorHandleScroll } from '~/hooks/editor/editorHandleScrollHook'
 import { useEditorHandleWindowResize } from '~/hooks/editor/editorHandleWindowResizeHook'
 import DarkModeContainer from '~/containers/DarkModeContainer'
+import { useEditorInsertAssetLink } from '~/hooks/editor/editorInsertAssetLinkHook'
 import IStandaloneCodeEditor = monacoEditor.editor.IStandaloneCodeEditor
 
 export interface EditorProps {
@@ -91,6 +92,7 @@ export default defineComponent({
 
     useEditorHandleScroll(markdownEditor, windowHeight)
     useEditorHandleWindowResize(markdownEditor, windowHeight, windowWidth)
+    useEditorInsertAssetLink(markdownEditor)
 
     return {
       windowHeight,

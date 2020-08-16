@@ -3,14 +3,17 @@ import { IPage } from '~/page/page.interface';
 import { Node } from '~/node/node';
 import { getMarkdownDummyDocument, getMarkdownDummyPages } from '~/dummydata/MarkdownDummyDataFactory';
 import { getTreeDummyDocument, getTreeDummyPages } from '~/dummydata/TreeDummyDataFactory';
+import { Asset } from '~/asset/asset';
 
 export class DummyStore {
   private readonly documents: Array<IDocument>
   private readonly pages: Array<IPage>
+  private readonly assetMap: Map<string, Asset>
   constructor() {
     console.log('DummyStore initialize.')
     this.documents = []
     this.pages = []
+    this.assetMap = new Map<string, Asset>()
     this.createDummyDocumentData()
     this.createDummyPageData()
   }
@@ -63,6 +66,14 @@ export class DummyStore {
     }
     const node = new Node(page.pageId, page.pageTitle, [])
     document.node.nodes.unshift(node)
+  }
+
+  registerAsset(id: string, asset: Asset): void {
+    this.assetMap.set(id, asset)
+  }
+
+  getAsset(id: string): Asset {
+    return this.assetMap.get(id)
   }
 
   private createDummyDocumentData() {

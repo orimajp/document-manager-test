@@ -1,6 +1,10 @@
 <template>
   <v-app>
-    <nuxt />
+    <file-draggable>
+      <nuxt />
+    </file-draggable>
+    <file-upload-dialog />
+    <file-upload-error-dialog />
   </v-app>
 </template>
 
@@ -12,8 +16,18 @@ import EditScrollHandleContainer from '~/containers/EditScrollHandleContainer'
 import DarkModeContainer from '~/containers/DarkModeContainer'
 import SyncModeContainer from '~/containers/SyncModeContainer'
 import EditStateContainer from '~/containers/EditStateContainer'
+import FileUploadContainer from '~/containers/FileUploadContainer'
+import FileDraggable from '~/components/upload/FileDraggable'
+import FileUploadDialog from '~/components/upload/FileUploadDialog'
+import AssetLinkContainer from '~/containers/AssetLinkContainer'
+import FileUploadErrorDialog from '~/components/upload/FileUploadErrorDialog.vue'
 
 export default defineComponent({
+  components: {
+    FileDraggable,
+    FileUploadDialog,
+    FileUploadErrorDialog
+  },
   setup() {
     // HeadlineContanier.provide()
     DisplayModeContainer.provide()
@@ -21,6 +35,8 @@ export default defineComponent({
     DarkModeContainer.provide()
     SyncModeContainer.provide()
     EditStateContainer.provide()
+    FileUploadContainer.provide()
+    AssetLinkContainer.provide()
   }
 })
 </script>
