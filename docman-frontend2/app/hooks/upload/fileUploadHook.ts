@@ -3,7 +3,7 @@ import { useAssetApi } from '~/hooks/assetApiHook'
 import AssetLinkContainer from '~/containers/AssetLinkContainer'
 
 // const MAX_FILE_SIZE = 1024
-const MAX_FILE_SIZE = 10240
+const MAX_FILE_SIZE = 1024000
 const UPLOAD_TYPES = ['image/jpeg', 'image/png', 'image/gif']
 
 const validateFileType = (type: string) => {
