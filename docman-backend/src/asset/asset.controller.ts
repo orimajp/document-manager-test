@@ -17,7 +17,7 @@ export class AssetController {
   upload(@UploadedFile() file) {
     console.log(file)
     const id = this.identityService.generateId()
-    this.assetService.registerAsset(id, file.originalname, file.mimeType, file.buffer)
+    this.assetService.registerAsset(id, file.originalname, file.mimetype, file.buffer)
     return new UploadResponse(file.originalname, this.createLocation(id))
   }
 

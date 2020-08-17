@@ -113,6 +113,25 @@ const nuxtConfig: NuxtConfig = {
       ['markdown-it-container', 'alert-success'],
       ['markdown-it-container', 'alert-warning'],
       ['markdown-it-container', 'alert-danger'],
+      [
+        'markdown-it-container',
+        'notice',
+        {
+          validate(params: string) {
+            return params.trim().match(/^notice\s+(.*)$/)
+          },
+          render(tokens: { info: string; nesting: number }[], idx: number) {
+            const m = tokens[idx].info.trim().match(/^notice\s+(.*)$/) as []
+            if (tokens[idx].nesting === 1) {
+              const md = require('markdown-it')() // FIXME escapeのためだけに使うのはアホらしいのだが
+              // @ts-ignore
+              const escapedHtml = md.utils.escapeHtml(m[1])
+              return `<div class="notices ${escapedHtml}-style"><p>`
+            }
+            return '</p></div>'
+          }
+        }
+      ],
       'markdown-it-sanitizer',
       'markdown-it-plantuml',
       'markdown-it-anchor',
@@ -122,7 +141,8 @@ const nuxtConfig: NuxtConfig = {
       'markdown-it-sub',
       'markdown-it-abbr',
       'markdown-it-deflist',
-      'markdown-it-video'
+      'markdown-it-video',
+      '@liradb2000/markdown-it-mermaid'
     ]
   },
 

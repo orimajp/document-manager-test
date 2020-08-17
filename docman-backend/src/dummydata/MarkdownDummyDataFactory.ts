@@ -101,7 +101,7 @@ alert('危険!')
 </script>
 
 # markdown-it-container
-とりあえずBootstrap風スタイル。
+## Bootstrap風スタイル
 
 ::: alert-primary
 Primary
@@ -127,6 +127,25 @@ Warning
 Danger
 :::
 
+## DocDocu(Hugoテーマ)風スタイル
+https://docdock.vjeantet.fr/shortcodes/notice/
+
+::: notice note
+notice
+:::
+
+::: notice info
+info
+:::
+
+::: notice tip
+tip
+:::
+
+::: notice warning
+warning
+:::
+
 # markdown-it-plantuml
 
 @startuml
@@ -148,6 +167,17 @@ Alice <-- Bob: another authentication Response
 
 # markdown-it-ins
 ++下線++
+
+# @liradb2000/markdown-it-mermaid
+
+~~~mermaid optional title goes here
+  graph TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[Car]
+~~~
 
 # markdown-it-sub
 

@@ -54,7 +54,7 @@
 /* 重複が多くてスタイル定義がイケてないが、markdown-it-containerプラグインの設定を凝らなければ解消しないのでとりあえず放置 */
 /* こちらのようなことをすればいいのだが、コードが不完全(TypeScript的にはエラーになる)でそのまま使えない https://blog.nakamu.life/posts/markdown-it-container-markdown-message-box */
 .markdown-body .alert-primary {
-  margin: 10px 0;
+  margin: 30px 0;
   padding: 10px 10px;
   border-radius: 5px;
   color: #004085;
@@ -66,7 +66,7 @@
 }
 
 .markdown-body .alert-secondary {
-  margin: 10px 0;
+  margin: 30px 0;
   padding: 10px 10px;
   border-radius: 5px;
   color: #383d41;
@@ -78,7 +78,7 @@
 }
 
 .markdown-body .alert-success {
-  margin: 10px 0;
+  margin: 30px 0;
   padding: 10px 10px;
   border-radius: 5px;
   color: #155724;
@@ -90,7 +90,7 @@
 }
 
 .markdown-body .alert-info {
-  margin: 10px 0;
+  margin: 30px 0;
   padding: 10px 10px;
   border-radius: 5px;
   color: #0c5460;
@@ -102,7 +102,7 @@
 }
 
 .markdown-body .alert-warning {
-  margin: 10px 0;
+  margin: 30px 0;
   padding: 10px;
   border-radius: 5px;
   color: #856404;
@@ -114,7 +114,7 @@
 }
 
 .markdown-body .alert-danger {
-  margin: 10px 0;
+  margin: 30px 0;
   padding: 10px 10px;
   border-radius: 5px;
   color: #721c24;
@@ -123,6 +123,81 @@
 }
 .markdown-body .alert-danger p {
   margin: 0;
+}
+
+/* https://docdock.vjeantet.fr/shortcodes/notice/ */
+/* .v-applicationの.infoと.warningにスタイルに被るので〜-styleという名前に変えて回避 */
+div.notices {
+  margin: 2rem 0;
+  position: relative;
+  border-radius: .2rem;
+  color: #fff;
+  padding: .5rem 1rem .5rem 2rem;
+}
+
+div.notices p {
+  padding: 0;
+  display: block;
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+div.notices p:first-child:before {
+  position: absolute;
+  top: -27px;
+  color: #fff;
+  /*font-family: FontAwesome;*/
+  font-family: Material Design Icons;
+  content: '\F0028';
+  left: 10px;
+}
+
+div.notices p:first-child:after {
+  position: absolute;
+  top: -27px;
+  color: #fff;
+  left: 2rem;
+}
+
+div.notices.info-style p:first-child:after {
+  content: 'Info';
+}
+
+div.notices.warning-style p:first-child:after {
+  content: 'Warning';
+}
+
+div.notices.note-style p:first-child:after {
+  content: 'Note';
+}
+
+div.notices.tip-style p:first-child:after {
+  content: 'Tip';
+}
+
+div.notices.note-style {
+  border-top: 30px solid #6bb1e0;
+  background: #e6f3fb;
+  color: rgba(47, 103, 141, 0.995) !important;
+}
+
+div.notices.info-style {
+  border-top: 30px solid #f1b37e;
+  background: #fefaf5;
+  color: rgba(150, 90, 38, 0.995) !important;
+}
+
+div.notices.tip-style {
+  border-top: 30px solid #84c578;
+  background: #e8f7e6;
+  color: rgba(72, 125, 63, 0.995) !important;
+}
+
+div.notices.warning-style {
+  border-top: 30px solid #d58181;
+  background: #fbeded;
+  color: rgba(132, 56, 56, 0.995) !important;
 }
 
 .markdown-body .footnotes-list {
