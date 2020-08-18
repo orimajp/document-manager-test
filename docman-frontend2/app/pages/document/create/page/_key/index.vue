@@ -107,7 +107,7 @@ export default defineComponent({
     } = useEditorPaneColumn()
 
     const cancelPage = () => {
-      router.push('/')
+      router.push(`/document/view/${pageId}`)
     }
 
     const goTop = () => {
