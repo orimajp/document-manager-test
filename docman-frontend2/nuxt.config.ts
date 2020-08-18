@@ -5,6 +5,8 @@ import { NuxtOptionsLoaders, NuxtWebpackEnv } from '@nuxt/types/config/build'
 import { Configuration as WebpackConfiguration } from 'webpack'
 const MonacoEditorPlugin = require('monaco-editor-webpack-plugin')
 
+const md = require('markdown-it')() // FIXME escapeのためだけに使うのはアホらしいのだが
+
 const nuxtConfig: NuxtConfig = {
   /*
    ** Nuxt rendering mode
@@ -123,7 +125,6 @@ const nuxtConfig: NuxtConfig = {
           render(tokens: { info: string; nesting: number }[], idx: number) {
             const m = tokens[idx].info.trim().match(/^notice\s+(.*)$/) as []
             if (tokens[idx].nesting === 1) {
-              const md = require('markdown-it')() // FIXME escapeのためだけに使うのはアホらしいのだが
               // @ts-ignore
               const escapedHtml = md.utils.escapeHtml(m[1])
               return `<div class="notices ${escapedHtml}-style"><p>`

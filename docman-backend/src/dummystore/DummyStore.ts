@@ -3,6 +3,7 @@ import { IPage } from '~/page/page.interface';
 import { Node } from '~/node/node';
 import { getMarkdownDummyDocument, getMarkdownDummyPages } from '~/dummydata/MarkdownDummyDataFactory';
 import { getTreeDummyDocument, getTreeDummyPages } from '~/dummydata/TreeDummyDataFactory';
+import { getFileDummyDocument, getFileDummyPages ,existFileData } from '~/dummydata/FileDummyDtaFactory'
 import { Asset } from '~/asset/asset';
 
 export class DummyStore {
@@ -79,6 +80,9 @@ export class DummyStore {
   private createDummyDocumentData() {
     this.documents.push(getTreeDummyDocument())
     this.documents.push(getMarkdownDummyDocument())
+    if (existFileData()) {
+      this.documents.push(getFileDummyDocument())
+    }
   }
 
   private createDummyPageData() {
@@ -87,6 +91,11 @@ export class DummyStore {
     }
     for (const page of getMarkdownDummyPages()) {
       this.pages.push(page)
+    }
+    if (existFileData()) {
+      for (const page of getFileDummyPages()) {
+        this.pages.push(page)
+      }
     }
   }
 
