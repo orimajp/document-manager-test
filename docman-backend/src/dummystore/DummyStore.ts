@@ -3,7 +3,7 @@ import { IPage } from '~/page/page.interface';
 import { Node } from '~/node/node';
 import { getMarkdownDummyDocument, getMarkdownDummyPages } from '~/dummydata/MarkdownDummyDataFactory';
 import { getTreeDummyDocument, getTreeDummyPages } from '~/dummydata/TreeDummyDataFactory';
-import { getFileDummyDocument, getFileDummyPages ,existFileData } from '~/dummydata/FileDummyDtaFactory'
+import { getFileDummyDocument, getFileDummyPages, getFileDummyAssetMap ,existFileData } from '~/dummydata/FileDummyDtaFactory'
 import { Asset } from '~/asset/asset';
 
 export class DummyStore {
@@ -17,6 +17,7 @@ export class DummyStore {
     this.assetMap = new Map<string, Asset>()
     this.createDummyDocumentData()
     this.createDummyPageData()
+    this.createDummyAssetData()
   }
 
   getAllDocuments(): Array<IDocument> {
@@ -99,6 +100,11 @@ export class DummyStore {
     }
   }
 
+  private createDummyAssetData() {
+    getFileDummyAssetMap().forEach((value, key, map) => {
+      this.assetMap.set(key, value)
+    })
+  }
 }
 
 export const dummyStore = new DummyStore()

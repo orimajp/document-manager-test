@@ -1,4 +1,14 @@
-import { Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Post,
+  Res,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { IdentityService } from '~/identity/identity.service';
 import { AssetService } from '~/asset/asset.service';
@@ -25,6 +35,12 @@ export class AssetController {
   @Get(':assetId')
   async getAsset(@Param('assetId') assetId: string, @Res() res) {
     const asset = this.assetService.getAsset(assetId)
+    if (!asset.buffer) {
+      throw new HttpException({
+        status: HttpStatus.NOT_FOUND,
+        error: `アセットが見つかりません。(assetId=${assetId})`
+      },404)
+    }
     const stream = this.assetService.getReadableStream(asset.buffer)
     this.setHeaders(res, asset)
     stream.pipe(res)

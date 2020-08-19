@@ -5,6 +5,7 @@ import { INode } from '~/node/node.interface';
 import { IDocument } from '~/document/document.interface';
 import * as fs from 'fs';
 import * as path from 'path';
+import { Asset } from '~/asset/asset';
 
 const createDate = dayjs('2020-07-07').format()
 const updateDate = dayjs('2020/08/08').format()
@@ -14,6 +15,7 @@ const node: INode = {} as INode
 const document: IDocument = {} as IDocument
 
 const pageMap: Map<string, IPage> = new Map<string, IPage>()
+const assetMap: Map<string, Asset> = new Map<string, Asset>()
 
 interface JsonPage {
   documentId: string
@@ -26,9 +28,16 @@ interface JsonNode {
   nodes: Array<JsonNode>
 }
 
+interface JsonAsset {
+  fileName: string
+  mimeType: string
+  assetId: string
+}
+
 interface JsonData {
   pages: Array<JsonPage>
   node: JsonNode
+  assets: Array<JsonAsset>
 }
 
 try {
@@ -56,6 +65,10 @@ function createData(jsonData: JsonData) {
     createPageDocument(jsonPage)
   }
 
+  for (const jsonAsset of jsonData.assets) {
+    createAsset(jsonAsset)
+  }
+
   createNode(jsonData.node)
 }
 
@@ -65,7 +78,7 @@ function createPageDocument(jsonPage: JsonPage) {
     createDocument(jsonPage)
   }
   try {
-    const buf = fs.readFileSync(path.join(__dirname, `../../src/filedata/data/${jsonPage.pageId}.md`), { encoding: 'utf-8' })
+    const buf = fs.readFileSync(path.join(__dirname, `../../src/filedata/docs/${jsonPage.pageId}.md`), { encoding: 'utf-8' })
     const newPage = {
       documentId: jsonPage.documentId,
       pageId: jsonPage.pageId,
@@ -94,6 +107,17 @@ function createDocument(jsonPage: JsonPage) {
   document.node = node
   document.createdAt = createDate
   document.updatedAt = updateDate
+}
+
+function createAsset(jsonAsset: JsonAsset) {
+  try {
+    const buf = fs.readFileSync(path.join(__dirname, `../../src/filedata/images/${jsonAsset.fileName}`))
+    const asset = new Asset(jsonAsset.fileName, jsonAsset.mimeType, buf)
+    assetMap.set(jsonAsset.assetId, asset)
+  } catch (err) {
+    console.error(err)
+    throw new Error(err)
+  }
 }
 
 function createNode(jsonNode: JsonNode) {
@@ -129,6 +153,10 @@ export function getFileDummyDocument(): IDocument {
 
 export function getFileDummyPages(): Array<IPage> {
   return pages
+}
+
+export function getFileDummyAssetMap(): Map<string, Asset> {
+  return assetMap
 }
 
 export function existFileData(): boolean {
