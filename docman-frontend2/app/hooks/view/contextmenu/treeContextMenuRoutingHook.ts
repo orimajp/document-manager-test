@@ -5,7 +5,7 @@ import { useRouter } from '~/hooks/useRouter'
 export const useTreeContextRouting = (openPageId: Ref<string | null>) => {
   const openPage = () => {
     const url = `/document/view/${openPageId.value}`
-    window.open(url, '_blank')
+    window.open(url, '_blank', 'noopener')
   }
 
   const { getPage } = usePage()
