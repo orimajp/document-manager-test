@@ -91,8 +91,8 @@ li {
 }
 .doc-list {
   cursor: pointer;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 9px;
+  padding-bottom: 9px;
   /*position: relative;*/
   -webkit-touch-callout: none;
   -webkit-user-select: none;
