@@ -42,6 +42,7 @@ export default defineComponent({
       pageData,
       createdAt,
       updatedAt,
+      goHash,
       formatDate
     } = useViewContent(props)
 
@@ -55,6 +56,7 @@ export default defineComponent({
       window.setTimeout(() => {
         nextTick(() => {
           addNavigateListener(viewer)
+          goHash()
         })
       }, 200)
     })
