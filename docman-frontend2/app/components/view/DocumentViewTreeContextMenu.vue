@@ -14,6 +14,12 @@
       </v-list-item>
       <v-divider />
       <v-list-item class="menu-item">
+        <v-list-item-title @click="copyPath">
+          パスをクリップボードにコピー
+        </v-list-item-title>
+      </v-list-item>
+      <v-divider />
+      <v-list-item class="menu-item">
         <v-list-item-title @click="createChildPage">
           子の先頭にページを追加
         </v-list-item-title>
@@ -49,9 +55,12 @@ export default defineComponent({
       top
     } = useTreeContextMenu(props, context)
 
-    const { openPage, createChildPage, createNextPage } = useTreeContextRouting(
-      openPageId
-    )
+    const {
+      openPage,
+      copyPath,
+      createChildPage,
+      createNextPage
+    } = useTreeContextRouting(openPageId)
 
     return {
       showContextMenu,
@@ -59,6 +68,7 @@ export default defineComponent({
       contextMenuY,
       top,
       openPage,
+      copyPath,
       createChildPage,
       createNextPage
     }

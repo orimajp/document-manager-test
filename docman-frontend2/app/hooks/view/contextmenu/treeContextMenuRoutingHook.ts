@@ -1,11 +1,19 @@
 import { Ref } from '@vue/composition-api'
+import { useClipboard } from '@vueuse/core'
 import { usePage } from '~/hooks/usePage'
 import { useRouter } from '~/hooks/useRouter'
 
 export const useTreeContextRouting = (openPageId: Ref<string | null>) => {
+  const { copy } = useClipboard()
+
   const openPage = () => {
     const url = `/document/view/${openPageId.value}`
     window.open(url, '_blank', 'noopener')
+  }
+
+  const copyPath = () => {
+    const url = `/document/view/${openPageId.value}`
+    return copy(url)
   }
 
   const { getPage } = usePage()
@@ -29,6 +37,7 @@ export const useTreeContextRouting = (openPageId: Ref<string | null>) => {
 
   return {
     openPage,
+    copyPath,
     createChildPage,
     createNextPage
   }
