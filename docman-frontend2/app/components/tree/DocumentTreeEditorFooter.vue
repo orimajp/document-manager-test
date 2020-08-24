@@ -2,14 +2,10 @@
   <v-footer fixed padless>
     <v-spacer />
     <div class="footer-button">
-      <v-btn block @click="cancelTree">
-        キャンセル
-      </v-btn>
+      <v-btn block @click="cancelTree">キャンセル</v-btn>
     </div>
     <div class="footer-button">
-      <v-btn color="primary" block @click="registerTree">
-        保存
-      </v-btn>
+      <v-btn color="primary" block @click="registerTree">保存</v-btn>
     </div>
   </v-footer>
 </template>

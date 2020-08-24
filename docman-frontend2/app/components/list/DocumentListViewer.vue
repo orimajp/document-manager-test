@@ -6,9 +6,7 @@
         <div v-if="loading" class="text-center">
           <v-progress-circular :size="100" color="primary" indeterminate />
         </div>
-        <v-alert v-if="empty" type="info">
-          ドキュメントがありません。
-        </v-alert>
+        <v-alert v-if="empty" type="info">ドキュメントがありません。</v-alert>
         <v-simple-table v-if="exists">
           <template v-slot:default>
             <thead>

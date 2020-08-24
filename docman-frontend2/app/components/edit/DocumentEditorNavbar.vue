@@ -1,9 +1,7 @@
 <template>
   <v-app-bar appdark fixed dense dark class="primary">
     <v-btn icon @click="goTop">
-      <v-icon>
-        mdi-home
-      </v-icon>
+      <v-icon>mdi-home</v-icon>
     </v-btn>
     <v-chip>
       {{ editTarget }}
@@ -22,12 +20,8 @@
       @input="updateTitle"
     />
     <v-btn-toggle v-model="option" dense multiple class="option-button-group">
-      <v-btn value="DARK" color="secondary" tabindex="-1">
-        DARK
-      </v-btn>
-      <v-btn value="SYNC" color="secondary" tabindex="-1">
-        SYNC
-      </v-btn>
+      <v-btn value="DARK" color="secondary" tabindex="-1">DARK</v-btn>
+      <v-btn value="SYNC" color="secondary" tabindex="-1">SYNC</v-btn>
     </v-btn-toggle>
     <v-btn-toggle v-model="mode" dense>
       <v-btn :value="editValue" color="secondary" tabindex="-1">

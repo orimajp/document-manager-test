@@ -1,9 +1,7 @@
 <template>
   <v-dialog v-model="modal" persistent width="500">
     <v-card>
-      <v-card-title class="headline">
-        アップロードエラー
-      </v-card-title>
+      <v-card-title class="headline">アップロードエラー</v-card-title>
       <v-card-text>
         <div class="error-message-area">
           <div class="error-message-text">
@@ -13,9 +11,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn color="primary" text @click="close">
-          閉じる
-        </v-btn>
+        <v-btn color="primary" text @click="close">閉じる</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

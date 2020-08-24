@@ -3,7 +3,7 @@
     v-model="modal"
     fullscreen
     transition="fade-transition"
-    style="margin-top: 40px;"
+    style="margin-top: 40px"
     @dragleave="cancelDragLeave"
     @drop="dragleave"
   >

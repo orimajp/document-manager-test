@@ -2,9 +2,7 @@
   <v-footer padless fixed>
     <v-spacer />
     <div class="footer-button">
-      <v-btn block @click="cancelDocument">
-        キャンセル
-      </v-btn>
+      <v-btn block @click="cancelDocument">キャンセル</v-btn>
     </div>
     <div class="footer-button">
       <v-btn color="primary" block :disabled="!change" @click="updateDocument">

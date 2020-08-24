@@ -1,9 +1,7 @@
 <template>
   <v-app-bar appdark dense dark class="primary">
     <v-btn icon @click="goTop">
-      <v-icon>
-        mdi-home
-      </v-icon>
+      <v-icon>mdi-home</v-icon>
     </v-btn>
     <v-toolbar-title>
       <small>メニュー階層編集: {{ pageTitle }}</small>
