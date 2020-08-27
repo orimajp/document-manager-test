@@ -26,6 +26,10 @@ export const useViewContent = (props: PageContentProp) => {
     props.pageContent === null ? '' : props.pageContent.updatedAt
   )
 
+  const pageId = computed(() =>
+    props.pageContent === null ? '' : props.pageContent.pageId
+  )
+
   const { route } = useRouter()
   const goHash = () => {
     const hash = route.value.hash
@@ -42,6 +46,7 @@ export const useViewContent = (props: PageContentProp) => {
     dayjs(date).format('YYYY年MM月DD日 HH:mm:ss')
 
   return {
+    pageId,
     pageTitle,
     pageData,
     createdAt,

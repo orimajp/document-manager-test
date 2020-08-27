@@ -16,6 +16,7 @@ import HeadlineContanier from '~/containers/HeadlineContanier'
 import DocumentViewNavbar from '~/components/view/DocumentViewNavbar'
 import DocumentViewTreeDrawer from '~/components/view/drawer/DocumentViewTreeDrawer'
 import DocumentVieweTocDrawer from '~/components/view/drawer/DocumentVieweTocDrawer'
+import LinkedPageMapContainer from '~/containers/LinkedPageMapContainer'
 
 export default defineComponent({
   components: {
@@ -28,6 +29,7 @@ export default defineComponent({
     PageContainer.provide()
     DrawerContainer.provide()
     HeadlineContanier.provide()
+    LinkedPageMapContainer.provide()
   }
 })
 </script>

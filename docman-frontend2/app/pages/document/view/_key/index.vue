@@ -3,17 +3,13 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  // ref,
-  // watchEffect
-  ref
-} from '@vue/composition-api'
+import { computed, defineComponent, ref } from '@vue/composition-api'
 import DocumentContainer from '~/containers/DocumentContainer'
 import PageContainer from '~/containers/PageContainer'
 import DocumentViewContent from '~/components/view/DocumentViewContent'
 import { useRouter } from '~/hooks/useRouter'
+import LinkedPageMapContainer from '~/containers/LinkedPageMapContainer'
+import { DocumentData } from '~/models/document/DocumentData'
 
 export default defineComponent({
   layout: 'viewer',
@@ -31,6 +27,7 @@ export default defineComponent({
 
     const { page, fetchPage } = PageContainer.useContainer()
     const { document, fetchDocument } = DocumentContainer.useContainer()
+    const { initializePageMap } = LinkedPageMapContainer.useContainer()
 
     // FIXME async/awaitが使えないので無理矢理な処理になっている
     fetchPage(pageId).then(() => {
@@ -40,15 +37,16 @@ export default defineComponent({
         fetchDocument(documentId.value).then(() => {
           const keyArray = document.value.getNestedIdArray(pageId)
           document.value.openChildren(keyArray)
+          initializePageMap(document.value as DocumentData) // FIXME 何故かエラーになるので無理矢理型を合わせている
         })
         return
       }
       const keyArray = document.value.getNestedIdArray(pageId)
       document.value.openChildren(keyArray)
+      initializePageMap(document.value as DocumentData) // FIXME 何故かエラーになるので無理矢理型を合わせている
     })
 
     return {
-      // document,
       page
     }
   }

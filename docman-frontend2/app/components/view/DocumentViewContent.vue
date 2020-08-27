@@ -12,6 +12,7 @@
           <div v-html="$md.render(pageData)" />
         </div>
       </div>
+      <document-view-navigation class="navigation" :page-id="pageId" />
     </v-container>
   </v-main>
 </template>
@@ -31,13 +32,18 @@ import { PageData } from '~/models/page/PageData'
 import { PageContentProp, useViewContent } from '~/hooks/view/viewContentHook'
 import { useCollectHeadline } from '~/hooks/view/viewCollectHeadlineHook'
 import { useNavigate } from '~/hooks/view/viewNavigateHook'
+import DocumentViewNavigation from '~/components/view/DocumentViewNavigation.vue'
 
 export default defineComponent({
+  components: {
+    DocumentViewNavigation
+  },
   props: {
     pageContent: Object as PropType<PageData>
   },
   setup(props: PageContentProp) {
     const {
+      pageId,
       pageTitle,
       pageData,
       createdAt,
@@ -75,6 +81,7 @@ export default defineComponent({
 
     return {
       viewer,
+      pageId,
       pageTitle,
       pageData,
       contentDate
@@ -85,4 +92,8 @@ export default defineComponent({
 
 <style>
 @import 'app/assets/css/markdown.css';
+.navigation {
+  margin-top: 40px;
+  margin-bottom: 80px;
+}
 </style>
