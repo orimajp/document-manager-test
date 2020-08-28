@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@liradb2000/markdown-it-mermaid": "^0.4.1",
-    "@nuxt/types": "^2.14.3",
+    "@nuxt/types": "^2.14.4",
     "@nuxt/typescript-runtime": "^1.0.0",
-    "@nuxtjs/axios": "^5.12.1",
+    "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/markdownit": "^1.2.10",
     "@types/highlightjs": "^9.12.0",
     "@types/markdown-it": "^10.0.2",
@@ -37,7 +37,7 @@
     "markdown-it-sub": "^1.0.0",
     "markdown-it-video": "^0.6.3",
     "monaco-editor-webpack-plugin": "^1.9.0",
-    "nuxt": "^2.14.3",
+    "nuxt": "^2.14.4",
     "vue-monaco": "^1.2.1",
     "vue-unstated": "0.0.7",
     "vuedraggable": "^2.24.1"
@@ -55,6 +55,6 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.1.0"
+    "prettier": "^2.1.1"
   }
 }
