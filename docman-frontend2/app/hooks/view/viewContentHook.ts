@@ -9,6 +9,11 @@ export interface PageContentProp {
   pageContent: PageData
 }
 
+const formatedDate = (date: string) =>
+  dayjs(date).format('YYYY年MM月DD日 HH:mm:ss')
+
+const dummyDate = () => '-年-月-日 -:-:-'
+
 export const useViewContent = (props: PageContentProp) => {
   const pageTitle = computed(() =>
     props.pageContent === null ? '' : props.pageContent.pageTitle
@@ -30,6 +35,14 @@ export const useViewContent = (props: PageContentProp) => {
     props.pageContent === null ? '' : props.pageContent.pageId
   )
 
+  const createdDateTime = computed(() =>
+    createdAt.value === '' ? dummyDate() : formatedDate(createdAt.value)
+  )
+
+  const updatedDateTime = computed(() =>
+    updatedAt.value === '' ? dummyDate() : formatedDate(updatedAt.value)
+  )
+
   const { route } = useRouter()
   const goHash = () => {
     const hash = route.value.hash
@@ -42,16 +55,12 @@ export const useViewContent = (props: PageContentProp) => {
     }
   }
 
-  const formatDate = (date: string) =>
-    dayjs(date).format('YYYY年MM月DD日 HH:mm:ss')
-
   return {
     pageId,
     pageTitle,
     pageData,
-    createdAt,
-    updatedAt,
-    goHash,
-    formatDate
+    createdDateTime,
+    updatedDateTime,
+    goHash
   }
 }

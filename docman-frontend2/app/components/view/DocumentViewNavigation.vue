@@ -65,6 +65,7 @@ export default defineComponent({
 }
 .nav-link {
   height: 4em;
+  font-size: 14px;
   /*height: 50px;*/
   color: #eeeeee;
   /*color: #e0e0e0;*/

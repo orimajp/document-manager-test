@@ -45,6 +45,7 @@
 }
 
 .markdown-body {
+  font-size: 14px;
 }
 
 .markdown-body pre > code {
@@ -138,7 +139,7 @@ div.notices {
 div.notices p {
   padding: 0;
   display: block;
-  font-size: 1rem;
+  /*font-size: 1rem;*/
   margin-top: 0;
   margin-bottom: 0;
 }

@@ -4,9 +4,8 @@
       <div ref="viewer">
         <h1 class="document-title">{{ pageTitle }}</h1>
         <div class="markdown-content">
-          <div class="date-data">
-            {{ contentDate }}
-          </div>
+          <div class="date-data">作成 {{ createdDateTime }}</div>
+          <div class="date-data">更新 {{ updatedDateTime }}</div>
         </div>
         <div class="markdown-body">
           <div v-html="$md.render(pageData)" />
@@ -19,7 +18,6 @@
 
 <script lang="ts">
 import {
-  computed,
   defineComponent,
   nextTick,
   onMounted,
@@ -46,10 +44,9 @@ export default defineComponent({
       pageId,
       pageTitle,
       pageData,
-      createdAt,
-      updatedAt,
-      goHash,
-      formatDate
+      createdDateTime,
+      updatedDateTime,
+      goHash
     } = useViewContent(props)
 
     const viewer = ref(null) as Ref<HTMLElement | null> // ref=viewer相当
@@ -71,20 +68,13 @@ export default defineComponent({
       removeNavigateListener()
     })
 
-    const contentDate = computed(
-      // () => `作成: ${createdAt.value} 更新: ${updatedAt.value}`
-      () =>
-        `作成: ${formatDate(createdAt.value)} 更新: ${formatDate(
-          updatedAt.value
-        )}`
-    )
-
     return {
       viewer,
       pageId,
       pageTitle,
       pageData,
-      contentDate
+      createdDateTime,
+      updatedDateTime
     }
   }
 })
