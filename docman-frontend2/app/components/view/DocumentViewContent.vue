@@ -1,6 +1,7 @@
 <template>
   <v-main>
     <v-container fluid>
+      <document-view-bread-crumb-list class="bread-crumb-block" />
       <div ref="viewer">
         <h1 class="document-title">{{ pageTitle }}</h1>
         <div class="markdown-content">
@@ -31,9 +32,11 @@ import { PageContentProp, useViewContent } from '~/hooks/view/viewContentHook'
 import { useCollectHeadline } from '~/hooks/view/viewCollectHeadlineHook'
 import { useNavigate } from '~/hooks/view/viewNavigateHook'
 import DocumentViewNavigation from '~/components/view/DocumentViewNavigation.vue'
+import DocumentViewBreadCrumbList from '~/components/view/DocumentViewBreadCrumbList'
 
 export default defineComponent({
   components: {
+    DocumentViewBreadCrumbList,
     DocumentViewNavigation
   },
   props: {
@@ -82,6 +85,9 @@ export default defineComponent({
 
 <style>
 @import 'app/assets/css/markdown.css';
+.bread-crumb-block {
+  margin-bottom: 20px;
+}
 .navigation {
   margin-top: 40px;
   margin-bottom: 80px;

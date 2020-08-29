@@ -133,6 +133,10 @@ const nuxtConfig: NuxtConfig = {
           }
         }
       ],
+      [
+        '@liradb2000/markdown-it-mermaid',
+        { themeVariables: { fontSize: '14px' } }
+      ],
       'markdown-it-sanitizer',
       'markdown-it-plantuml',
       'markdown-it-anchor',
@@ -142,8 +146,7 @@ const nuxtConfig: NuxtConfig = {
       'markdown-it-sub',
       'markdown-it-abbr',
       'markdown-it-deflist',
-      'markdown-it-video',
-      '@liradb2000/markdown-it-mermaid'
+      'markdown-it-video'
     ]
   },
 

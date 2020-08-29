@@ -17,6 +17,7 @@ import DocumentViewNavbar from '~/components/view/DocumentViewNavbar'
 import DocumentViewTreeDrawer from '~/components/view/drawer/DocumentViewTreeDrawer'
 import DocumentVieweTocDrawer from '~/components/view/drawer/DocumentVieweTocDrawer'
 import LinkedPageMapContainer from '~/containers/LinkedPageMapContainer'
+import BreadCrumbListContainer from '~/containers/BreadCrumbListContainer'
 
 export default defineComponent({
   components: {
@@ -30,6 +31,7 @@ export default defineComponent({
     DrawerContainer.provide()
     HeadlineContanier.provide()
     LinkedPageMapContainer.provide()
+    BreadCrumbListContainer.provide()
   }
 })
 </script>

@@ -10,6 +10,7 @@ import DocumentViewContent from '~/components/view/DocumentViewContent'
 import { useRouter } from '~/hooks/useRouter'
 import LinkedPageMapContainer from '~/containers/LinkedPageMapContainer'
 import { DocumentData } from '~/models/document/DocumentData'
+import BreadCrumbListContainer from '~/containers/BreadCrumbListContainer'
 
 export default defineComponent({
   layout: 'viewer',
@@ -28,6 +29,7 @@ export default defineComponent({
     const { page, fetchPage } = PageContainer.useContainer()
     const { document, fetchDocument } = DocumentContainer.useContainer()
     const { initializePageMap } = LinkedPageMapContainer.useContainer()
+    const { setPageIdList } = BreadCrumbListContainer.useContainer()
 
     // FIXME async/awaitが使えないので無理矢理な処理になっている
     fetchPage(pageId).then(() => {
@@ -38,12 +40,14 @@ export default defineComponent({
           const keyArray = document.value.getNestedIdArray(pageId)
           document.value.openChildren(keyArray)
           initializePageMap(document.value as DocumentData) // FIXME 何故かエラーになるので無理矢理型を合わせている
+          setPageIdList(keyArray)
         })
         return
       }
       const keyArray = document.value.getNestedIdArray(pageId)
       document.value.openChildren(keyArray)
       initializePageMap(document.value as DocumentData) // FIXME 何故かエラーになるので無理矢理型を合わせている
+      setPageIdList(keyArray)
     })
 
     return {

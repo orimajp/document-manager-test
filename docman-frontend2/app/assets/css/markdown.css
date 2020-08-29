@@ -25,6 +25,7 @@
   font-weight: normal;
   font-size: 100%;
   color: black;
+  background-color: rgba(27,31,35,.05);; /* github */
   /*text-indent: 0;*/
   padding: 0;
 }
@@ -227,9 +228,10 @@ div.notices.warning-style {
 }
 
 .markdown-content {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .markdown-content .date-data {
   text-align: right;
   color: lightgray;
+  font-size: 14px;
 }
