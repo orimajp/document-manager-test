@@ -87,7 +87,11 @@ export default defineComponent({
   justify-content: flex-end;
 }
 .chevron {
-  font-size: 80px;
+  font-size: 40px;
+  /*font-size: 24px;
+  transform: scale(1, 4);*/
+  transform: scale(1, 3);
+  /*transform: scale(0.8, 3);*/
   color: #eeeeee;
   /*color: #e0e0e0;*/
   display: flex;
@@ -95,11 +99,13 @@ export default defineComponent({
   justify-content: flex-end;
 }
 .chevron.left {
-  margin-left: -22px;
-  margin-right: -25px;
+  /*margin-left: -22px;*/
+  /*margin-right: -25px;*/
+  /*margin-right: -12px;*/
 }
 .chevron.right {
-  margin-left: -25px;
-  margin-right: -22px;
+  /*margin-left: -25px;*/
+  /*margin-left: -12px;*/
+  /*margin-right: -22px;*/
 }
 </style>
