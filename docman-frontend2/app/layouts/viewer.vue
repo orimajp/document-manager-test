@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <snackbar-combo />
     <document-view-tree-drawer />
     <document-view-navbar />
     <nuxt />
@@ -18,9 +19,12 @@ import DocumentViewTreeDrawer from '~/components/view/drawer/DocumentViewTreeDra
 import DocumentVieweTocDrawer from '~/components/view/drawer/DocumentVieweTocDrawer'
 import LinkedPageMapContainer from '~/containers/LinkedPageMapContainer'
 import BreadCrumbListContainer from '~/containers/BreadCrumbListContainer'
+import SnackbarComboContainer from '~/containers/SnackbarComboContainer'
+import SnackbarCombo from '~/components/SnackbarCombo'
 
 export default defineComponent({
   components: {
+    SnackbarCombo,
     DocumentViewNavbar,
     DocumentViewTreeDrawer,
     DocumentVieweTocDrawer
@@ -32,6 +36,7 @@ export default defineComponent({
     HeadlineContanier.provide()
     LinkedPageMapContainer.provide()
     BreadCrumbListContainer.provide()
+    SnackbarComboContainer.provide()
   }
 })
 </script>
