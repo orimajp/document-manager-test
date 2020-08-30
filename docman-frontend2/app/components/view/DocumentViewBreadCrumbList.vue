@@ -8,7 +8,7 @@
       <nuxt-link :to="createLink(item.pageId)" style="text-decoration: none">
         {{ item.pageTitle }}
       </nuxt-link>
-      <v-icon x-small>mdi-chevron-double-right</v-icon>
+      <v-icon x-small color="grey">mdi-chevron-double-right</v-icon>
     </span>
     <span class="current-pate-title">{{ bottomPageTitle }}</span>
   </div>
@@ -44,5 +44,6 @@ export default defineComponent({
 }
 .current-pate-title {
   font-size: 12px;
+  color: grey;
 }
 </style>

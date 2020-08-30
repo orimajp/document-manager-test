@@ -66,11 +66,11 @@ export default defineComponent({
     } = useTreeContextControll()
 
     const topContextMenu = (e) => {
-      openTopContextMenu(documentId.value, e)
+      openTopContextMenu(documentId.value, pageTitle.value, e)
     }
 
-    const treeContextMenu = (pageId, e) => {
-      openTreeContextMenu(pageId, e)
+    const treeContextMenu = (pageId, pageTitle, e) => {
+      openTreeContextMenu(pageId, pageTitle, e)
     }
 
     return {

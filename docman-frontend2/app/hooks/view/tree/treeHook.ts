@@ -23,29 +23,29 @@ export const useTree = (treeProps: TreeProps, context: SetupContext) => {
 
   const firstNode = computed(() => treeProps.pageIdArray.length === 0)
 
-  // const currentPageId = computed(() => treeProps.currentNode.pageId)
-  const currentPageId = computed(() => {
-    console.log(`currentPageId=${treeProps.currentNode.pageId}`)
-    return treeProps.currentNode.pageId
-  })
+  const currentPageId = computed(() => treeProps.currentNode.pageId)
+
+  const currentPageTitle = computed(() => treeProps.currentNode.pageTitle)
 
   const addPageIdArray = computed(() =>
     treeProps.pageIdArray.concat(currentPageId.value)
   )
 
   const { router } = useRouter()
-
   const openPage = () => {
     return router.push(`/document/view/${currentPageId.value}`)
   }
 
-  const openContextMenu = (pageId: string, e: MouseEvent) => {
-    console.log(e)
-    context.emit('openContextMenu', pageId, e)
+  const openContextMenu = (
+    pageId: string,
+    pageTitle: string,
+    e: MouseEvent
+  ) => {
+    context.emit('openContextMenu', pageId, pageTitle, e)
   }
 
   const openTreeContextMenu = (e: MouseEvent) => {
-    openContextMenu(currentPageId.value, e)
+    openContextMenu(currentPageId.value, currentPageTitle.value, e)
   }
 
   return {

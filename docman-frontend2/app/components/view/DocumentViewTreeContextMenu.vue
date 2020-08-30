@@ -12,10 +12,15 @@
           新規ウィンドウで開く
         </v-list-item-title>
       </v-list-item>
+      <v-list-item class="menu-item">
+        <v-list-item-title @click="copyUrl">
+          URLをクリップボードにコピー
+        </v-list-item-title>
+      </v-list-item>
       <v-divider />
       <v-list-item class="menu-item">
         <v-list-item-title @click="copyPath">
-          パスをクリップボードにコピー
+          パスをMarkdown形式でクリップボードにコピー
         </v-list-item-title>
       </v-list-item>
       <v-divider />
@@ -50,6 +55,7 @@ export default defineComponent({
     const {
       showContextMenu,
       openPageId,
+      openPageTitle,
       contextMenuX,
       contextMenuY,
       top
@@ -57,10 +63,11 @@ export default defineComponent({
 
     const {
       openPage,
+      copyUrl,
       copyPath,
       createChildPage,
       createNextPage
-    } = useTreeContextRouting(openPageId)
+    } = useTreeContextRouting(openPageId, openPageTitle)
 
     return {
       showContextMenu,
@@ -68,6 +75,7 @@ export default defineComponent({
       contextMenuY,
       top,
       openPage,
+      copyUrl,
       copyPath,
       createChildPage,
       createNextPage

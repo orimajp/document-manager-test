@@ -12,6 +12,8 @@ export const useTreeContextMenu = (
 
   const openPageId = computed(() => props.treeContextMenuParam.openPageId)
 
+  const openPageTitle = computed(() => props.treeContextMenuParam.openPageTitle)
+
   const contextMenuX = computed(() => props.treeContextMenuParam.contextMenuX)
 
   const contextMenuY = computed(() => props.treeContextMenuParam.contextMenuY)
@@ -21,6 +23,7 @@ export const useTreeContextMenu = (
   return {
     showContextMenu,
     openPageId,
+    openPageTitle,
     contextMenuX,
     contextMenuY,
     top

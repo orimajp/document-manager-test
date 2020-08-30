@@ -2,7 +2,8 @@ import { reactive, toRefs } from '@vue/composition-api'
 
 export interface TreeContextMenuParam {
   showContextMenu: boolean
-  openPageId: string | null
+  openPageId: string
+  openPageTitle: string
   contextMenuX: number
   contextMenuY: number
   top: boolean
@@ -16,28 +17,43 @@ export const useTreeContextControll = () => {
   const state = reactive({
     contextMenuParam: {
       showContextMenu: false,
-      openPageId: null,
+      openPageId: '',
+      openPageTitle: '',
       contextMenuX: 0,
       contextMenuY: 0,
       top: false
     } as TreeContextMenuParam
   })
 
-  const openContextMenu = (pageId: string, e: MouseEvent, top: boolean) => {
+  const openContextMenu = (
+    pageId: string,
+    pageTitle: string,
+    e: MouseEvent,
+    top: boolean
+  ) => {
     e.preventDefault()
     state.contextMenuParam.showContextMenu = true
     state.contextMenuParam.openPageId = pageId
+    state.contextMenuParam.openPageTitle = pageTitle
     state.contextMenuParam.contextMenuX = e.clientX
     state.contextMenuParam.contextMenuY = e.clientY
     state.contextMenuParam.top = top
   }
 
-  const openTopContextMenu = (pageId: string, e: MouseEvent) => {
-    openContextMenu(pageId, e, true)
+  const openTopContextMenu = (
+    pageId: string,
+    pageTitle: string,
+    e: MouseEvent
+  ) => {
+    openContextMenu(pageId, pageTitle, e, true)
   }
 
-  const openTreeContextMenu = (pageId: string, e: MouseEvent) => {
-    openContextMenu(pageId, e, false)
+  const openTreeContextMenu = (
+    pageId: string,
+    pageTitle: string,
+    e: MouseEvent
+  ) => {
+    openContextMenu(pageId, pageTitle, e, false)
   }
 
   const closeContextMenu = () => {
