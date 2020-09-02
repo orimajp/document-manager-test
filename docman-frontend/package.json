@@ -12,23 +12,23 @@
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@nuxt/typescript-runtime": "^1.0.0",
+    "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
-    "@vueuse/core": "^4.0.0-beta.9",
+    "@vueuse/core": "^4.0.0-beta.10",
     "nuxt": "^2.14.4",
     "nuxt-composition-api": "^0.11.0",
     "vue-unstated": "0.0.7"
   },
   "devDependencies": {
     "@mdi/font": "^5.5.55",
-    "@nuxt/typescript-build": "^2.0.2",
+    "@nuxt/typescript-build": "^2.0.3",
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-config-typescript": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/vuetify": "^1.11.2",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.2",
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": ">=1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
