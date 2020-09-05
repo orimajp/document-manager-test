@@ -9,7 +9,7 @@
     <v-list>
       <v-list-item class="menu-item" dense>
         <v-list-item-title @click="copyUrl">
-          URLをクリップボードにコピー
+          ハッシュ付きURLをクリップボードにコピー
         </v-list-item-title>
       </v-list-item>
       <v-list-item class="menu-item" dense>

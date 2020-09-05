@@ -7,29 +7,29 @@
     offset-y
   >
     <v-list>
-      <v-list-item class="menu-item">
+      <v-list-item class="menu-item" dense>
         <v-list-item-title @click="openPage">
           新規ウィンドウで開く
         </v-list-item-title>
       </v-list-item>
-      <v-list-item class="menu-item">
+      <v-list-item class="menu-item" dense>
         <v-list-item-title @click="copyUrl">
           URLをクリップボードにコピー
         </v-list-item-title>
       </v-list-item>
       <v-divider />
-      <v-list-item class="menu-item">
+      <v-list-item class="menu-item" dense>
         <v-list-item-title @click="copyPath">
           パスをMarkdown形式でクリップボードにコピー
         </v-list-item-title>
       </v-list-item>
       <v-divider />
-      <v-list-item class="menu-item">
+      <v-list-item class="menu-item" dense>
         <v-list-item-title @click="createChildPage">
           子の先頭にページを追加
         </v-list-item-title>
       </v-list-item>
-      <v-list-item v-if="!top" class="menu-item">
+      <v-list-item v-if="!top" class="menu-item" dense>
         <v-list-item-title @click="createNextPage">
           次にページを追加
         </v-list-item-title>

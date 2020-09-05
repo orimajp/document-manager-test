@@ -29,7 +29,7 @@ const copyClipbord = (text: string) => {
   return window.navigator.clipboard.writeText(text)
 }
 
-const URL_COPY_MESSAGE = 'URLをコピーしました'
+const URL_COPY_MESSAGE = 'ハッシュ付きURLをコピーしました'
 const HASHED_PATH_COPY_MESSAGE = 'ハッシュ付きパスリンクをコピーしました'
 const HASH_COPY_MESSAGE = 'ハッシュリンクをコピーしました'
 
