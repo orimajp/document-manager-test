@@ -1,4 +1,4 @@
-import { onMounted, Ref, watch } from '@vue/composition-api'
+import { onMounted, onUnmounted, ref, Ref, watch } from '@vue/composition-api'
 import HeadlineContanier from '~/containers/HeadlineContanier'
 import { createDocumentHeadline } from '~/models/document/factory/DocumentHeadlineFactory'
 import { PageContentProp } from '~/hooks/view/viewContentHook'
@@ -8,12 +8,23 @@ const HeadlineSelector =
 
 export const useCollectHeadline = (
   props: PageContentProp,
-  viewer: Ref<HTMLElement | null>
+  viewer: Ref<HTMLElement | null>,
+  addClickListener: (target: HTMLElement) => void,
+  removeClickListener: (target: HTMLElement) => void
 ) => {
   const { clearHeadlines, addHeadline } = HeadlineContanier.useContainer()
 
+  const headerArray = ref<Array<HTMLElement>>([])
+
   onMounted(() => {
     collectHeadLine()
+  })
+
+  onUnmounted(() => {
+    for (const header of headerArray.value) {
+      removeEventListener(header)
+    }
+    headerArray.value = []
   })
 
   watch(
@@ -23,6 +34,14 @@ export const useCollectHeadline = (
     }
   )
 
+  const addEventListtener = (target: HTMLElement) => {
+    addClickListener(target)
+  }
+
+  const removeEventListener = (target: HTMLElement) => {
+    removeClickListener(target)
+  }
+
   const collectHeadLine = () => {
     clearHeadlines()
 
@@ -30,10 +49,16 @@ export const useCollectHeadline = (
       return
     }
 
-    const headers = viewer.value.querySelectorAll<HTMLElement>(HeadlineSelector)
-    // @ts-ignore
-    for (const header of headers) {
-      addHeadline(createDocumentHeadline(header))
+    for (const header of headerArray.value) {
+      removeEventListener(header)
     }
+    headerArray.value = []
+
+    const headers = viewer.value.querySelectorAll<HTMLElement>(HeadlineSelector)
+    Array.from(headers).forEach((header) => {
+      headerArray.value.push(header)
+      addEventListtener(header)
+      addHeadline(createDocumentHeadline(header))
+    })
   }
 }

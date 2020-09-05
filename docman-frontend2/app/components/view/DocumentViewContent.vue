@@ -13,6 +13,10 @@
         </div>
       </div>
       <document-view-navigation class="navigation" :page-id="pageId" />
+      <document-view-headline-menu
+        :headline-menu-param="headlineMenuParam"
+        @closeHeadlineMenu="closeHeadlineMenu"
+      />
     </v-container>
   </v-main>
 </template>
@@ -33,10 +37,13 @@ import { useCollectHeadline } from '~/hooks/view/viewCollectHeadlineHook'
 import { useNavigate } from '~/hooks/view/viewNavigateHook'
 import DocumentViewNavigation from '~/components/view/DocumentViewNavigation.vue'
 import DocumentViewBreadCrumbList from '~/components/view/DocumentViewBreadCrumbList'
+import { headlineMenuControllHook } from '~/hooks/view/headlinmenu/headlineMenuControllHook'
+import DocumentViewHeadlineMenu from '~/components/view/DocumentViewHeadlineMenu.vue'
 
 export default defineComponent({
   components: {
     DocumentViewBreadCrumbList,
+    DocumentViewHeadlineMenu,
     DocumentViewNavigation
   },
   props: {
@@ -52,8 +59,15 @@ export default defineComponent({
       goHash
     } = useViewContent(props)
 
+    const {
+      headlineMenuParam,
+      addClickListener,
+      removeClickListener,
+      closeHeadlineMenu
+    } = headlineMenuControllHook(props)
+
     const viewer = ref(null) as Ref<HTMLElement | null> // ref=viewer相当
-    useCollectHeadline(props, viewer)
+    useCollectHeadline(props, viewer, addClickListener, removeClickListener)
 
     const { addNavigateListener, removeNavigateListener } = useNavigate()
 
@@ -77,7 +91,10 @@ export default defineComponent({
       pageTitle,
       pageData,
       createdDateTime,
-      updatedDateTime
+      updatedDateTime,
+      // headline menu
+      headlineMenuParam,
+      closeHeadlineMenu
     }
   }
 })
@@ -91,5 +108,24 @@ export default defineComponent({
 .navigation {
   margin-top: 40px;
   margin-bottom: 80px;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  cursor: pointer;
+}
+.markdown-body h1:hover:after,
+.markdown-body h2:hover:after,
+.markdown-body h3:hover:after,
+.markdown-body h4:hover:after,
+.markdown-body h5:hover:after,
+.markdown-body h6:hover:after {
+  font-size: 0.9em; /* アイコン描画時に行高が変わる問題の抑止 */
+  color: darkgray;
+  font-family: Material Design Icons;
+  content: '\F0339';
 }
 </style>
