@@ -221,6 +221,10 @@ div.notices.warning-style {
   height: 100%;
 }
 
+.markdown-body .mermaid {
+  margin-bottom: 16px;
+}
+
 /* https://senoweb.jp/note/fixheader-anchorlink/ */
 .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
   padding-top: 48px;
