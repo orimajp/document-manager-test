@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <snackbar-combo />
     <file-draggable>
       <nuxt />
     </file-draggable>
@@ -22,9 +23,11 @@ import FileUploadDialog from '~/components/upload/FileUploadDialog'
 import AssetLinkContainer from '~/containers/AssetLinkContainer'
 import FileUploadErrorDialog from '~/components/upload/FileUploadErrorDialog.vue'
 import SnackbarComboContainer from '~/containers/SnackbarComboContainer'
+import SnackbarCombo from '~/components/SnackbarCombo.vue'
 
 export default defineComponent({
   components: {
+    SnackbarCombo,
     FileDraggable,
     FileUploadDialog,
     FileUploadErrorDialog
