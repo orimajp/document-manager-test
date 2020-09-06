@@ -12,6 +12,10 @@
           <div v-html="$md.render(pageData)" />
         </div>
       </div>
+      <document-previwer-headline-menu
+        :headline-menu-param="headlineMenuParam"
+        @closeHeadlineMenu="closeHeadlineMenu"
+      />
     </v-container>
   </v-main>
 </template>
@@ -23,8 +27,14 @@ import { PageData } from '~/models/page/PageData'
 import { PageContentProp, useViewContent } from '~/hooks/view/viewContentHook'
 import { useViewerWindowSize } from '~/hooks/viewer/viewerWindowSizeHook'
 import DisplayModeContainer from '~/containers/DisplayModeContainer'
+import DocumentPreviwerHeadlineMenu from '~/components/viewer/DocumentPreviewerHeadlineMenu'
+import { headlineMenuControllHook } from '~/hooks/view/headlinmenu/headlineMenuControllHook'
+import { useViewerCollectHeadline } from '~/hooks/viewer/viewerCollectHeadlineHook'
 
 export default defineComponent({
+  components: {
+    DocumentPreviwerHeadlineMenu
+  },
   props: {
     pageContent: Object as PropType<PageData>
   },
@@ -36,12 +46,29 @@ export default defineComponent({
     const viewer = ref(null) as Ref<HTMLElement | null> // ref=viewer相当
     useViewerHandleScroll(viewer)
 
+    const {
+      headlineMenuParam,
+      addClickListener,
+      removeClickListener,
+      closeHeadlineMenu
+    } = headlineMenuControllHook(props)
+
+    useViewerCollectHeadline(
+      props,
+      viewer,
+      addClickListener,
+      removeClickListener
+    )
+
     return {
       viewer,
       pageTitle,
       pageData,
       dualMode,
-      viewerWidthStlye
+      viewerWidthStlye,
+      // headline menu
+      headlineMenuParam,
+      closeHeadlineMenu
     }
   }
 })

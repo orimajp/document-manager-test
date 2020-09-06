@@ -21,6 +21,7 @@ import FileDraggable from '~/components/upload/FileDraggable'
 import FileUploadDialog from '~/components/upload/FileUploadDialog'
 import AssetLinkContainer from '~/containers/AssetLinkContainer'
 import FileUploadErrorDialog from '~/components/upload/FileUploadErrorDialog.vue'
+import SnackbarComboContainer from '~/containers/SnackbarComboContainer'
 
 export default defineComponent({
   components: {
@@ -37,6 +38,7 @@ export default defineComponent({
     EditStateContainer.provide()
     FileUploadContainer.provide()
     AssetLinkContainer.provide()
+    SnackbarComboContainer.provide()
   }
 })
 </script>
