@@ -7,12 +7,14 @@ import * as dayjs from 'dayjs'
 import 'dayjs/locale/ja';
 import { NodeService } from '~/node/node.service';
 import { NewPositionPage } from '~/page/new-position-page.interface';
+import { IndexService } from '~/index/index.service';
 
 @Controller('api/pages')
 export class PageController {
   constructor(private readonly pageService: PageService,
               private readonly nodeServer: NodeService,
-              private readonly  identityService: IdentityService) {
+              private readonly identityService: IdentityService,
+              private readonly indexService: IndexService) {
   }
 
   @Get(':pageId')
@@ -31,6 +33,7 @@ export class PageController {
   postPage(@Body() newPage: NewPage) {
     const page = this.registerPage(newPage.documentId, newPage.pageTitle, newPage.pageData)
     this.pageService.postPageFirstNode(page)
+    this.indexService.registerIndex(page)
     return page
   }
 
@@ -46,6 +49,7 @@ export class PageController {
         error: 'ノード追加に失敗しました。'
       },500)
     }
+    this.indexService.registerIndex(page)
 
     return page
   }
@@ -62,26 +66,36 @@ export class PageController {
         error: 'ノード追加に失敗しました。'
       },500)
     }
+    this.indexService.registerIndex(page)
 
     return page
   }
 
   @Put()
-  putPage(@Body() newPage: IPage) {
-    const page = this.pageService.getPage(newPage.pageId)
+  putPage(@Body() updatePage: IPage) {
+    const page = this.pageService.getPage(updatePage.pageId)
     if (!page) {
       throw new HttpException({
         status: HttpStatus.NOT_FOUND,
-        error: `ページが見つかりません。(pageId=${newPage.pageId})`
+        error: `ページが見つかりません。(pageId=${updatePage.pageId})`
       },404)
     }
 
     try {
-      this.pageService.putPage(newPage)
+      this.pageService.putPage(updatePage)
     } catch (e) {
       throw new HttpException({
         status: HttpStatus.INTERNAL_SERVER_ERROR,
-        error: `更新対象ページが見つかりません。(pageId=${newPage.pageId})`
+        error: `更新対象ページが見つかりません。(pageId=${updatePage.pageId})`
+      },500)
+    }
+
+    try {
+      this.indexService.updateIndex(page)
+    } catch (e) {
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: `更新対象インデックスが見つかりません。(pageId=${updatePage.pageId})`
       },500)
     }
   }

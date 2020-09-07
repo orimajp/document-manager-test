@@ -6,9 +6,10 @@ import { PageModule } from './page/page.module';
 import { NodeModule } from './node/node.module';
 import { IdentityModule } from './identity/identity.module';
 import { AssetModule } from './asset/asset.module';
+import { IndexModule } from './index/index.module';
 
 @Module({
-  imports: [DocumentModule, PageModule, NodeModule, IdentityModule, AssetModule],
+  imports: [DocumentModule, PageModule, NodeModule, IdentityModule, AssetModule, IndexModule],
   controllers: [AppController],
   providers: [AppService],
 })

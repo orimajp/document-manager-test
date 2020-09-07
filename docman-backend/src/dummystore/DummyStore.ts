@@ -5,16 +5,20 @@ import { getMarkdownDummyDocument, getMarkdownDummyPages } from '~/dummydata/Mar
 import { getTreeDummyDocument, getTreeDummyPages } from '~/dummydata/TreeDummyDataFactory';
 import { getFileDummyDocument, getFileDummyPages, getFileDummyAssetMap ,existFileData } from '~/dummydata/FileDummyDtaFactory'
 import { Asset } from '~/asset/asset';
+import { Index } from '~/index';
+import { createIndex } from '~/index/IndexFactory';
 
 export class DummyStore {
   private readonly documents: Array<IDocument>
   private readonly pages: Array<IPage>
   private readonly assetMap: Map<string, Asset>
+  private readonly indexMap: Map<string, Index>
   constructor() {
     console.log('DummyStore initialize.')
     this.documents = []
     this.pages = []
     this.assetMap = new Map<string, Asset>()
+    this.indexMap = new Map<string, Index>()
     this.createDummyDocumentData()
     this.createDummyPageData()
     this.createDummyAssetData()
@@ -78,6 +82,37 @@ export class DummyStore {
     return this.assetMap.get(id)
   }
 
+  getIndexList(pageIds: Array<string>): Array<Index> {
+    const indexes = [] as Array<Index>
+
+    for (const pageId of pageIds) {
+      const page = this.pages.find(page => page.pageId === pageId)
+      if (!page) {
+        throw new Error(`ページが見つかりません。 pageId=${pageId}`)
+      }
+      indexes.push(createIndex(page))
+    }
+
+    return indexes
+  }
+
+  registerIndex(pageId: string, index: Index) {
+    const oldIndex = this.indexMap.get(pageId)
+    if (oldIndex) {
+      throw new Error(`インデックスが重複しています。pageId=${pageId}`)
+    }
+    this.indexMap.set(pageId, index)
+  }
+
+  updateIndex(pageId: string, index: Index) {
+    const oldIndex = this.indexMap.get(pageId)
+    if (!oldIndex) {
+      throw new Error(`インデックスが見つかりません。pageId=${pageId}`)
+    }
+    oldIndex.title = index.title
+    oldIndex.body = index.body
+  }
+
   private createDummyDocumentData() {
     this.documents.push(getTreeDummyDocument())
     this.documents.push(getMarkdownDummyDocument())
@@ -89,13 +124,16 @@ export class DummyStore {
   private createDummyPageData() {
     for (const page of getTreeDummyPages()) {
       this.pages.push(page)
+      this.indexMap.set(page.pageId, createIndex(page))
     }
     for (const page of getMarkdownDummyPages()) {
       this.pages.push(page)
+      this.indexMap.set(page.pageId, createIndex(page))
     }
     if (existFileData()) {
       for (const page of getFileDummyPages()) {
         this.pages.push(page)
+        this.indexMap.set(page.pageId, createIndex(page))
       }
     }
   }

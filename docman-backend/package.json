@@ -26,8 +26,10 @@
     "@nestjs/platform-express": "^7.4.4",
     "dayjs": "^1.8.34",
     "reflect-metadata": "^0.1.13",
+    "remark": "^12.0.1",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.2"
+    "rxjs": "^6.6.2",
+    "strip-markdown": "^3.1.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.1",
