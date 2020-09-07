@@ -21,7 +21,7 @@
     "@types/markdown-it": "^10.0.2",
     "@vue/composition-api": "^1.0.0-beta.11",
     "@vueuse/core": "^4.0.0-beta.10",
-    "dayjs": "^1.8.34",
+    "dayjs": "^1.8.35",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.1.2",
     "highlightjs-vue": "^1.0.0",
