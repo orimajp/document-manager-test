@@ -21,6 +21,7 @@ import LinkedPageMapContainer from '~/containers/LinkedPageMapContainer'
 import BreadCrumbListContainer from '~/containers/BreadCrumbListContainer'
 import SnackbarComboContainer from '~/containers/SnackbarComboContainer'
 import SnackbarCombo from '~/components/SnackbarCombo'
+import LunrIndexContainer from '~/containers/LunrIndexContainer'
 
 export default defineComponent({
   components: {
@@ -37,6 +38,7 @@ export default defineComponent({
     LinkedPageMapContainer.provide()
     BreadCrumbListContainer.provide()
     SnackbarComboContainer.provide()
+    LunrIndexContainer.provide()
   }
 })
 </script>

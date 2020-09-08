@@ -16,7 +16,8 @@ export function createIndex(page: IPage): Index {
 }
 
 function createRef(page: IPage) {
-  return `/document/view/${page.pageId}`
+  // return `/document/view/${page.pageId}`
+  return page.pageId
 }
 
 function createBody(page: IPage) {
