@@ -10,6 +10,9 @@
     <div class="pinned-area">
       <v-checkbox v-model="permanent" label="Pinned" dark />
     </div>
+    <div>
+      <document-view-search />
+    </div>
     <div class="link-area">
       <div
         class="document-top-link"
@@ -40,9 +43,11 @@ import DocumentViewTreeContextMenu from '~/components/view/DocumentViewTreeConte
 import { useTreeContextControll } from '~/hooks/view/contextmenu/treeContextMenuControllHook'
 import { useTreeDrawer } from '~/hooks/view/treedrawer/treeDrawerHook'
 import DocumentViewTree from '~/components/view/DocumentViewTree.vue'
+import DocumentViewSearch from '~/components/view/DocumentViewSearch.vue'
 
 export default defineComponent({
   components: {
+    DocumentViewSearch,
     DocumentViewTree,
     DocumentViewTreeContextMenu
   },

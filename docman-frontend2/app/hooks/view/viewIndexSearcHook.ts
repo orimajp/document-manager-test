@@ -38,14 +38,11 @@ export const useViewIndexSearch = () => {
       })
       available.value = true
       console.log('Search Index available.')
-      // console.log(searchIndex.value)
-      const result = serchIndex('テーブル')
-      console.log(result)
     })
   }
 
-  const serchIndex = (str: string) => {
-    if (!available.value || str === '' || str.length < 2) {
+  const searchWord = (str: string) => {
+    if (!available.value || !str || str === '' || str.length < 2) {
       return []
     }
     const lunrResult = searchIndex.value.search(str)
@@ -53,9 +50,8 @@ export const useViewIndexSearch = () => {
   }
 
   return {
-    index: searchIndex,
     available,
     fetchIndex,
-    serchIndex
+    searchWord
   }
 }
