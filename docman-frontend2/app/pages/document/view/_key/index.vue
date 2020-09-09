@@ -35,17 +35,17 @@ export default defineComponent({
 
     // FIXME async/awaitが使えないので無理矢理な処理になっている
 
-    // 検索不可設定
-    available.value = false
-
     fetchPage(pageId).then(() => {
       documentId.value = page.value.documentId
       console.log(`documentID=${documentId.value}`)
 
-      // 検索インデックス取得
-      fetchIndex(documentId.value)
-
       if (documentId.value !== document.value.documentId) {
+        // 検索不可設定
+        available.value = false
+
+        // 検索インデックス取得
+        fetchIndex(documentId.value)
+
         fetchDocument(documentId.value).then(() => {
           const keyArray = document.value.getNestedIdArray(pageId)
           document.value.openChildren(keyArray)
