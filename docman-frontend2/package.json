@@ -42,6 +42,7 @@
     "monaco-editor-webpack-plugin": "^1.9.0",
     "nuxt": "^2.14.4",
     "vue-monaco": "^1.2.1",
+    "vue-text-highlight": "^2.0.10",
     "vue-unstated": "0.0.7",
     "vuedraggable": "^2.24.1"
   },

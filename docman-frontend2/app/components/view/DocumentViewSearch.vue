@@ -26,10 +26,14 @@
         >
           <v-list-item-content>
             <v-list-item-title>
-              {{ item.title }}
+              <text-highlight :queries="queries">
+                {{ item.title }}
+              </text-highlight>
             </v-list-item-title>
             <v-list-item-subtitle>
-              {{ item.body }}
+              <text-highlight :queries="queries">
+                {{ item.body }}
+              </text-highlight>
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -54,7 +58,8 @@ export default defineComponent({
       searchResult,
       existsResult,
       goPage,
-      isSelected
+      isSelected,
+      queries
     } = useViewSearch(props)
 
     return {
@@ -64,7 +69,8 @@ export default defineComponent({
       searchResult,
       existsResult,
       goPage,
-      isSelected
+      isSelected,
+      queries
     }
   }
 })
@@ -75,10 +81,10 @@ export default defineComponent({
   font-size: 14px;
 }
 .search-box {
-  margin-left: 4px;
+  margin-left: 5px;
   margin-right: 4px;
 }
 .selectedItem {
-  background-color: #81d4fa;
+  background-color: #b3e5fc;
 }
 </style>

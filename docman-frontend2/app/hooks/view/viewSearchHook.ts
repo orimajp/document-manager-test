@@ -30,10 +30,11 @@ export const useViewSearch = (props: ViewSearchProps) => {
     router.push(path)
   }
 
-  const isSelected = (id: string) => {
-    console.log(`pageId=${props.pageId}`)
-    return id === props.pageId
-  }
+  const isSelected = (id: string) => id === props.pageId
+
+  const queries = computed(() =>
+    searchKeyword.value ? [searchKeyword.value] : []
+  )
 
   return {
     available,
@@ -43,6 +44,7 @@ export const useViewSearch = (props: ViewSearchProps) => {
     searchResult,
     existsResult,
     goPage,
-    isSelected
+    isSelected,
+    queries
   }
 }

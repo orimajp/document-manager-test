@@ -62,7 +62,7 @@ const nuxtConfig: NuxtConfig = {
    ** https://nuxtjs.org/guide/plugins
    */
   // plugins: ['~/plugins/composition-api.ts', '~/plugins/vuetify.ts'],
-  plugins: ['~/plugins/composition-api.ts'],
+  plugins: ['~/plugins/composition-api.ts', '~/plugins/vue-text-highlight.ts'],
   // plugins: ['~/plugins/vuetify.ts'],
   /*
    ** Auto import components
