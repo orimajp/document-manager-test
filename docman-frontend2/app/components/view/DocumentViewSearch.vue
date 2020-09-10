@@ -85,6 +85,6 @@ export default defineComponent({
   margin-right: 4px;
 }
 .selectedItem {
-  background-color: #b3e5fc;
+  background-color: #bbdefb;
 }
 </style>
