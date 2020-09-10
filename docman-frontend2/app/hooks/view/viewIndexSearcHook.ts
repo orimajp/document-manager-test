@@ -7,6 +7,11 @@ require('lunr-languages/lunr.stemmer.support.js')(lunr)
 require('lunr-languages/tinyseg.js')(lunr)
 require('lunr-languages/lunr.ja.js')(lunr)
 
+const getElapsedTime = (start: Date): number => {
+  const end = new Date()
+  return end.getTime() - start.getTime()
+}
+
 // https://koirand.github.io/blog/2018/pulp-search/
 // https://koirand.github.io/blog/2018/pulp-search2/
 // https://blog.kozakana.net/2019/03/lunr-node/
@@ -23,6 +28,7 @@ export const useViewIndexSearch = () => {
 
   const fetchIndex = (documentId: string) => {
     console.log('fetchIndex(): called.')
+    const start = new Date()
     getIndexList(documentId).then((list) => {
       pageIndex.value = list
       searchIndex.value = lunr((builder: Builder) => {
@@ -38,7 +44,7 @@ export const useViewIndexSearch = () => {
         }
       })
       available.value = true
-      console.log('Search Index available.')
+      console.log(`Search Index available. time=${getElapsedTime(start)}ms`)
     })
   }
 

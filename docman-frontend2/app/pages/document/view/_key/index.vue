@@ -43,14 +43,13 @@ export default defineComponent({
         // 検索不可設定
         available.value = false
 
-        // 検索インデックス取得
-        fetchIndex(documentId.value)
-
         fetchDocument(documentId.value).then(() => {
           const keyArray = document.value.getNestedIdArray(pageId)
           document.value.openChildren(keyArray)
           initializePageMap(document.value as DocumentData) // FIXME 何故かエラーになるので無理矢理型を合わせている
           setPageIdList(keyArray)
+          // 検索インデックス取得
+          fetchIndex(documentId.value)
         })
         return
       }
