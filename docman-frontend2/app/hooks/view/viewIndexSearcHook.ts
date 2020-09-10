@@ -28,7 +28,8 @@ export const useViewIndexSearch = () => {
       searchIndex.value = lunr((builder: Builder) => {
         builder.pipeline.reset()
         builder.ref('ref')
-        builder.field('title', { boost: 10 })
+        // builder.field('title', { boost: 10 })
+        builder.field('title')
         builder.field('body')
         builder.use(lunr.ja)
         builder.metadataWhitelist = ['position']

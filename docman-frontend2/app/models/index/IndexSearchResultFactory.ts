@@ -22,15 +22,16 @@ const createSearchResult = (
 ): IndexSearchResult => {
   const title = result.title
   const path = createPath(result.ref)
-  const temp = result.body.substring(bodyStartPosition, BODY_LENGTH)
+  const temp = result.body.substr(bodyStartPosition, BODY_LENGTH)
   const body = md.utils.escapeHtml(temp)
-  return new IndexSearchResult(path, title, body)
+  return new IndexSearchResult(result.ref, path, title, body)
 }
 
 export function createIndexSearchResult(
   lunrResult: Index.Result[],
   pageIndex: Array<IIndex>
 ): Array<IndexSearchResult> {
+  console.log('createIndexSearchResult(): called.')
   const results = lunrResult.map((result) => {
     return pageIndex.filter((page) => {
       return page.ref === result.ref
@@ -49,6 +50,8 @@ export function createIndexSearchResult(
     const searchResult = createSearchResult(result, bodyStartPosition)
     searchResults.push(searchResult)
   })
+
+  console.log(`${searchResults.length}件ヒット`)
 
   return searchResults
 }

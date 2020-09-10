@@ -11,7 +11,7 @@
       <v-checkbox v-model="permanent" label="Pinned" dark />
     </div>
     <div>
-      <document-view-search />
+      <document-view-search :page-id="pageId" />
     </div>
     <div class="link-area">
       <div
@@ -56,6 +56,7 @@ export default defineComponent({
 
     const {
       documentId,
+      pageId,
       currentNode,
       pageIdArray,
       documentSelected,
@@ -93,7 +94,8 @@ export default defineComponent({
       contextMenuParam,
       // ドロワ制御
       drawer,
-      permanent
+      permanent,
+      pageId
     }
   }
 })

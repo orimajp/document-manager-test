@@ -3,7 +3,11 @@ import { IndexSearchResult } from '~/models/index/IndexSearchResult'
 import { useViewIndexSearch } from '~/hooks/view/viewIndexSearcHook'
 import { useRouter } from '~/hooks/useRouter'
 
-export const useViewSearch = () => {
+export interface ViewSearchProps {
+  pageId: string
+}
+
+export const useViewSearch = (props: ViewSearchProps) => {
   const { available, searchWord } = useViewIndexSearch()
   const searchKeyword = ref('')
   const searchResult = ref<Array<IndexSearchResult>>([])
@@ -17,18 +21,28 @@ export const useViewSearch = () => {
 
   const existsResult = computed(() => searchResult.value.length !== 0)
   const searchDisabled = computed(() => !available.value)
+  const placeholder = computed(() =>
+    searchDisabled.value ? '準備中…' : '検索'
+  )
 
   const { router } = useRouter()
   const goPage = (path: string) => {
     router.push(path)
   }
 
+  const isSelected = (id: string) => {
+    console.log(`pageId=${props.pageId}`)
+    return id === props.pageId
+  }
+
   return {
     available,
     searchDisabled,
+    placeholder,
     searchKeyword,
     searchResult,
     existsResult,
-    goPage
+    goPage,
+    isSelected
   }
 }
