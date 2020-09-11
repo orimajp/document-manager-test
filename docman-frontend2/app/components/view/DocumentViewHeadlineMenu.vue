@@ -6,21 +6,18 @@
     absolute
     offset-y
   >
-    <v-list>
-      <v-list-item class="menu-item" dense>
-        <v-list-item-title @click="copyUrl">
-          ハッシュ付きURLをクリップボードにコピー
+    <v-list dense>
+      <v-subheader>クリップボードにコピー</v-subheader>
+      <v-list-item class="menu-item" dense @click="copyUrl">
+        <v-list-item-title>ハッシュ付きURL</v-list-item-title>
+      </v-list-item>
+      <v-list-item class="menu-item" dense @click="copyMarkdownPath">
+        <v-list-item-title>
+          ハッシュ付きパスリンク(Markdown形式)
         </v-list-item-title>
       </v-list-item>
-      <v-list-item class="menu-item" dense>
-        <v-list-item-title @click="copyMarkdownPath">
-          ハッシュ付きパスをMarkdown形式でクリップボードにコピー
-        </v-list-item-title>
-      </v-list-item>
-      <v-list-item class="menu-item" dense>
-        <v-list-item-title @click="copyMarkdownHash">
-          ハッシュをMarkdown形式でクリップボードにコピー
-        </v-list-item-title>
+      <v-list-item class="menu-item" dense @click="copyMarkdownHash">
+        <v-list-item-title>ハッシュリンク(Markdown形式)</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-menu>
