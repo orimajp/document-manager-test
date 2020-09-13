@@ -14,7 +14,7 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
-    "@vueuse/core": "^4.0.0-beta.10",
+    "@vueuse/core": "^4.0.0-beta.11",
     "nuxt": "^2.14.5",
     "nuxt-composition-api": "^0.11.0",
     "vue-unstated": "0.0.7"
@@ -28,7 +28,7 @@
     "@nuxtjs/vuetify": "^1.11.2",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.2",
-    "eslint": "^7.8.1",
+    "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": ">=1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
