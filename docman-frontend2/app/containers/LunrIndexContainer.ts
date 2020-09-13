@@ -7,7 +7,8 @@ const useLunrIndex = () => {
   const state = reactive({
     searchIndex: {} as lunr.Index,
     pageIndex: [] as Array<IIndex>,
-    available: false
+    available: false,
+    searchKeyword: ''
   })
 
   return {

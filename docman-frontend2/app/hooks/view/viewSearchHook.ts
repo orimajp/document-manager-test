@@ -8,8 +8,7 @@ export interface ViewSearchProps {
 }
 
 export const useViewSearch = (props: ViewSearchProps) => {
-  const { available, searchWord } = useViewIndexSearch()
-  const searchKeyword = ref('')
+  const { available, searchWord, searchKeyword } = useViewIndexSearch()
   const searchResult = ref<Array<IndexSearchResult>>([])
 
   watch(

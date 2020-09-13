@@ -2,9 +2,13 @@ import { Builder } from 'lunr'
 import LunrIndexContainer from '~/containers/LunrIndexContainer'
 import { useIndexApi } from '~/hooks/indexApiHook'
 import { createIndexSearchResult } from '~/models/index/IndexSearchResultFactory'
+// @ts-ignore
 const lunr = require('lunr')
+// @ts-ignore
 require('lunr-languages/lunr.stemmer.support.js')(lunr)
+// @ts-ignore
 require('lunr-languages/tinyseg.js')(lunr)
+// @ts-ignore
 require('lunr-languages/lunr.ja.js')(lunr)
 
 const getElapsedTime = (start: Date): number => {
@@ -22,7 +26,8 @@ export const useViewIndexSearch = () => {
   const {
     searchIndex,
     pageIndex,
-    available
+    available,
+    searchKeyword
   } = LunrIndexContainer.useContainer()
   const { getIndexList } = useIndexApi()
 
@@ -58,6 +63,7 @@ export const useViewIndexSearch = () => {
 
   return {
     available,
+    searchKeyword,
     fetchIndex,
     searchWord
   }

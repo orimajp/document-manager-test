@@ -2,13 +2,17 @@
   <v-main>
     <v-container fluid>
       <document-view-bread-crumb-list class="bread-crumb-block" />
-      <div ref="viewer">
-        <h1 class="document-title">{{ pageTitle }}</h1>
+      <div>
+        <h1 class="document-title">
+          <text-highlight :queries="queries">
+            {{ pageTitle }}
+          </text-highlight>
+        </h1>
         <div class="markdown-content">
           <div class="date-data">作成 {{ createdDateTime }}</div>
           <div class="date-data">更新 {{ updatedDateTime }}</div>
         </div>
-        <div class="markdown-body">
+        <div ref="viewer" class="markdown-body">
           <div v-html="$md.render(pageData)" />
         </div>
       </div>
@@ -23,6 +27,7 @@
 
 <script lang="ts">
 import {
+  computed,
   defineComponent,
   nextTick,
   onMounted,
@@ -39,6 +44,8 @@ import DocumentViewNavigation from '~/components/view/DocumentViewNavigation.vue
 import DocumentViewBreadCrumbList from '~/components/view/DocumentViewBreadCrumbList'
 import { headlineMenuControllHook } from '~/hooks/view/headlinmenu/headlineMenuControllHook'
 import DocumentViewHeadlineMenu from '~/components/view/DocumentViewHeadlineMenu.vue'
+import { useViewIndexSearch } from '~/hooks/view/viewIndexSearcHook'
+import { useViewContentHeighlight } from '~/hooks/view/viewContentHeighlightHook'
 
 export default defineComponent({
   components: {
@@ -69,6 +76,17 @@ export default defineComponent({
     const viewer = ref(null) as Ref<HTMLElement | null> // ref=viewer相当
     useCollectHeadline(props, viewer, addClickListener, removeClickListener)
 
+    const { searchKeyword } = useViewIndexSearch()
+    const queries = computed(() =>
+      searchKeyword.value ? [searchKeyword.value] : []
+    )
+
+    // 本文に対する検索文字強調表示
+    const { updateContentHeighlight } = useViewContentHeighlight(
+      viewer,
+      searchKeyword
+    )
+
     const { addNavigateListener, removeNavigateListener } = useNavigate()
 
     // FIXME addNavigateListener()の実行が空振ってしまうので無理矢理タイマで待ち合わせる
@@ -76,6 +94,7 @@ export default defineComponent({
       window.setTimeout(() => {
         nextTick(() => {
           addNavigateListener(viewer)
+          updateContentHeighlight()
           goHash()
         })
       }, 200)
@@ -92,6 +111,7 @@ export default defineComponent({
       pageData,
       createdDateTime,
       updatedDateTime,
+      queries,
       // headline menu
       headlineMenuParam,
       closeHeadlineMenu
@@ -108,5 +128,9 @@ export default defineComponent({
 .navigation {
   margin-top: 40px;
   margin-bottom: 80px;
+}
+.text-heighlight {
+  background: #fc0;
+  border-radius: 3px;
 }
 </style>
