@@ -252,3 +252,8 @@ div.notices.warning-style {
   color: lightgray;
   font-size: 14px;
 }
+
+.markdown-body img {
+  border: solid 1px lightgray;
+  border-radius: 0.5em;
+}
