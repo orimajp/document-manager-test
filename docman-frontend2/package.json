@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@liradb2000/markdown-it-mermaid": "^0.4.1",
-    "@nuxt/types": "^2.14.5",
+    "@nuxt/types": "^2.14.6",
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/markdownit": "^1.2.10",
@@ -21,8 +21,8 @@
     "@types/lunr": "^2.3.3",
     "@types/markdown-it": "^10.0.2",
     "@vue/composition-api": "^1.0.0-beta.14",
-    "@vueuse/core": "^4.0.0-beta.11",
-    "dayjs": "^1.8.35",
+    "@vueuse/core": "^4.0.0-beta.16",
+    "dayjs": "^1.8.36",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.2.0",
     "highlightjs-vue": "^1.0.0",
@@ -39,15 +39,15 @@
     "markdown-it-sanitizer": "^0.4.3",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-video": "^0.6.3",
-    "monaco-editor-webpack-plugin": "^1.9.0",
-    "nuxt": "^2.14.5",
+    "monaco-editor-webpack-plugin": "^1.9.1",
+    "nuxt": "^2.14.6",
     "vue-monaco": "^1.2.1",
     "vue-text-highlight": "^2.0.10",
-    "vue-unstated": "0.0.7",
+    "vue-unstated": "0.1.2",
     "vuedraggable": "^2.24.1"
   },
   "devDependencies": {
-    "@mdi/font": "^5.5.55",
+    "@mdi/font": "^5.6.55",
     "@nuxt/typescript-build": "^2.0.3",
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-config-typescript": "^3.0.0",
@@ -59,6 +59,6 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.1.1"
+    "prettier": "^2.1.2"
   }
 }
