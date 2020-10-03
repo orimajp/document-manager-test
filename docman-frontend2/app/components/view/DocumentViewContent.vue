@@ -81,13 +81,15 @@ export default defineComponent({
       searchKeyword.value ? [searchKeyword.value] : []
     )
 
+    const { addNavigateListener, removeNavigateListener } = useNavigate()
+
     // 本文に対する検索文字強調表示
     const { updateContentHeighlight } = useViewContentHeighlight(
       viewer,
-      searchKeyword
+      searchKeyword,
+      addNavigateListener,
+      removeNavigateListener
     )
-
-    const { addNavigateListener, removeNavigateListener } = useNavigate()
 
     // FIXME addNavigateListener()の実行が空振ってしまうので無理矢理タイマで待ち合わせる
     onMounted(() => {

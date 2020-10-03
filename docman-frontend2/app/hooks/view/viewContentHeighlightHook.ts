@@ -5,15 +5,30 @@ import { Ref, watch } from '@vue/composition-api'
 // https://stackoverflow.com/questions/56724344/get-inner-html-of-parent-but-ignore-a-child-class/56724399
 export const useViewContentHeighlight = (
   viewer: Ref<HTMLElement | null>,
-  searchKeyword: Ref<string>
+  searchKeyword: Ref<string>,
+  addNavigateListener: (viewer: Ref<HTMLElement | null>) => void,
+  removeNavigateListener: () => void
 ) => {
+  /**
+   * コンテンツハイライト処理前後で、ナビゲートリスナの削除、追加を行い、リンクに対するハンドラメソッドの再設定を行う
+   */
+
   watch(
     () => viewer.value,
     () => {
       if (!searchKeyword.value || searchKeyword.value.length < 2) {
+        // ナビゲートリスナー削除
+        removeNavigateListener()
+
+        // コンテンツハイライトリセット
         resetContentHeighlight()
+
+        // ナビゲートリスナー追加
+        addNavigateListener(viewer)
         return
       }
+
+      // コンテンツハイライト更新
       updateContentHeighlight()
     }
   )
@@ -22,15 +37,27 @@ export const useViewContentHeighlight = (
     () => searchKeyword.value,
     () => {
       if (!searchKeyword.value || searchKeyword.value.length < 2) {
+        // ナビゲートリスナー削除
+        removeNavigateListener()
+
+        // コンテンツハイライトリセット
         resetContentHeighlight()
+
+        // ナビゲートリスナー追加
+        addNavigateListener(viewer)
         return
       }
+
+      // コンテンツハイライト更新
       updateContentHeighlight()
     }
   )
 
   let targets: NodeListOf<HTMLElement>
 
+  /**
+   * コンテンツハイライト更新
+   */
   const updateContentHeighlight = () => {
     console.log('updateContentHeighlight(): called.')
     if (
@@ -46,6 +73,10 @@ export const useViewContentHeighlight = (
       ':not(pre), :not(code)'
     )
 
+    // ナビゲートリスナー削除
+    removeNavigateListener()
+
+    // コンテンツハイライトリセット
     resetContentHeighlight()
 
     const regexp = new RegExp(
@@ -61,8 +92,14 @@ export const useViewContentHeighlight = (
         )
       })
     })
+
+    // ナビゲートリスナー追加
+    addNavigateListener(viewer)
   }
 
+  /**
+   * コンテンツハイライトリセット
+   */
   const resetContentHeighlight = () => {
     if (!targets) {
       return
