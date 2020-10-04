@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <v-row>
-      <v-col cols="12" sm="12">
+      <v-col cols="12" sm="10">
         <v-text-field
           v-model="searchKeyword"
           :placeholder="placeholder"
@@ -10,10 +10,21 @@
           dense
           clearable
           :disabled="searchDisabled"
-          :hide-details="true"
+          hide-details
           background-color="grey lighten-2"
           class="search-text"
         />
+      </v-col>
+      <v-col cols="12" sm="2">
+        <div class="pinned-area">
+          <v-checkbox
+            v-model="permanent"
+            on-icon="mdi-pin"
+            off-icon="mdi-pin-off"
+            dark
+            hide-details
+          />
+        </div>
       </v-col>
     </v-row>
     <v-list v-if="existsResult" dense three-line color="grey lighten-2">
@@ -52,6 +63,7 @@ export default defineComponent({
   },
   setup(props: ViewSearchProps) {
     const {
+      permanent,
       searchDisabled,
       searchKeyword,
       placeholder,
@@ -63,6 +75,7 @@ export default defineComponent({
     } = useViewSearch(props)
 
     return {
+      permanent,
       searchDisabled,
       searchKeyword,
       placeholder,
@@ -79,6 +92,10 @@ export default defineComponent({
 <style scoped>
 .search-text {
   font-size: 14px;
+}
+.pinned-area {
+  margin-top: -12px;
+  margin-left: -12px;
 }
 .search-box {
   margin-left: 5px;

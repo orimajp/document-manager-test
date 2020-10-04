@@ -11,7 +11,7 @@ import { useRouter } from '~/hooks/useRouter'
 import LinkedPageMapContainer from '~/containers/LinkedPageMapContainer'
 import { DocumentData } from '~/models/document/DocumentData'
 import BreadCrumbListContainer from '~/containers/BreadCrumbListContainer'
-import { useViewIndexSearch } from '~/hooks/view/viewIndexSearcHook'
+import { useViewIndexSearch } from '~/hooks/view/viewIndexSearchHook'
 
 export default defineComponent({
   layout: 'viewer',

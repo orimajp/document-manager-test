@@ -44,7 +44,7 @@ import DocumentViewNavigation from '~/components/view/DocumentViewNavigation.vue
 import DocumentViewBreadCrumbList from '~/components/view/DocumentViewBreadCrumbList'
 import { headlineMenuControllHook } from '~/hooks/view/headlinmenu/headlineMenuControllHook'
 import DocumentViewHeadlineMenu from '~/components/view/DocumentViewHeadlineMenu.vue'
-import { useViewIndexSearch } from '~/hooks/view/viewIndexSearcHook'
+import { useViewIndexSearch } from '~/hooks/view/viewIndexSearchHook'
 import { useViewContentHeighlight } from '~/hooks/view/viewContentHeighlightHook'
 
 export default defineComponent({

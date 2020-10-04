@@ -7,9 +7,6 @@
     clipped
     color="secondary"
   >
-    <div class="pinned-area">
-      <v-checkbox v-model="permanent" label="Pinned" dark />
-    </div>
     <div>
       <document-view-search :page-id="pageId" />
     </div>

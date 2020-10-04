@@ -1,13 +1,15 @@
 import { computed, ref, watch } from '@vue/composition-api'
 import { IndexSearchResult } from '~/models/index/IndexSearchResult'
-import { useViewIndexSearch } from '~/hooks/view/viewIndexSearcHook'
+import { useViewIndexSearch } from '~/hooks/view/viewIndexSearchHook'
 import { useRouter } from '~/hooks/useRouter'
+import DrawerContainer from '~/containers/DrawerContainer'
 
 export interface ViewSearchProps {
   pageId: string
 }
 
 export const useViewSearch = (props: ViewSearchProps) => {
+  const { permanent } = DrawerContainer.useContainer()
   const { available, searchWord, searchKeyword } = useViewIndexSearch()
   const searchResult = ref<Array<IndexSearchResult>>([])
 
@@ -36,6 +38,7 @@ export const useViewSearch = (props: ViewSearchProps) => {
   )
 
   return {
+    permanent,
     available,
     searchDisabled,
     placeholder,
