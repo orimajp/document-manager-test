@@ -212,7 +212,8 @@ const pages:Array<IPage> = [
     pageTitle: 'マークダウン:md-page0',
     pageData: pageData,
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   }
 ]
 
@@ -227,7 +228,8 @@ const document: IDocument = {
   documentTitle: pages[0].pageTitle,
   node: node,
   createdAt: pages[0].createdAt,
-  updatedAt: pages[0].updatedAt
+  updatedAt: pages[0].updatedAt,
+  version: 0
 }
 
 export function getMarkdownDummyDocument(): IDocument {

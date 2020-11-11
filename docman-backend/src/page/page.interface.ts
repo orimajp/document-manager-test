@@ -5,4 +5,5 @@ export interface IPage {
   pageData: string
   createdAt: string // FIXME Date型は型定義されていない
   updatedAt: string // FIXME Date型は型定義されていない
+  version: number
 }

@@ -15,7 +15,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ0のタイトル(ツリーテスト)',
     pageData: 'ページ0のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -23,7 +24,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ1のタイトル',
     pageData: 'ページ1のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -31,7 +33,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ2のタイトル',
     pageData: 'ページ2のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -39,7 +42,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ3のタイトル',
     pageData: 'ページ3のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -47,7 +51,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ4のタイトル',
     pageData: 'ページ4のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -55,7 +60,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ5のタイトル',
     pageData: 'ページ5のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -63,7 +69,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ6のタイトル',
     pageData: 'ページ6のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -71,7 +78,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ7のタイトル',
     pageData: 'ページ7のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -79,7 +87,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ8のタイトル',
     pageData: 'ページ8のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -87,7 +96,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ9のタイトル',
     pageData: 'ページ9のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   },
   {
     documentId: 'page0',
@@ -95,7 +105,8 @@ const pages:Array<IPage> = [
     pageTitle: 'ページ10のタイトル',
     pageData: 'ページ10のデータ',
     createdAt: createDate,
-    updatedAt: updateDate
+    updatedAt: updateDate,
+    version: 0
   }
 ]
 
@@ -164,7 +175,8 @@ const document: IDocument = {
   documentTitle: pages[0].pageTitle,
   node: node,
   createdAt: pages[0].createdAt,
-  updatedAt: pages[0].updatedAt
+  updatedAt: pages[0].updatedAt,
+  version: 0
 }
 
 export function getTreeDummyDocument(): IDocument {

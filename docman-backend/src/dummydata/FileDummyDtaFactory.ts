@@ -85,7 +85,8 @@ function createPageDocument(jsonPage: JsonPage) {
       pageTitle: jsonPage.pageTitle,
       pageData: buf.toString(),
       createdAt: createDate,
-      updatedAt: updateDate
+      updatedAt: updateDate,
+      version: 0
     } as IPage
     pages.push(newPage)
     pageMap.set(newPage.pageId, newPage)
@@ -107,6 +108,7 @@ function createDocument(jsonPage: JsonPage) {
   document.node = node
   document.createdAt = createDate
   document.updatedAt = updateDate
+  document.version = 0
 }
 
 function createAsset(jsonAsset: JsonAsset) {

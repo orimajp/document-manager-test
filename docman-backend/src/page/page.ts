@@ -7,6 +7,7 @@ export class Page implements IPage {
   pageTitle: string;
   createdAt: string;
   updatedAt: string;
+  version: number;
 
   constructor(
     documentId: string,
@@ -14,7 +15,8 @@ export class Page implements IPage {
     pageData: string,
     pageTitle: string,
     createdAt: string,
-    updatedAt: string
+    updatedAt: string,
+    version = 0
   ) {
     this.documentId = documentId
     this.pageId = pageId
@@ -22,5 +24,6 @@ export class Page implements IPage {
     this.pageTitle = pageTitle
     this.createdAt = createdAt
     this.updatedAt = updatedAt
+    this.version = version
   }
 }
