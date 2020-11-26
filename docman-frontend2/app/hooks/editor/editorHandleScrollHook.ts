@@ -9,6 +9,7 @@ import {
 } from '@vue/composition-api'
 import EditScrollHandleContainer from '~/containers/EditScrollHandleContainer'
 import SyncModeContainer from '~/containers/SyncModeContainer'
+// eslint-disable-next-line no-undef
 import IStandaloneCodeEditor = monacoEditor.editor.IStandaloneCodeEditor
 
 export const useEditorHandleScroll = (

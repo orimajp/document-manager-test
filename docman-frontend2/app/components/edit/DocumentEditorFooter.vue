@@ -21,11 +21,11 @@ export default defineComponent({
     const { change } = EditStateContainer.useContainer()
 
     const updateDocument = () => {
-      context.emit('updateDocument')
+      context.emit('update-document')
     }
 
     const cancelDocument = () => {
-      context.emit('cancelDocument')
+      context.emit('cancel-document')
     }
 
     return {

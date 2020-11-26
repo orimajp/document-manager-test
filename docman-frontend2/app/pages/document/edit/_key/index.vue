@@ -13,7 +13,7 @@
           :markdown-data="pageData"
           :edit-mode="true"
           class="fixed-content"
-          @updatePageData="updatePageData"
+          @update-page-data="updatePageData"
         />
       </v-col>
       <v-col
@@ -25,8 +25,8 @@
       </v-col>
     </v-row>
     <document-editor-footer
-      @updateDocument="updateDocumentPage"
-      @cancelDocument="cancelDocumentPage"
+      @update-document="updateDocumentPage"
+      @cancel-document="cancelDocumentPage"
     />
   </div>
 </template>
@@ -46,13 +46,13 @@ import { useUpdateData } from '~/hooks/edit/updateDataHook'
 import { useBeforeUnloadConfirm } from '~/hooks/edit/beforeUnloadConfirmHook'
 
 export default defineComponent({
-  layout: 'editor',
   components: {
     DocumentEditorNavbar,
     MarkdownEditor,
     DocumentPreviewer,
     DocumentEditorFooter
   },
+  layout: 'editor',
   setup() {
     const { route, router } = useRouter()
 

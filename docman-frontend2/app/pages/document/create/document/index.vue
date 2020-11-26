@@ -25,8 +25,8 @@
       </v-col>
     </v-row>
     <document-editor-create-footer
-      @registerDocumentPage="registerDocument"
-      @cancelDocument="cancelDocument"
+      @register-document-page="registerDocument"
+      @cancel-document="cancelDocument"
     />
   </div>
 </template>
@@ -46,13 +46,13 @@ import { useCreateData } from '~/hooks/create/createDataHook'
 import { useBeforeUnloadConfirm } from '~/hooks/edit/beforeUnloadConfirmHook'
 
 export default defineComponent({
-  layout: 'editor',
   components: {
     DocumentEditorNavbar,
     MarkdownEditor,
     DocumentPreviewer,
     DocumentEditorCreateFooter
   },
+  layout: 'editor',
   setup() {
     const { change, savePage } = EditStateContainer.useContainer()
 

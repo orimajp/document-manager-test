@@ -53,6 +53,7 @@ export const useViewContentHeighlight = (
     }
   )
 
+  // eslint-disable-next-line no-undef
   let targets: NodeListOf<HTMLElement>
 
   /**

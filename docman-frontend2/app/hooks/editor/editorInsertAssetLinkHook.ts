@@ -1,7 +1,9 @@
 import * as monacoEditor from 'monaco-editor'
 import { Ref, watch } from '@vue/composition-api'
 import AssetLinkContainer from '~/containers/AssetLinkContainer'
+// eslint-disable-next-line no-undef
 import IStandaloneCodeEditor = monacoEditor.editor.IStandaloneCodeEditor
+// eslint-disable-next-line no-undef
 import IIdentifiedSingleEditOperation = monacoEditor.editor.IIdentifiedSingleEditOperation
 
 const createAssetLinkString = (fileName: string, location: string) => {

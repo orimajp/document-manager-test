@@ -27,6 +27,7 @@ export const useDraggableTree = (
 
   const mouseDown = (e: MouseEvent) => {
     if (e) {
+      // eslint-disable-next-line no-undef
       selectedPageId.value = ((e.target as unknown) as HTMLOrSVGElement).dataset
         .pageId as string
     }

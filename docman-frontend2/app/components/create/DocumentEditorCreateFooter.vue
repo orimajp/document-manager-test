@@ -26,11 +26,11 @@ export default defineComponent({
     const { change } = EditStateContainer.useContainer()
 
     const registerDocumentPage = () => {
-      context.emit('registerDocumentPage')
+      context.emit('register-document-page')
     }
 
     const cancelDocument = () => {
-      context.emit('cancelDocument')
+      context.emit('cancel-document')
     }
 
     return {

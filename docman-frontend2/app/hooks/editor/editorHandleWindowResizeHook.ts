@@ -6,6 +6,7 @@ import {
   Ref,
   watch
 } from '@vue/composition-api'
+// eslint-disable-next-line no-undef
 import IStandaloneCodeEditor = monacoEditor.editor.IStandaloneCodeEditor
 
 export const useEditorHandleWindowResize = (

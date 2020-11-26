@@ -14,7 +14,7 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
-    "@vueuse/core": "^4.0.0-beta.40",
+    "@vueuse/core": "^4.0.0-rc.3",
     "nuxt": "^2.14.7",
     "nuxt-composition-api": "^0.11.0",
     "vue-unstated": "0.1.2"
@@ -22,16 +22,16 @@
   "devDependencies": {
     "@mdi/font": "^5.8.55",
     "@nuxt/typescript-build": "^2.0.3",
-    "@nuxtjs/eslint-config": "^4.0.0",
-    "@nuxtjs/eslint-config-typescript": "^4.0.0",
-    "@nuxtjs/eslint-module": "^3.0.0",
+    "@nuxtjs/eslint-config": "^5.0.0",
+    "@nuxtjs/eslint-config-typescript": "^5.0.0",
+    "@nuxtjs/eslint-module": "^3.0.1",
     "@nuxtjs/vuetify": "^1.11.2",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.2",
-    "eslint": "^7.13.0",
+    "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-nuxt": ">=1.0.0",
+    "eslint-plugin-nuxt": ">=2.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.1.2"
+    "prettier": "^2.2.0"
   }
 }

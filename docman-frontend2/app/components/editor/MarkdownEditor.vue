@@ -34,6 +34,7 @@ import { useEditorHandleScroll } from '~/hooks/editor/editorHandleScrollHook'
 import { useEditorHandleWindowResize } from '~/hooks/editor/editorHandleWindowResizeHook'
 import DarkModeContainer from '~/containers/DarkModeContainer'
 import { useEditorInsertAssetLink } from '~/hooks/editor/editorInsertAssetLinkHook'
+// eslint-disable-next-line no-undef
 import IStandaloneCodeEditor = monacoEditor.editor.IStandaloneCodeEditor
 
 export interface EditorProps {
@@ -66,7 +67,7 @@ export default defineComponent({
     const editData = computed({
       get: () => props.markdownData,
       set: (newValue: string) => {
-        context.emit('updatePageData', newValue)
+        context.emit('update-page-data', newValue)
       }
     })
 

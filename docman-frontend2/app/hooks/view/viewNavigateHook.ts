@@ -17,6 +17,7 @@ export const useNavigate = () => {
   const { router } = useRouter()
   const { getInnerPath } = useInnerPath()
 
+  // eslint-disable-next-line no-undef
   let links = {} as HTMLCollectionOf<HTMLAnchorElement> | undefined
 
   const navigate = (event: Event) => {
