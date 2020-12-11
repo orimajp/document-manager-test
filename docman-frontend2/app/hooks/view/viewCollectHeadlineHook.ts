@@ -1,4 +1,11 @@
-import { onMounted, onUnmounted, ref, Ref, watch } from '@vue/composition-api'
+import {
+  nextTick,
+  onMounted,
+  onUnmounted,
+  ref,
+  Ref,
+  watch
+} from '@vue/composition-api'
 import HeadlineContanier from '~/containers/HeadlineContanier'
 import { createDocumentHeadline } from '~/models/document/factory/DocumentHeadlineFactory'
 import { PageContentProp } from '~/hooks/view/viewContentHook'
@@ -17,7 +24,9 @@ export const useCollectHeadline = (
   const headerArray = ref<Array<HTMLElement>>([])
 
   onMounted(() => {
-    collectHeadLine()
+    nextTick(() => {
+      collectHeadLine()
+    })
   })
 
   onUnmounted(() => {
@@ -30,7 +39,9 @@ export const useCollectHeadline = (
   watch(
     () => props.pageContent,
     () => {
-      collectHeadLine()
+      nextTick(() => {
+        collectHeadLine()
+      })
     }
   )
 
