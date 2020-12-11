@@ -62,22 +62,22 @@ export default defineComponent({
 }
 .headline-2 {
   cursor: pointer;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 .headline-3 {
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 .headline-4 {
   cursor: pointer;
-  margin-left: 15px;
+  margin-left: 30px;
 }
 .headline-5 {
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 40px;
 }
 .headline-6 {
   cursor: pointer;
-  margin-left: 25px;
+  margin-left: 50px;
 }
 </style>
