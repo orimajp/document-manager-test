@@ -17,7 +17,7 @@ export class DocumentsService {
     return this.dbService.getDocumentByDocumentId(documentId);
   }
 
-  async registerDocument(document: NewDocument): Promise<string> {
+  async registerDocument(document: NewDocument): Promise<IDocument | null> {
     return this.dbService.registerDocument(document);
   }
   async updateDocumentNodes(

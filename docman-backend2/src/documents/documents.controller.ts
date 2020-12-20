@@ -39,8 +39,18 @@ export class DocumentsController {
   }
 
   @Post()
-  postDocument(@Body() newDocument: NewDocument) {
-    return this.documentsService.registerDocument(newDocument);
+  async postDocument(@Body() newDocument: NewDocument) {
+    const document = await this.documentsService.registerDocument(newDocument);
+    if (!document) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: `登録したドキュメントが見つかりません。`,
+        },
+        500,
+      );
+    }
+    return document;
   }
 
   @Put(':documentId/nodes')

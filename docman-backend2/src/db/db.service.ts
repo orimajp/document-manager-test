@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { INode } from '../nodes/node.interface';
 import { Asset, collections, Node, Page } from './db';
-import { ObjectID } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import { IDocument } from '../documents/document.interface';
 import { NewDocument } from '../documents/new-document.interface';
 import * as dayjs from 'dayjs';
@@ -35,7 +35,7 @@ export class DbService {
     // https://docs.mongodb.com/manual/reference/operator/query/expr/
     return await collections.pages
       .find<Page>({
-        $expr: { $eq: ['_id', 'documentId'] },
+        $expr: { $eq: ['$_id', '$documentId'] },
       })
       .map((page) => {
         return {
@@ -56,7 +56,7 @@ export class DbService {
     targetDocumentId: string,
   ): Promise<IDocument | null> {
     const page = await collections.pages.findOne<Page>({
-      _id: new ObjectID(targetDocumentId),
+      _id: new ObjectId(targetDocumentId),
     });
     if (!page) {
       return null;
@@ -76,7 +76,7 @@ export class DbService {
    * 新規ドキュメント登録
    * @param document 新規ドキュメント
    */
-  async registerDocument(document: NewDocument): Promise<string> {
+  async registerDocument(document: NewDocument): Promise<IDocument | null> {
     const date = dayjs().format();
     const page: Page = {
       pageTitle: document.documentTitle,
@@ -105,7 +105,7 @@ export class DbService {
     };
     await collections.nodes.insertOne(node);
 
-    return id.toHexString();
+    return this.getDocumentByDocumentId(id.toHexString());
   }
 
   /**
@@ -119,7 +119,7 @@ export class DbService {
   ): Promise<IDocument | null> {
     // ノード更新対象ドキュメント取得
     const page = await collections.pages.findOne<Page>({
-      _id: new ObjectID(documentId),
+      _id: new ObjectId(documentId),
     });
     if (!page) {
       return null;
@@ -130,7 +130,7 @@ export class DbService {
 
     // ノードカーソル取得
     const nodeCursor = await collections.nodes.find({
-      documentId: new ObjectID(documentId),
+      documentId: new ObjectId(documentId),
     });
 
     // 件数比較、違ってたらエラー
@@ -167,7 +167,7 @@ export class DbService {
    */
   async getPage(pageId: string): Promise<IPage | null> {
     const page = await collections.pages.findOne<Page>({
-      _id: new ObjectID(pageId),
+      _id: new ObjectId(pageId),
     });
     if (!page) {
       return null;
@@ -190,7 +190,7 @@ export class DbService {
   async putPage(updatePage: IPage): Promise<void> {
     const date = dayjs().format();
     await collections.pages.updateOne(
-      { _id: new ObjectID(updatePage.pageId) },
+      { _id: new ObjectId(updatePage.pageId) },
       {
         $set: {
           pageTitle: updatePage.pageTitle,
@@ -210,7 +210,7 @@ export class DbService {
     // 別途ノード登録も行う
     const date = dayjs().format();
     const page: Page = {
-      documentId: new ObjectID(newPage.documentId),
+      documentId: new ObjectId(newPage.documentId),
       pageTitle: newPage.pageTitle,
       pageData: newPage.pageData,
       searchData: createSearchData(newPage.pageData),
@@ -237,16 +237,16 @@ export class DbService {
    */
   async postPageFirstNode(page: IPage): Promise<void> {
     const node = await collections.pages.findOne<Node>({
-      _id: new ObjectID(page.documentId),
+      _id: new ObjectId(page.documentId),
     });
     if (!node) {
       throw new Error('ページ未発見');
     }
 
     const nodes = node.nodes;
-    nodes.unshift(new ObjectID(page.pageId));
+    nodes.unshift(new ObjectId(page.pageId));
     await collections.pages.updateOne(
-      { _id: new ObjectID(page.documentId) },
+      { _id: new ObjectId(page.documentId) },
       { $set: { nodes: nodes } },
     );
   }
@@ -261,16 +261,16 @@ export class DbService {
     page: IPage,
   ): Promise<void> {
     const node = await collections.pages.findOne<Node>({
-      _id: new ObjectID(targetPageId),
+      _id: new ObjectId(targetPageId),
     });
     if (!node) {
       throw new Error('ページ未発見');
     }
 
     const nodes = node.nodes;
-    nodes.unshift(new ObjectID(page.pageId));
+    nodes.unshift(new ObjectId(page.pageId));
     await collections.pages.updateOne(
-      { _id: new ObjectID(targetPageId) },
+      { _id: new ObjectId(targetPageId) },
       { $set: { nodes: nodes } },
     );
   }
@@ -285,7 +285,7 @@ export class DbService {
     page: IPage,
   ): Promise<void> {
     const node = await collections.pages.findOne<Node>({
-      _id: new ObjectID(targetPageId),
+      _id: new ObjectId(targetPageId),
     });
     if (!node) {
       throw new Error('ページ未発見');
@@ -297,7 +297,7 @@ export class DbService {
       throw new Error('親ページ未発見');
     }
     const nodes = parentNode.nodes;
-    nodes.concat(new ObjectID(page.pageId));
+    nodes.concat(new ObjectId(page.pageId));
     await collections.pages.updateOne(
       { _id: node.parentId },
       { $set: { nodes: nodes } },
@@ -324,7 +324,7 @@ export class DbService {
    */
   async getAsset(id: string): Promise<Asset | null> {
     const asset = collections.assets.findOne<Asset>({
-      _id: new ObjectID(id),
+      _id: new ObjectId(id),
     });
 
     return asset ? asset : null;
@@ -337,7 +337,7 @@ export class DbService {
   async getIndexList(documentId: string): Promise<Array<IIndex>> {
     return await collections.pages
       .find({
-        _id: new ObjectID(documentId),
+        _id: new ObjectId(documentId),
       })
       .map((page) => {
         return {
@@ -351,12 +351,13 @@ export class DbService {
 }
 
 async function getNodeByDocumentId(documentId: string): Promise<INode | null> {
-  const nodePageMap = new Map<ObjectID, Node & { page: Page }>();
+  const oDocumentId = new ObjectId(documentId);
+  const nodePageMap = new Map<string, Node & { page: Page }>();
 
   await collections.nodes
     .aggregate<Node & { page: Page }>([
       {
-        $match: { documentId: new ObjectID(documentId) },
+        $match: { documentId: oDocumentId },
       },
       {
         $lookup: {
@@ -369,10 +370,12 @@ async function getNodeByDocumentId(documentId: string): Promise<INode | null> {
     ])
     .toArray()
     .then((nodePages) => {
-      nodePages.forEach((nodePage) => nodePageMap.set(nodePage._id, nodePage));
+      nodePages.forEach((nodePage) =>
+        nodePageMap.set(nodePage._id.toHexString(), nodePage),
+      );
     });
 
-  const documentNode = nodePageMap.get(new ObjectID(documentId));
+  const documentNode = nodePageMap.get(documentId);
   if (!documentNode) {
     return null;
   }
@@ -381,11 +384,11 @@ async function getNodeByDocumentId(documentId: string): Promise<INode | null> {
 
 function toINode(
   targetNode: Node & { page: Page },
-  map: Map<ObjectID, Node & { page: Page }>,
+  map: Map<string, Node & { page: Page }>,
 ): INode {
   const returnINode = {
     pageId: targetNode._id.toHexString(),
-    pageTitle: targetNode.page.pageTitle,
+    pageTitle: targetNode.page[0].pageTitle,
     nodes: [],
   };
 
@@ -394,10 +397,12 @@ function toINode(
   }
 
   for (const id of targetNode.nodes) {
-    const node = map.get(id);
+    const node = map.get(id.toHexString());
     const iNode = toINode(node, map);
     returnINode.nodes.push(iNode);
   }
+
+  return returnINode;
 }
 
 function createSearchData(pageData: string): string {
@@ -423,10 +428,10 @@ function updateNodeList(
     if (!modifyNode) {
       throw new Error('更新ノード不一致');
     }
-    node.parentId = new ObjectID(modifyNode.parentId);
+    node.parentId = new ObjectId(modifyNode.parentId);
     const nodes = [];
     modifyNode.nodes.forEach((childId) => {
-      nodes.push(new ObjectID(childId));
+      nodes.push(new ObjectId(childId));
     });
     node.nodes = nodes;
   });
