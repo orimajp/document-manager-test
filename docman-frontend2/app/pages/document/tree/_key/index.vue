@@ -11,8 +11,8 @@
       </v-container>
     </v-main>
     <document-tree-editor-footer
-      @register-tree="registerTreeData"
-      @cancel-tree="cancelTreeData"
+      @registerTree="registerTreeData"
+      @cancelTree="cancelTreeData"
     />
   </div>
 </template>

@@ -67,7 +67,8 @@ export default defineComponent({
     const editData = computed({
       get: () => props.markdownData,
       set: (newValue: string) => {
-        context.emit('update-page-data', newValue)
+        // eslint-disable-next-line vue/custom-event-name-casing
+        context.emit('updatePageData', newValue)
       }
     })
 

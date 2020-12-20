@@ -26,11 +26,13 @@ export default defineComponent({
     const { change } = EditStateContainer.useContainer()
 
     const registerDocumentPage = () => {
-      context.emit('register-document-page')
+      // eslint-disable-next-line vue/custom-event-name-casing
+      context.emit('registerDocumentPage')
     }
 
     const cancelDocument = () => {
-      context.emit('cancel-document')
+      // eslint-disable-next-line vue/custom-event-name-casing
+      context.emit('cancelDocument')
     }
 
     return {

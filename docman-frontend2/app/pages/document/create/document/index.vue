@@ -25,8 +25,8 @@
       </v-col>
     </v-row>
     <document-editor-create-footer
-      @register-document-page="registerDocument"
-      @cancel-document="cancelDocument"
+      @registerDocumentPage="registerDocument"
+      @cancelDocument="cancelDocument"
     />
   </div>
 </template>

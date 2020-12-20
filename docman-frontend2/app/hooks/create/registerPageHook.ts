@@ -1,5 +1,6 @@
 import { useRouter } from '~/hooks/useRouter'
 import { usePage } from '~/hooks/usePage'
+import { useDocument } from '~/hooks/useDocument'
 
 export const useRegisterPage = (openDialog: (pageId: string) => void) => {
   const { router } = useRouter()
@@ -9,6 +10,7 @@ export const useRegisterPage = (openDialog: (pageId: string) => void) => {
     registerPagePrevendChild,
     registerPageAppendNext
   } = usePage()
+  const { getDocument } = useDocument()
 
   const goNewPage = (pageId: string) => {
     router.push(`/document/view/${pageId}`)
@@ -19,8 +21,15 @@ export const useRegisterPage = (openDialog: (pageId: string) => void) => {
     pageTitle: string,
     pageData: string
   ) => {
-    registerPage(documentId, pageTitle, pageData).then((newPage) => {
-      openDialog(newPage.pageId)
+    getDocument(documentId).then((document) => {
+      const firstPage = document.node.nodes.length === 0
+      registerPage(documentId, pageTitle, pageData).then((newPage) => {
+        if (firstPage) {
+          goNewPage(newPage.pageId)
+          return
+        }
+        openDialog(newPage.pageId)
+      })
     })
   }
 

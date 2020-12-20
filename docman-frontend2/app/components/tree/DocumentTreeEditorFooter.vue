@@ -15,8 +15,10 @@ import { defineComponent, SetupContext } from '@vue/composition-api'
 
 export default defineComponent({
   setup(_, context: SetupContext) {
-    const registerTree = () => context.emit('register-tree')
-    const cancelTree = () => context.emit('cancel-tree')
+    // eslint-disable-next-line vue/custom-event-name-casing
+    const registerTree = () => context.emit('registerTree')
+    // eslint-disable-next-line vue/custom-event-name-casing
+    const cancelTree = () => context.emit('cancelTree')
 
     return {
       registerTree,

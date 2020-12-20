@@ -13,7 +13,7 @@
           :markdown-data="pageData"
           :edit-mode="true"
           class="fixed-content"
-          @update-page-data="updatePageData"
+          @updatePageData="updatePageData"
         />
       </v-col>
       <v-col
@@ -25,8 +25,8 @@
       </v-col>
     </v-row>
     <document-editor-footer
-      @update-document="updateDocumentPage"
-      @cancel-document="cancelDocumentPage"
+      @updateDocument="updateDocumentPage"
+      @cancelDocument="cancelDocumentPage"
     />
   </div>
 </template>

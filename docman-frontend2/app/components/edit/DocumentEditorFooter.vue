@@ -21,11 +21,13 @@ export default defineComponent({
     const { change } = EditStateContainer.useContainer()
 
     const updateDocument = () => {
-      context.emit('update-document')
+      // eslint-disable-next-line vue/custom-event-name-casing
+      context.emit('updateDocument')
     }
 
     const cancelDocument = () => {
-      context.emit('cancel-document')
+      // eslint-disable-next-line vue/custom-event-name-casing
+      context.emit('cancelDocument')
     }
 
     return {
