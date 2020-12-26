@@ -207,20 +207,22 @@ export class DbService {
    * @param newPage 新規ページ
    */
   async registerPage(newPage: NewPage): Promise<IPage> {
-    // 別途ノード登録も行う
+    const oDocumentId = new ObjectId(newPage.documentId);
     const date = dayjs().format();
     const page: Page = {
-      documentId: new ObjectId(newPage.documentId),
+      documentId: oDocumentId,
       pageTitle: newPage.pageTitle,
       pageData: newPage.pageData,
       searchData: createSearchData(newPage.pageData),
       createdAt: date,
       updatedAt: date,
     };
+
     const result = await collections.pages.insertOne(page);
     const createdPage = await collections.pages.findOne<Page>({
       _id: result.insertedId,
     });
+
     return {
       pageId: result.insertedId.toHexString(),
       documentId: createdPage.documentId.toHexString(),
@@ -236,19 +238,29 @@ export class DbService {
    * @param page ページ
    */
   async postPageFirstNode(page: IPage): Promise<void> {
-    const node = await collections.pages.findOne<Node>({
-      _id: new ObjectId(page.documentId),
+    const oDocumentId = new ObjectId(page.documentId);
+    const node = await collections.nodes.findOne<Node>({
+      _id: oDocumentId,
     });
     if (!node) {
       throw new Error('ページ未発見');
     }
 
     const nodes = node.nodes;
-    nodes.unshift(new ObjectId(page.pageId));
-    await collections.pages.updateOne(
-      { _id: new ObjectId(page.documentId) },
+    const oPageId = new ObjectId(page.pageId);
+    nodes.unshift(oPageId);
+    await collections.nodes.updateOne(
+      { _id: oDocumentId },
       { $set: { nodes: nodes } },
     );
+
+    const newNode: Node = {
+      _id: oPageId,
+      documentId: oDocumentId,
+      parentId: oDocumentId,
+      nodes: [],
+    };
+    await collections.nodes.insertOne(newNode);
   }
 
   /**
@@ -260,19 +272,30 @@ export class DbService {
     targetPageId: string,
     page: IPage,
   ): Promise<void> {
-    const node = await collections.pages.findOne<Node>({
-      _id: new ObjectId(targetPageId),
+    const oTargetPageId = new ObjectId(targetPageId);
+    const node = await collections.nodes.findOne<Node>({
+      _id: oTargetPageId,
     });
     if (!node) {
       throw new Error('ページ未発見');
     }
 
     const nodes = node.nodes;
-    nodes.unshift(new ObjectId(page.pageId));
-    await collections.pages.updateOne(
-      { _id: new ObjectId(targetPageId) },
+    const oPageId = new ObjectId(page.pageId);
+    nodes.unshift(oPageId);
+    await collections.nodes.updateOne(
+      { _id: oTargetPageId },
       { $set: { nodes: nodes } },
     );
+
+    const oDocumentId = new ObjectId(page.documentId);
+    const newNode: Node = {
+      _id: oPageId,
+      documentId: oDocumentId,
+      parentId: oTargetPageId,
+      nodes: [],
+    };
+    await collections.nodes.insertOne(newNode);
   }
 
   /**
@@ -284,24 +307,37 @@ export class DbService {
     targetPageId: string,
     page: IPage,
   ): Promise<void> {
-    const node = await collections.pages.findOne<Node>({
-      _id: new ObjectId(targetPageId),
+    const oTargetPageId = new ObjectId(targetPageId);
+    const node = await collections.nodes.findOne<Node>({
+      _id: oTargetPageId,
     });
     if (!node) {
       throw new Error('ページ未発見');
     }
-    const parentNode = await collections.pages.findOne<Node>({
+
+    const parentNode = await collections.nodes.findOne<Node>({
       _id: node.parentId,
     });
     if (!parentNode) {
       throw new Error('親ページ未発見');
     }
+
     const nodes = parentNode.nodes;
-    nodes.concat(new ObjectId(page.pageId));
-    await collections.pages.updateOne(
+    const oPageId = new ObjectId(page.pageId);
+    const addedNodes = nodes.concat(oPageId);
+    await collections.nodes.updateOne(
       { _id: node.parentId },
-      { $set: { nodes: nodes } },
+      { $set: { nodes: addedNodes } },
     );
+
+    const oDocumentId = new ObjectId(page.documentId);
+    const newNode: Node = {
+      _id: oPageId,
+      documentId: oDocumentId,
+      parentId: parentNode._id,
+      nodes: [],
+    };
+    await collections.nodes.insertOne(newNode);
   }
 
   /**
@@ -323,7 +359,7 @@ export class DbService {
    * @param id アセットID
    */
   async getAsset(id: string): Promise<Asset | null> {
-    const asset = collections.assets.findOne<Asset>({
+    const asset = await collections.assets.findOne<Asset>({
       _id: new ObjectId(id),
     });
 
@@ -397,6 +433,8 @@ function toINode(
   }
 
   for (const id of targetNode.nodes) {
+    const idString = id.toHexString();
+    console.log(idString);
     const node = map.get(id.toHexString());
     const iNode = toINode(node, map);
     returnINode.nodes.push(iNode);
