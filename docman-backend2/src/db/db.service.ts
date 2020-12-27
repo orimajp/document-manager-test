@@ -371,18 +371,36 @@ export class DbService {
    * @param documentId
    */
   async getIndexList(documentId: string): Promise<Array<IIndex>> {
-    return await collections.pages
-      .find({
-        _id: new ObjectId(documentId),
-      })
-      .map((page) => {
-        return {
-          ref: page._id.toHexString(),
-          title: page.pageTitle,
-          body: page.searchData,
-        };
-      })
-      .toArray();
+    const oDocumentId = new ObjectId(documentId);
+    const indexes = [];
+
+    await collections.nodes
+      .aggregate<Node & { page: Page }>([
+        {
+          $match: { documentId: oDocumentId },
+        },
+        {
+          $lookup: {
+            from: 'pages',
+            localField: '_id',
+            foreignField: '_id',
+            as: 'page',
+          },
+        },
+      ])
+      .toArray()
+      .then((nodePages) => {
+        nodePages.forEach((nodePage) => {
+          const page = nodePage.page[0];
+          const index = {
+            ref: page._id.toHexString(),
+            title: page.pageTitle,
+            body: page.searchData,
+          };
+          indexes.push(index);
+        });
+      });
+    return indexes;
   }
 }
 
