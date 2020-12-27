@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { INode } from '../nodes/node.interface';
 import { Asset, collections, Node, Page } from './db';
-import { ObjectId } from 'mongodb';
+import { BulkWriteOperation, ObjectId } from 'mongodb';
 import { Binary } from 'bson';
 import { IDocument } from '../documents/document.interface';
 import { NewDocument } from '../documents/new-document.interface';
@@ -137,15 +137,25 @@ export class DbService {
     // 件数比較、違ってたらエラー
     const iNodeKeyCount = iNodeKeyMap.size;
     const nodeCount = await nodeCursor.count();
-    if (iNodeKeyCount !== nodeCount) {
-      throw new Error('更新件数不一致');
+    // documentノード分加算して比較
+    if (iNodeKeyCount + 1 !== nodeCount) {
+      throw new Error(
+        '更新件数不一致 iNodeKeyCount=' +
+          iNodeKeyCount +
+          ', nodeCount=' +
+          nodeCount,
+      );
     }
+
+    // ドキュメントNode配列
+    const documentNodes = updateDocumentNodes.nodes;
 
     // ノードリスト更新、マッチしなかったらエラー
     const nodeList = await nodeCursor.toArray();
-    updateNodeList(nodeList, iNodeKeyMap);
+    updateNodeList(documentNodes, iNodeKeyMap, nodeList);
 
     // ノードリスト保存
+
     const updateNodeCommandList = createUpdateNodeCommandList(nodeList);
     const results = await collections.nodes.bulkWrite(updateNodeCommandList);
     if (results.upsertedCount !== nodeCount) {
@@ -473,31 +483,52 @@ function createSearchData(pageData: string): string {
   return remark().use(strip).processSync(pageData).toString();
 }
 
-function createUpdateNodeCommandList(nodes: Node[]) {
-  const list = [];
+function createUpdateNodeCommandList(
+  nodes: Node[],
+): Array<BulkWriteOperation<Node>> {
+  const list: Array<BulkWriteOperation<Node>> = [];
   nodes.forEach((node) => {
     list.push({
-      updateOne: node,
+      updateOne: {
+        filter: { _id: node._id },
+        update: {
+          $set: {
+            documentId: node.documentId,
+            parentId: node.parentId,
+            nodes: node.nodes,
+          },
+        },
+      },
     });
   });
   return list;
 }
 
 function updateNodeList(
-  nodeList: Node[],
+  documentNodes: INode[],
   iNodeKeyMap: Map<string, IModifiableNode>,
+  nodeList: Node[],
 ): void {
   nodeList.forEach((node) => {
-    const modifyNode = iNodeKeyMap.get(node._id.toHexString());
-    if (!modifyNode) {
-      throw new Error('更新ノード不一致');
+    if (node._id.toHexString() === node.documentId.toHexString()) {
+      const documentNode = node;
+      const oDocumentChildIds = [];
+      documentNodes.forEach((node) => {
+        oDocumentChildIds.push(new ObjectId(node.pageId));
+      });
+      documentNode.nodes = oDocumentChildIds;
+    } else {
+      const modifyNode = iNodeKeyMap.get(node._id.toHexString());
+      if (!modifyNode) {
+        throw new Error('更新ノード不一致');
+      }
+      node.parentId = new ObjectId(modifyNode.parentId);
+      const nodes = [];
+      modifyNode.nodes.forEach((childId) => {
+        nodes.push(new ObjectId(childId));
+      });
+      node.nodes = nodes;
     }
-    node.parentId = new ObjectId(modifyNode.parentId);
-    const nodes = [];
-    modifyNode.nodes.forEach((childId) => {
-      nodes.push(new ObjectId(childId));
-    });
-    node.nodes = nodes;
   });
 }
 
