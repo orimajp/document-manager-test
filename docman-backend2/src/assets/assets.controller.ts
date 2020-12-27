@@ -14,7 +14,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { IAsset } from './asset.interface';
 import { UploadResponse } from './upload-response';
 
-@Controller('assets')
+@Controller('api/assets')
 export class AssetsController {
   constructor(private readonly assetsService: AssetsService) {}
 

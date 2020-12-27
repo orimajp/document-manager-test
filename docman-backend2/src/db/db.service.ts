@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { INode } from '../nodes/node.interface';
 import { Asset, collections, Node, Page } from './db';
 import { ObjectId } from 'mongodb';
+import { Binary } from 'bson';
 import { IDocument } from '../documents/document.interface';
 import { NewDocument } from '../documents/new-document.interface';
 import * as dayjs from 'dayjs';
@@ -10,12 +11,12 @@ import { IPage } from '../pages/page.interface';
 import { IDocumentList } from '../documents/document-list.interface';
 import { IAsset } from '../assets/asset.interface';
 import { IIndex } from '../indexes/index.interface';
+import { UpdateDocumentNodes } from '../documents/update-document-nodes.interface';
+import { NewPage } from '../pages/new-page.interface';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const remark = require('remark');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const strip = require('strip-markdown');
-import { UpdateDocumentNodes } from '../documents/update-document-nodes.interface';
-import { NewPage } from '../pages/new-page.interface';
 
 // FIXME 正直DBに無関係な処理は別に持って行った方がいい気がする
 
@@ -348,7 +349,7 @@ export class DbService {
     const asset: Asset = {
       fileName: newAsset.fileName,
       mimeType: newAsset.mimeType,
-      buffer: newAsset.buffer,
+      data: new Binary(newAsset.buffer),
     };
     const createdAsset = await collections.assets.insertOne(asset);
     return createdAsset.insertedId.toHexString();
@@ -358,12 +359,19 @@ export class DbService {
    * アセット取得
    * @param id アセットID
    */
-  async getAsset(id: string): Promise<Asset | null> {
+  async getAsset(id: string): Promise<IAsset | null> {
     const asset = await collections.assets.findOne<Asset>({
       _id: new ObjectId(id),
     });
+    if (!asset) {
+      return null;
+    }
 
-    return asset ? asset : null;
+    return {
+      fileName: asset.fileName,
+      mimeType: asset.mimeType,
+      buffer: asset.data.buffer,
+    };
   }
 
   /**

@@ -1,4 +1,5 @@
 import { MongoClient, Collection, ObjectID } from 'mongodb';
+import { Binary } from 'bson';
 const MONGODB_URI = 'mongodb://localhost:27017/docman';
 
 // 参考
@@ -41,7 +42,7 @@ export type Asset = {
   // documentId: ObjectID; // 元々のAPI的に無理
   fileName: string;
   mimeType: string;
-  buffer: Buffer;
+  data: Binary;
 };
 
 type Collections = {
