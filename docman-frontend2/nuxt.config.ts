@@ -178,7 +178,7 @@ const nuxtConfig: NuxtConfig = {
     }
   },
   proxy: {
-    '/api': 'http://localhost:3000'
+    '/api': 'http://localhost:3001'
   },
   /*
    ** Build configuration
