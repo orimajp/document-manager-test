@@ -48,7 +48,9 @@ export const useEditorHandleScroll = (
   }
 
   onMounted(() => {
-    editorRef.value.onDidScrollChange(handleScroll)
+    nextTick(() => {
+      editorRef.value.onDidScrollChange(handleScroll)
+    })
   })
 
   const setTimeout = (clearOnly: boolean) => {

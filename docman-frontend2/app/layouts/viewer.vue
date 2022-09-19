@@ -24,6 +24,8 @@ import SnackbarCombo from '~/components/SnackbarCombo'
 import LunrIndexContainer from '~/containers/LunrIndexContainer'
 
 export default defineComponent({
+  // eslint-disable-next-line
+  name: 'viewer',
   components: {
     SnackbarCombo,
     DocumentViewNavbar,

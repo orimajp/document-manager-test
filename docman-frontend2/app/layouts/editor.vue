@@ -26,6 +26,8 @@ import SnackbarComboContainer from '~/containers/SnackbarComboContainer'
 import SnackbarCombo from '~/components/SnackbarCombo.vue'
 
 export default defineComponent({
+  // eslint-disable-next-line
+  name: 'editor',
   components: {
     SnackbarCombo,
     FileDraggable,

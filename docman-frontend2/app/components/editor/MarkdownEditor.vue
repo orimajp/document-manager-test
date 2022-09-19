@@ -20,6 +20,7 @@
 import {
   computed,
   defineComponent,
+  nextTick,
   onMounted,
   PropType,
   Ref,
@@ -85,11 +86,13 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      markdownEditor.value = (editor.value as typeof MonacoEditor).getEditor()
-      // markdownEditor.value = editor.value.getEditor()
-      if (props.editMode) {
-        focus()
-      }
+      nextTick(() => {
+        markdownEditor.value = (editor.value as typeof MonacoEditor).getEditor()
+        // markdownEditor.value = editor.value.getEditor()
+        if (props.editMode) {
+          focus()
+        }
+      })
     })
 
     useEditorHandleScroll(markdownEditor, windowHeight)
