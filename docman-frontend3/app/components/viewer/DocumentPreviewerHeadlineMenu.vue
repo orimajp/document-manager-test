@@ -11,12 +11,22 @@ interface Props {
 
 const props = defineProps<Props>()
 
+interface Emits {
+  (e: 'closeHeadlineMenu'): void
+}
+
+const emit = defineEmits<Emits>()
+
+const closeHeadlineMenu = () => {
+  emit('closeHeadlineMenu')
+}
+
 const {
   showHeadlineMenu,
   headlineMenuX,
   headlineMenuY,
   copyMarkdownHash
-} = useHeadlineMenu(props)
+} = useHeadlineMenu(props, closeHeadlineMenu)
 </script>
 
 <template>

@@ -2,7 +2,6 @@
 import draggable from 'vuedraggable'
 import { INode } from '~/models/node/INode'
 import {
-//  DraggableTreeProps,
   useDraggableTree
 } from '~/composables/tree/use-draggable-tree'
 
@@ -13,13 +12,6 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-/*
-const props = withDefaults(defineProps<Props>(), {
-  value: () => [] as Array<INode>,
-  list: () => [] as Array<INode>,
-  currentPageId: '',
-})
-*/
 
 interface Emits {
   (e: 'input', value: Array<INode>): void
@@ -31,19 +23,16 @@ const emitter = (value: Array<INode>) => emit('input', value)
 
 const {
   moving,
-//      selectedPageId,
   readValue,
   startMove,
   endMove,
   mouseDown,
   mouseUp,
-//  emitter,
   isCurrentPage,
   selectionPage
 } = useDraggableTree(props)
 
 </script>
-
 
 <script lang="ts">
 export default {

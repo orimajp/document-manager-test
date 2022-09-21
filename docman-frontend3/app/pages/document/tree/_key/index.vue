@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useRoute } from '@nuxtjs/composition-api'
+// @ts-ignore
 import DocumentTreeEditorNavbar from '~/components/tree/DocumentTreeEditorNavbar.vue'
 import DraggableTree from '~/components/tree/DraggableTree.vue'
+// @ts-ignore
 import DocumentTreeEditorFooter from '~/components/tree/DocumentTreeEditorFooter.vue'
 import { useTreeEditor } from '~/composables/tree/use-tree-editor'
 

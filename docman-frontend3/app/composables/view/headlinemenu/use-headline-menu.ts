@@ -1,14 +1,6 @@
-// import { computed, SetupContext } from '@nuxtjs/composition-api'
 import { computed } from '@nuxtjs/composition-api'
 import { HeadlineMenuProps } from '~/composables/view/headlinemenu/use-headline-menu-controll'
 import SnackbarComboContainer from '~/containers/snackbar-container'
-
-/*
-interface Emits {
-  (e: 'closeHeadlineMenu'): void
-}
-const emit = defineEmits<Emits>()
-*/
 
 const createPathWithHash = (pageId: string, hash: string) => {
   return `/document/view/${pageId}#${hash}`
@@ -43,13 +35,10 @@ const HASH_COPY_MESSAGE = 'ハッシュリンクをコピーしました'
 
 export const useHeadlineMenu = (
   props: HeadlineMenuProps,
-//  context: SetupContext
-closeHeadlineMenu: () => void,
+  closeHeadlineMenu: () => void,
 ) => {
   const showHeadlineMenu = computed<boolean>({
     get: () => props.headlineMenuParam.showHeadlineMenu,
-//    set: () => context.emit('closeHeadlineMenu')
-//    set: () => emit('closeHeadlineMenu')
     set: () => closeHeadlineMenu()
   })
 

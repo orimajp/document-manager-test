@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-//  EditorNavbarProps,
   useEditorNavbar
 } from '~/composables/edit/use-editor-navbar'
 
@@ -21,12 +20,10 @@ const emit = defineEmits<Emits>()
 
 
 const goTop = () => {
-//    context.emit('goTop')
   emit('goTop')
 }
 
 const updateTitle = (newTitle: string) => {
-//    context.emit('updateTitle', newTitle)
   emit('updateTitle', newTitle)
 }
 
@@ -38,8 +35,6 @@ const {
   editValue,
   dualValue,
   prevValue,
-//  goTop,
-//  updateTitle
 } = useEditorNavbar(props)
 
 </script>

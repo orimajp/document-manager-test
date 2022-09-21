@@ -1,6 +1,6 @@
-// import * as path from 'path'
 import { NuxtConfig } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
+// eslint-disable-next-line
 import { NuxtOptionsLoaders, NuxtWebpackEnv } from '@nuxt/types/config/build'
 import { Configuration as WebpackConfiguration } from 'webpack'
 const MonacoEditorPlugin = require('monaco-editor-webpack-plugin')
@@ -31,13 +31,8 @@ const nuxtConfig: NuxtConfig = {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-//    'github-markdown-css',
     '../node_modules/github-markdown-css/github-markdown-light.css',
-//    '../node_modules/highlight.js/styles/github-gist.css'
     '../node_modules/highlight.js/styles/github.css'
-//    '../node_modules/highlight.js/styles/github-dark-dimmed.css'
-//    '../node_modules/highlight.js/styles/googlecode.css'
-
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -162,8 +157,6 @@ const nuxtConfig: NuxtConfig = {
   build: {
     extend(
       config: WebpackConfiguration,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//      ctx: { loaders: any }
       // eslint-disable-next-line
       ctx: { loaders: NuxtOptionsLoaders } & NuxtWebpackEnv
     ) {

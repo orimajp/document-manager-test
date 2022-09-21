@@ -1,5 +1,4 @@
 import { computed, useRoute } from '@nuxtjs/composition-api'
-/// import * as dayjs from 'dayjs'
 import dayjs from 'dayjs'
 import { PageData } from '~/models/page/PageData'
 import 'dayjs/locale/ja'

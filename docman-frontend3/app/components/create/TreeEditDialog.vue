@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {
   TreeEditDialogControllMenu,
-//  TreeEditDialogControllProps
 } from '~/composables/create/use-tree-edit-daialog-controll'
 import { useTreeEditDialog } from '~/composables/create/use-tree-edit-dialog'
 import DraggableTree from '~/components/tree/DraggableTree.vue'
@@ -25,7 +24,6 @@ const {
   showModal,
   pageId,
   treeNodes,
-//  pageTitle,
   registerTreeData,
   cancelTreeData,
   editAreaHeightStyle,

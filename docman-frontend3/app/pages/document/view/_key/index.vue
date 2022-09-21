@@ -2,6 +2,7 @@
 import { computed, ref, useRoute } from '@nuxtjs/composition-api'
 import DocumentContainer from '~/containers/document-container'
 import PageContainer from '~/containers/page-container'
+// @ts-ignore
 import DocumentViewContent from '~/components/view/DocumentViewContent.vue'
 import LinkedPageMapContainer from '~/containers/linked-page-map-container'
 import { DocumentData } from '~/models/document/DocumentData'

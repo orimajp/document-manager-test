@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import {
   computed,
-//  defineComponent,
   nextTick,
   onMounted,
   onUnmounted,
-//  PropType,
   Ref,
   ref
 } from '@nuxtjs/composition-api'
@@ -14,9 +12,12 @@ import { PageData } from '~/models/page/PageData'
 import { useViewContent } from '~/composables/view/use-view-content'
 import { useCollectHeadline } from '~/composables/view/use-view-collect-headline'
 import { useNavigate } from '~/composables/view/use-view-navigate'
+// @ts-ignore
 import DocumentViewNavigation from '~/components/view/DocumentViewNavigation.vue'
+// @ts-ignore
 import DocumentViewBreadCrumbList from '~/components/view/DocumentViewBreadCrumbList.vue'
 import { headlineMenuControll } from '~/composables/view/headlinemenu/use-headline-menu-controll'
+// @ts-ignore
 import DocumentViewHeadlineMenu from '~/components/view/DocumentViewHeadlineMenu.vue'
 import { useViewIndexSearch } from '~/composables/view/use-view-index-search'
 import { useViewContentHeighlight } from '~/composables/view/use-view-content-heighlight'

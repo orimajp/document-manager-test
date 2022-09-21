@@ -1,17 +1,12 @@
 <script setup lang="ts">
-// import DocumentContainer from '~/containers/DocumentContainer'
-// import PageContainer from '~/containers/PageContainer'
-// import DrawerContainer from '~/containers/DrawerContainer'
-// import HeadlineContanier from '~/containers/HeadlineContanier'
+// @ts-ignore
 import DocumentViewNavbar from '~/components/view/DocumentViewNavbar.vue'
+// @ts-ignore
 import DocumentViewTreeDrawer from '~/components/view/drawer/DocumentViewTreeDrawer.vue'
+// @ts-ignore
 import DocumentVieweTocDrawer from '~/components/view/drawer/DocumentVieweTocDrawer.vue'
-// import LinkedPageMapContainer from '~/containers/LinkedPageMapContainer'
-// import BreadCrumbListContainer from '~/containers/BreadCrumbListContainer'
-// import SnackbarComboContainer from '~/containers/SnackbarComboContainer'
+// @ts-ignore
 import SnackbarCombo from '~/components/SnackbarCombo.vue'
-// import LunrIndexContainer from '~/containers/LunrIndexContainer'
-
 import DocumentContainer from '~/containers/document-container'
 import PageContainer from '~/containers/page-container'
 import DrawerContainer from '~/containers/drawer-container'
@@ -33,6 +28,7 @@ LunrIndexContainer.provide()
 
 <script lang="ts">
 export default {
+  // eslint-disable-next-line
   name: "viewer",
 }
 </script>

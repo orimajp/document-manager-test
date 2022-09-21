@@ -7,8 +7,6 @@ const { permanent } = DrawerContainer.useContainer()
 const {
   openDrawer,
   pageTitle,
-//  pageId,
-//  documentId,
   canTreeEdit,
   goTop,
   goPageCreate,

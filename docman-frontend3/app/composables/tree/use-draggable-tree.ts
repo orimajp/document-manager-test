@@ -1,13 +1,5 @@
-// import { computed, ref, SetupContext } from '@nuxtjs/composition-api'
 import { computed, ref } from '@nuxtjs/composition-api'
 import { INode } from '~/models/node/INode'
-
-/*
-interface Emits {
-  (e: 'input', value: Array<INode>): void
-}
-const emit = defineEmits<Emits>()
-*/
 
 export interface DraggableTreeProps {
   value?: Array<INode>
@@ -17,8 +9,6 @@ export interface DraggableTreeProps {
 
 export const useDraggableTree = (
   props: DraggableTreeProps,
-//  context: SetupContext
-//  emitter: (value: Array<INode>) => void,
 ) => {
   const moving = ref(false)
   const selectedPageId = ref<string | null>(null)
@@ -44,9 +34,6 @@ export const useDraggableTree = (
 
   const mouseUp = () => (selectedPageId.value = null)
 
-//  const emitter = (value: Array<INode>) => context.emit('input', value)
-//  const emitter = (value: Array<INode>) => emit('input', value)
-
   const isCurrentPage = (pageId: string) => {
     console.log(
       `isCurrentPage(): pageId=${pageId}, props.currentPageId=${props.currentPageId}`
@@ -66,7 +53,6 @@ export const useDraggableTree = (
     endMove,
     mouseDown,
     mouseUp,
-//    emitter,
     isCurrentPage,
     selectionPage
   }

@@ -3,13 +3,10 @@
 <script setup lang="ts">
 import {
   computed,
-//  defineComponent,
   onMounted,
-//  PropType,
   Ref,
   ref,
   nextTick,
-//  SetupContext
 } from '@nuxtjs/composition-api'
 import MonacoEditor from 'vue-monaco'
 import * as monacoEditor from 'monaco-editor'
@@ -51,14 +48,15 @@ const theme = computed(() => (darkMode.value ? 'vs-dark' : ''))
 const editData = computed({
   get: () => props.markdownData,
   set: (newValue: string) => {
-    // eslint-disable-next-line vue/custom-event-name-casing
-//    context.emit('updatePageData', newValue)
     emit('updatePageData', newValue)
   }
 })
 
+// @ts-ignore
 const monaco = ref(null) as Ref<monacoEditor | null>
+// @ts-ignore
 const onEditorWillMount = (monacoInstance: monacoEditor) => {
+  console.log(monacoInstance)
   monaco.value = monacoInstance
 }
 
@@ -72,9 +70,6 @@ const focus = () => {
 onMounted(() => {
   nextTick(() => {
     markdownEditor.value = (editor.value as typeof MonacoEditor).getEditor()
-//    console.log(markdownEditor.value)
-//    console.log(editor.value.getEditor())
-    // markdownEditor.value = editor.value.getEditor()
     if (props.editMode) {
       focus()
     }

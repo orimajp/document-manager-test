@@ -3,6 +3,7 @@
 
 <script lang="ts">
 export default {
+  // eslint-disable-next-line
   name: "default",
 }
 </script>

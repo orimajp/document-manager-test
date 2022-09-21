@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { useRouter } from "@nuxtjs/composition-api";
-import { computed } from "vue";
+import { computed, useRouter } from "@nuxtjs/composition-api";
 import { IDocumentList } from "~/models/document/IDocumentList";
 
 type Props = {

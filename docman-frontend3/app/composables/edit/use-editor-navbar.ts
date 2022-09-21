@@ -4,21 +4,12 @@ import {
   onMounted,
   ref,
   Ref,
-//  SetupContext,
   watch
 } from '@nuxtjs/composition-api'
 import { DisplayMode, DUAL, EDIT, PREV } from '~/models/EditorDisplayMode'
 import SyncModeContainer from '~/containers/sync-mode-container'
 import DarkModeContainer from '~/containers/dark-mode-container'
 import DisplayModeContainer from '~/containers/display-mode-container'
-
-/*
-interface Emits {
-  (e: 'goTop'): void
-  (e: 'updateTitle', newTitle: string): void
-}
-const emit = defineEmits<Emits>()
-*/
 
 export interface EditorNavbarProps {
   pageTitle: string
@@ -28,7 +19,6 @@ export interface EditorNavbarProps {
 
 export const useEditorNavbar = (
   props: EditorNavbarProps,
-//  context: SetupContext
 ) => {
   const editTarget = computed(() => (props.documentEdit ? 'D' : 'P'))
 
@@ -61,18 +51,6 @@ export const useEditorNavbar = (
     }
   )
 
-  /*
-  const goTop = () => {
-//    context.emit('goTop')
-    emit('goTop')
-  }
-
-  const updateTitle = (newTitle: string) => {
-//    context.emit('updateTitle', newTitle)
-    emit('updateTitle', newTitle)
-  }
-  */
-
   const titleField = ref(null) as Ref<HTMLElement | null>
   onMounted(() => {
     if (props.createMode) {
@@ -90,7 +68,5 @@ export const useEditorNavbar = (
     editValue,
     dualValue,
     prevValue,
-//    goTop,
-//    updateTitle
   }
 }

@@ -5,7 +5,6 @@ const useFileUpload = () => {
   const state = reactive({
     dragging: false,
     modal: false,
-    // errorModal: false
     errorMessage: ''
   })
 

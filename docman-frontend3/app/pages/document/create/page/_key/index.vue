@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { computed, useRoute, useRouter } from '@nuxtjs/composition-api'
+// @ts-ignore
 import DocumentEditorCreateFooter from '~/components/create/DocumentEditorCreateFooter.vue'
+// @ts-ignore
 import DocumentPreviewer from '~/components/viewer/DocumentPreviewer.vue'
+// @ts-ignore
 import MarkdownEditor from '~/components/editor/MarkdownEditor.vue'
+// @ts-ignore
 import DocumentEditorNavbar from '~/components/edit/DocumentEditorNavbar.vue'
+// @ts-ignore
 import TreeEditDialog from '~/components/create/TreeEditDialog.vue'
 import EditStateContainer from '~/containers/edit-state-container'
 import { useEditorPaneColumn } from '~/composables/edit/use-editor-pane-column'
@@ -27,23 +32,14 @@ const appendNextTargetId = route.value.query.appendNextTargetId
 const {
   treeEditDialogControllMenu,
   openDialog,
-//  closeDialog
 } = useTreeEditDialogControll()
-
-/*
-const closeEditDialog = () => {
-  closeDialog()
-}
-*/
 
 const { registerNewPage } = useRegisterPage(openDialog)
 
 const registerPage = () => {
   registerNewPage(
     pageId,
-//    title.value,
     documentTitle.value,
-//    data.value,
     documentData.value,
     prevendChildTargetId,
     appendNextTargetId
@@ -55,7 +51,6 @@ const { title: documentTitle, data: documentData, page, updateTitle, updatePageD
   change
 )
 
-// const { editMode, dualMode, prevMode } = DisplayModeContainer.useContainer()
 const { editMode, prevMode } = DisplayModeContainer.useContainer()
 const displayEditForm = computed(() => !prevMode.value)
 const displayPreviewArea = computed(() => !editMode.value)

@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { computed, useRouter } from '@nuxtjs/composition-api'
+// @ts-ignore
 import DocumentEditorCreateFooter from '~/components/create/DocumentEditorCreateFooter.vue'
+// @ts-ignore
 import DocumentPreviewer from '~/components/viewer/DocumentPreviewer.vue'
+// @ts-ignore
 import MarkdownEditor from '~/components/editor/MarkdownEditor.vue'
+// @ts-ignore
 import DocumentEditorNavbar from '~/components/edit/DocumentEditorNavbar.vue'
 import EditStateContainer from '~/containers/edit-state-container'
 import { useDocument } from '~/composables/use-document'
@@ -17,10 +21,6 @@ const { title: documentTitle , data: documentData , page, updateTitle, updatePag
   change
 )
 
-// const documentTitle = computed(() => title.value)
-// const documentData = computed(() => data.value)
-
-//    const { editMode, dualMode, prevMode } = DisplayModeContainer.useContainer()
 const { editMode, prevMode } = DisplayModeContainer.useContainer()
 const displayEditForm = computed(() => !prevMode.value)
 const displayPreviewArea = computed(() => !editMode.value)
@@ -33,7 +33,7 @@ const {
 const router = useRouter()
 const documentFunc = useDocument()
 const registerDocument = () => {
-  documentFunc.registerDocument(title.value, data.value).then((data) => {
+  documentFunc.registerDocument(documentTitle.value, documentData.value).then((data) => {
     router.push(`/document/view/${data.documentId}`)
   })
 }

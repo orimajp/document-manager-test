@@ -3,7 +3,6 @@ import DrawerContainer from '~/containers/drawer-container'
 import PageContainer from '~/containers/page-container'
 import DocumentContainer from '~/containers/document-container'
 
-
 export const useViewNavbar = () => {
   const { drawer } = DrawerContainer.useContainer()
   const openDrawer = () => {

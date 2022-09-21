@@ -1,31 +1,12 @@
-// import { computed, SetupContext } from '@nuxtjs/composition-api'
 import { computed } from '@nuxtjs/composition-api'
-// import { defineEmits } from 'vue'
 import { TreeContextMenuProps } from '~/composables/view/contextmenu/use-tree-context-menu-controll'
-
-/*
-interface Emits {
-  (e: 'closeContextMenu'): void
-}
-*/
-
-
-export interface TreeContextMenuEmits {
-  (e: 'closeContextMenu'): void
-}
-
-// const emit = defineEmits<Emits>()
 
 export const useTreeContextMenu = (
   props: TreeContextMenuProps,
-//  emit: TreeContextMenuEmits,
-//  context: SetupContext
-closeContextMenu: () => void
+  closeContextMenu: () => void
 ) => {
   const showContextMenu = computed<boolean>({
     get: () => props.treeContextMenuParam.showContextMenu,
-//    set: () => context.emit('closeContextMenu')
-//    set: () => emit('closeContextMenu')
     set: () => closeContextMenu()
   })
 

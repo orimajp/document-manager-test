@@ -48,10 +48,7 @@ export const useEditorHandleScroll = (
   }
 
   onMounted(() => {
-//    editorRef.value.onDidScrollChange(handleScroll)
     nextTick(() => {
-//      console.log(editor.value)
-//      console.log(editorRef.value)
       editorRef.value.onDidScrollChange(handleScroll)
     })
   })

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+// @ts-ignore
 import DocumentViewTree from '~/components/view/DocumentViewTree.vue'
 import { NodeData } from '~/models/node/NodeData'
-// import { TreeProps, useTree } from '~/composables/view/tree/use-tree'
 import { useTree } from '~/composables/view/tree/use-tree'
 
 interface Props {
@@ -21,17 +21,14 @@ const openContextMenu = (
   pageTitle: string,
   e: MouseEvent
 ) => {
-//     context.emit('openContextMenu', pageId, pageTitle, e)
   emit('openContextMenu', pageId, pageTitle, e)
 }
 
 const {
   iconText,
   firstNode,
-//  currentPageId,
   addPageIdArray,
   openPage,
-//  openContextMenu,
   openTreeContextMenu
 } = useTree(props, openContextMenu)
 </script>

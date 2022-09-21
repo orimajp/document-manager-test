@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import DrawerContainer from '~/containers/drawer-container'
+// @ts-ignore
 import DocumentViewTreeContextMenu from '~/components/view/DocumentViewTreeContextMenu.vue'
 import { useTreeContextControll } from '~/composables/view/contextmenu/use-tree-context-menu-controll'
 import { useTreeDrawer } from '~/composables/view/treedrawer/use-tree-drawer'
+// @ts-ignore
 import DocumentViewTree from '~/components/view/DocumentViewTree.vue'
+// @ts-ignore
 import DocumentViewSearch from '~/components/view/DocumentViewSearch.vue'
 
 const { drawer, permanent } = DrawerContainer.useContainer()

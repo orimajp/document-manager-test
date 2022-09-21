@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { useViewSearch, ViewSearchProps } from '~/composables/view/use-view-search'
 import { useViewSearch } from '~/composables/view/use-view-search'
 
 interface Props {

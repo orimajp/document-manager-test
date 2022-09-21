@@ -1,20 +1,11 @@
-// import { computed, SetupContext, useRouter } from '@nuxtjs/composition-api'
 import { computed, useRouter } from '@nuxtjs/composition-api'
 import { NodeData } from '~/models/node/NodeData'
-
-/*
-interface Emits {
-  (e: 'openContextMenu', pageId: string, pageTitle: string, ex: MouseEvent): void
-}
-const emit = defineEmits<Emits>()
-*/
 
 export interface TreeProps {
   currentNode: NodeData
   pageIdArray: Array<string>
 }
 
-// export const useTree = (treeProps: TreeProps, context: SetupContext) => {
 export const useTree = (
   treeProps: TreeProps,
   openContextMenu: (pageId: string, pageTitle: string, e: MouseEvent) => void
@@ -46,17 +37,6 @@ export const useTree = (
   const openPage = () => {
     return router.push(`/document/view/${currentPageId.value}`)
   }
-
-  /*
-  const openContextMenu = (
-    pageId: string,
-    pageTitle: string,
-    e: MouseEvent
-  ) => {
-//     context.emit('openContextMenu', pageId, pageTitle, e)
-    emit('openContextMenu', pageId, pageTitle, e)
-  }
-  */
 
   const openTreeContextMenu = (e: MouseEvent) => {
     openContextMenu(currentPageId.value, currentPageTitle.value, e)

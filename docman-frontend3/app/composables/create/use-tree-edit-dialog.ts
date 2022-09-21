@@ -2,7 +2,6 @@ import {
   computed,
   onMounted,
   ref,
-//  SetupContext,
   watchEffect
 } from '@nuxtjs/composition-api'
 import { useEventListener } from '@vueuse/core'
@@ -16,22 +15,12 @@ const ADJUST_HEIGHT = 136
 /* ヘッダ・フッタ補正 */
 const HEADER_FOOTER_HEIGHT = 117
 
-/*
-interface Emits {
-  (e: 'closeDialog'): void
-}
-const emit = defineEmits<Emits>()
-*/
-
 export const useTreeEditDialog = (
   props: TreeEditDialogControllProps,
   closeDialog: () => void,
-//  contest: SetupContext
 ) => {
   const showModal = computed<boolean>({
     get: () => props.treeEditDialogControllMenu.showModal,
-//    set: () => contest.emit('closeDialog')
-//    set: () => emit('closeDialog')
     set: () => closeDialog()
 })
   const pageId = computed(() => props.treeEditDialogControllMenu.pageId)

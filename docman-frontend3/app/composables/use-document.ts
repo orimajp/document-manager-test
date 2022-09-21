@@ -10,7 +10,6 @@ export const useDocument = () => {
   const { $axios } = useContext()
 
   const search = (): Promise<Array<IDocumentList>> => {
-    // return await axios.$get<Array<IDocumentList>>('/api/documents')
     return $axios.$get<Array<IDocumentList>>('/api/documents')
   }
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {
   HeadlineMenuParam,
-//  HeadlineMenuProps
 } from '~/composables/view/headlinemenu/use-headline-menu-controll'
 import { useHeadlineMenu } from '~/composables/view/headlinemenu/use-headline-menu'
 

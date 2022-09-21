@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { NavInfoProp, useViewNavigation } from '~/composables/view/use-view-navigation'
 import { useViewNavigation } from '~/composables/view/use-view-navigation'
 
 interface Props {
@@ -11,8 +10,6 @@ const props = defineProps<Props>()
 const {
   existsPrevPage,
   existsNextPage,
-//      prevId,
-//      nextId,
   prevTitle,
   nextTitle,
   goPrev,

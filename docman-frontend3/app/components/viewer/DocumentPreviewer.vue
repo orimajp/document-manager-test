@@ -2,10 +2,10 @@
 import { Ref, ref } from '@nuxtjs/composition-api'
 import { useViewerHandleScroll } from '~/composables/viewer/use-viewer-handle-scroll'
 import { PageData } from '~/models/page/PageData'
-// import { PageContentProp, useViewContent } from '~/composables/view/use-view-content'
 import { useViewContent } from '~/composables/view/use-view-content'
 import { useViewerWindowSize } from '~/composables/viewer/use-viewer-window-size'
 import DisplayModeContainer from '~/containers/display-mode-container'
+// @ts-ignore
 import DocumentPreviwerHeadlineMenu from '~/components/viewer/DocumentPreviewerHeadlineMenu.vue'
 import { headlineMenuControll } from '~/composables/view/headlinemenu/use-headline-menu-controll'
 import { useViewerCollectHeadline } from '~/composables/viewer/use-viewer-colletc-headline'
@@ -15,7 +15,6 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
 
 const { pageTitle, pageData } = useViewContent(props)
 const { displayMode, dualMode } = DisplayModeContainer.useContainer()

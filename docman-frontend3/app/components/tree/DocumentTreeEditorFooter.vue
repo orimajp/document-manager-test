@@ -6,10 +6,8 @@ interface Emits {
 
 const emit = defineEmits<Emits>()
 
-// const registerTree = () => context.emit('registerTree')
 const registerTree = () => emit('registerTree')
 
-// const cancelTree = () => context.emit('cancelTree')
 const cancelTree = () => emit('cancelTree')
 </script>
 

@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { computed, useRoute, useRouter } from '@nuxtjs/composition-api'
+// @ts-ignore
 import MarkdownEditor from '~/components/editor/MarkdownEditor.vue'
+// @ts-ignore
 import DocumentPreviewer from '~/components/viewer/DocumentPreviewer.vue'
 import { usePage } from '~/composables/use-page'
 import { useEditorPaneColumn } from '~/composables/edit/use-editor-pane-column'
+// @ts-ignore
 import DocumentEditorNavbar from '~/components/edit/DocumentEditorNavbar.vue'
 import DisplayModeContainer from '~/containers/display-mode-container'
 import EditStateContainer from '~/containers/edit-state-container'
+// @ts-ignore
 import DocumentEditorFooter from '~/components/edit/DocumentEditorFooter.vue'
 import { useUpdateData } from '~/composables/edit/use-update-data'
 import { useBeforeUnloadConfirm } from '~/composables/edit/use-before-unload-confirm'
@@ -25,7 +29,6 @@ const {
   updatePageData
 } = useUpdateData(pageId, change)
 
-// const { editMode, dualMode, prevMode } = DisplayModeContainer.useContainer()
 const { editMode, prevMode } = DisplayModeContainer.useContainer()
 const displayEditForm = computed(() => !prevMode.value)
 const displayPreviewArea = computed(() => !editMode.value)

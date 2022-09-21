@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import {
   TreeContextMenuParam,
-//  TreeContextMenuProps
 } from '~/composables/view/contextmenu/use-tree-context-menu-controll'
 import { useTreeContextRouting } from '~/composables/view/contextmenu/use-tree-context-menu-routing'
-// import { useTreeContextMenu, TreeContextMenuEmits } from '~/composables/view/contextmenu/use-tree-context-menu'
 import { useTreeContextMenu } from '~/composables/view/contextmenu/use-tree-context-menu'
 
 interface Props {
@@ -13,20 +11,10 @@ interface Props {
 
 const props = defineProps<Props>()
 
-/*
 interface Emits {
   (e: 'closeContextMenu'): void
 }
-*/
-
-
-interface TreeContextMenuEmits {
-  (e: 'closeContextMenu'): void
-}
-const emit = defineEmits<TreeContextMenuEmits>()
-
-
-// const emit = defineEmits(['closeContextMenu'])
+const emit = defineEmits<Emits>()
 
 const closeContextMenu =() => {
   emit('closeContextMenu')

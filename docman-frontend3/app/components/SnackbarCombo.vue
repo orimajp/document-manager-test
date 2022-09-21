@@ -17,7 +17,7 @@ const timeout = 1500
   <div>
     <v-snackbar v-model="infoDialog" top :timeout="timeout" color="info">
       {{ infoMessage }}
-      <template v-slot:action="{ attrs }">
+      <template #action="{ attrs }">
         <v-btn text v-bind="attrs" @click="infoDialog.value = false">
           Close
         </v-btn>
@@ -25,7 +25,7 @@ const timeout = 1500
     </v-snackbar>
     <v-snackbar v-model="warningDialog" top :timeout="timeout" color="warining">
       {{ warningMessage }}
-      <template v-slot:action="{ attrs }">
+      <template #action="{ attrs }">
         <v-btn text v-bind="attrs" @click="warningDialog.value = false">
           Close
         </v-btn>
@@ -33,7 +33,7 @@ const timeout = 1500
     </v-snackbar>
     <v-snackbar v-model="alertDialog" top :timeout="timeout" color="alert">
       {{ alertMessage }}
-      <template v-slot:action="{ attrs }">
+      <template #action="{ attrs }">
         <v-btn text v-bind="attrs" @click="alertDialog.value = false">
           Close
         </v-btn>

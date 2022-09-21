@@ -1,5 +1,4 @@
 import { Ref, useRouter } from '@nuxtjs/composition-api'
-// import { useClipboard } from '@vueuse/core'
 import { usePage } from '~/composables/use-page'
 import SnackbarComboContainer from '~/containers/snackbar-container'
 
@@ -39,7 +38,6 @@ export const useTreeContextRouting = (
   openPageTitle: Ref<string>
 ) => {
   const { infoMessage } = SnackbarComboContainer.useContainer()
-  // const { copy } = useClipboard() // キーボードショートカットでコピーする際に権限確認ダイアログが出て気持ち悪いので利用停止
 
   const openPage = () => {
     const url = createUrl(openPageId.value)
