@@ -170,7 +170,7 @@ Alice <-- Bob: another authentication Response
 
 # @liradb2000/markdown-it-mermaid
 
-~~~mermaid optional title goes here
+~~~mermaid
   graph TD
     A[Christmas] -->|Get money| B(Go shopping)
     B --> C{Let me think}
